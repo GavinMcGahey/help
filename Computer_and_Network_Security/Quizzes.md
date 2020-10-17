@@ -67,3 +67,72 @@ It then configures a vm provision for ansible
 then sets ansible.playbook to "playbook.yml"*
 
 **[Quiz 1 Walkthrough](https://youtu.be/MM-OO18PwEQ)**
+
+# Quiz 2
+1. What protocol can Ansible use to connect to remote hosts?
+
+**SSH**
+
+2. Terraform can be used to manage assets in Google Cloud
+
+**True**
+
+3. Stateless packet filtering is performed on a per-packet basis? 
+
+**True**
+
+4. A typical enterprise firewall has at minimum the following interfaces?
+
+**Outside, Inside, and DMZ**
+
+5. Which Vagrant providers are not shipped with the software?
+
+**Nutanix**
+
+6. What does the following do in Vagrant?
+
+config.vm.provision "shell",
+
+ inline: "sudo apt install lynx"
+ 
+ **Installs a web browser**
+ 
+ 7. Vagrant is a Type 2 Hypervisor
+ 
+ **False**
+ 
+ 8. Vagrant is a configuration managment tool
+ 
+ **False**
+ 
+ 9. Security engineers will usually build firewall rules with netfilter
+ 
+ **False**
+ 
+ 10. What tool would you use to scan for open ports
+
+**nmap**
+
+11. If you want to be able to telnet into a server you need to install what package in Ubuntu Linux?
+
+**telnetd**
+
+12. What group can execute this script?
+
+-rw-rw-r-- 1 constantine bananas 626 Sep 30 22:27 exploit.py
+
+**no one**
+
+13. What type of script is this?
+
+-rw-rw-r-- 1 constantine bananas 626 Sep 30 22:27 exploit.py
+
+**Python**
+
+14. A firewall passes or blocks traffic based upon:
+
+**Port number and IP address**
+
+15. A firewall is typically located at only one position in an organization?
+
+**False**
