@@ -74,3 +74,9 @@
 * IDS -- Intrusion Detection System
 * IPS -- Intrusion Prevention System
 * TTP -- Tactics, Techniques and Procedures
+* SSL -- Secure Sockets Layer
+* TLS -- Transport Layer Security
+* IETF -- Internet Engineering Task Force
+* AEAD -- Authenticated Encryption with Associated Data
+* RSA -- Rivest, Shamir and Adelman
+* MAC -- Message Authentication Code
