@@ -3780,3 +3780,168 @@ There are many benefits to NIDS/NIPS at a network level. They provide the abilit
 * [snare](http://mushmush.org/) -- Site that logs http webapp vulns
 * [tanner](http://mushmush.org/)
 
+# Class 20 SSL/TLS
+
+## Definitions
+
+* SSL -- Secure Sockets Layer
+* TLS -- Transport Layer Security
+* IETF -- Internet Engineering Task Force
+* AEAD -- Authenticated Encryption with Associated Data
+* RSA -- Rivest, Shamir and Adelman
+* MAC -- Message Authentication Code
+
+## What is SSL/TLS
+
+* A mechanism to encrypt data in transit -- Confidentiality
+* Method to ensure no tampering -- Integrity
+* A way to verify you are talking to who you are talking to -- Authentication (can be done with certificates)
+* Runs on top of TCP 
+* Can be used for almost anything, however we mainly see it used for web-applications. HTTP over TLS would be HTTPS
+* Other uses include VOIP, Chat and Email
+
+We have started having the bad habit of allowing ourselves to use the terms SSL, Secure Sockets Layer, and TLS, Transport Layer Security, interchangeably. We will endeavor to explain why that is a bad idea and attempt to remedy that habit by being specific in reference to TLS and SSL. The original idea was that the internet needed a standard way to transport information across a network encrypted. 
+
+## SSL/TLS a short History
+
+* Not really needed until they noticed information starting to be tampered for the first time
+* SSL 1.0
+  * Internal Netscape design, early 1994
+  * Scrapped during technical presentation
+* SSL 2.0
+  * Published by Netscape, November 1994
+  * Several weaknesses
+* SSL 3.0 (RFC 6101)
+  * Designed by Netscape and Paul Kocher, November 1996
+  * If the internet were to be adopted by SSL, they didn't want it to be tied with Netscape
+* TLS 1.0 (RFC 2246)
+  * Internet standard based on SSL 3.0, January 1999
+  * Not inter-operable with SSL 3.0
+  * TLS uses HMAC instead of MAC
+  * Uses any port
+
+
+  You may not remember but one of the first browsers was the Netscape Navigator. In the early days of the Internet there was no good way to protect data going across the wire as web pages started to become more dynamic. The Netscape Corporation (now part of Verizon Media) needed a way to protect the confidentiality of information traveling between their customers and servers. For that they developed SSL 1.0 which was developed in early 1994 but was never released because of well known vulnerabilities in it that it is said was discovered within the first 10 minutes of presenting it in a technical demo to MIT students. SSL 2.0 was also released by Netscape as a proprietary product from Netscape, it was released in November 1994 and was withdrawn a year later. During the same time frame Microsoft released PCT (Private Communications Technology) using Secure Transport Layer Protocol (STLP), another proprietary product, it was perfect and it is what we are using today... It was actually not perfect and it did not see the success that SSL 2.0 and SSL 3.0 did. In November 1995 Netscape addressed some of the serious issues with SSL 2.0 and released SSL 3.0. SSL 3.0 is considered insecure now but still is supported by 6% websites according to [Qualys](https://www.ssllabs.com/ssl-pulse/). In 1999 what was going to be SSL 3.1 was renamed TLS 1.0 to break the relation (you guessed it by request of Microsoft) with Netscape and was developed by Internet Engineering Task Force (IETF) and gained wide adoption. Despite being based on SSL 3.0, TLS 1.0 is not actually inter-operate with SSL 3.0. For the first time we have a standard for 
+
+
+## The History Continues (Post Text Book)
+
+* TLS 1.1 (RFC 4346)
+  * Not Secure
+  * 2006 Update to address flaws related to [BEAST](https://blog.qualys.com/ssllabs/2013/09/10/is-beast-still-a-threat) cyber attack in 2011
+* TLS 1.2 (RFC 5246)
+  * 2008 Update to address flaws not seen in wild
+  * Was the standard unti the Snowden Leaks
+* 2013 Snowden Leaks -- Expose vulnerabilities in TLS 1.2
+* TLS 1.3 (RFC 8446)
+  * 2013 work begins on TLS 1.3
+  * Represents about 25% of all sites supporting 1.3: crazy since it was released in 2013
+* 2015 [POODLE Attack](https://www.us-cert.gov/ncas/alerts/TA14-290A) targets flaws in SSL 3.0
+* 2016 [DROWN Attack](https://drownattack.com/drown-attack-paper.pdf) targets flaws in SSL 2.0
+
+
+The sordid history of SSL/TLS continues in 2006 with TLS 1.1 which addresses a flaw that would later be exploited in the BEAST attack in 2011 (5 years later). Why did this attack happen 5 years after it was superseded? TLS 1.2 adds Authenticated Encryption with Associated Data (AEAD) which removes the necessity for block ciphers and vulnerability in Cipher Block Chaining CBC. After 2008 life starts getting interesting for TLS as we are deep in the heyday of the internet. A focus is made on SSL/TLS issue with the starting of [SSL Labs](https://media.blackhat.com/bh-us-10/presentations/Ristic/BlackHat-USA-2010-Ristic-Qualys-SSL-Survey-HTTP-Rating-Guide-slides.pdf) at BlackHat in 2010 still avaliable at [SSL Labs](https://www.ssllabs.com/ssltest/). At this point HTTPS is still not quite mainstream, so someone made a product called [Firesheep](https://codebutler.github.io/firesheep/) that enabled someone to recreate an entire session trivial. We are ready to enter 2011 the year of SSL. In March RFC 6176 formally deprecated HTTPS however it is still in use on over 54% of web-servers. With that we see the Comodo breach what saw seven high-profile domain names get breached, the BEAST attack and the DigiNotar compromise that forced the revocation of a root Certificate Authority. We see continued issues with insufficient on Entropy, FLAME Malware, CRIME vulnerability, Lucky 13 attack, discovery of the RC4 biases, TIME info leakage, Edward Snowden leaks, BREACH Attacks. We finally decide to develop TLS 1.3 while at the same time Chrome 29 decides to support TLS 1.2. It doesn't end there in that we see the Triple Handshake Attack and the critical flow in OpenSSL known as Heartbleed. 
+
+
+## Some SSL Labs Results
+
+![Lets Checkout pumpout.me :sad_face:](https://cga.sfo2.digitaloceanspaces.com/cns/images/pumpout_me.PNG)
+
+## Another SSL Labs Result
+
+![You can analyze any site](https://cga.sfo2.digitaloceanspaces.com/cns/images/uscga_edu.PNG)
+
+## SSL Labs Rigged
+
+![Sometimes you can get it right](https://cga.sfo2.digitaloceanspaces.com/cns/images/macris_co.PNG)
+
+## SSL/TLS Basic Concepts
+
+* Two Protocols
+  * Handshake Protocol -- utilize public-key cryptography to share a secret between a client and server, slow progress that takes a lot of overhead
+  * Record Protocol -- use the established secret to encrypt communications between two hosts (how bulk communication is established), more efficient 
+
+  At the most basic level SSL/TLS works by using Public Key Cryptography to share a secret between two machines that only need to share trust to transfer the public key and verify identity (most of the time only verifying the identity of the server side). The idea is that with Public Key Infrastructure there are a number of trusted Root Certificate Authorities (Root CA's) that are trusted by web browsers by default. These Root CA's are responsible for issuing a key pair (certificates) to verified sites that they can use to identify themselves as well as well as allow the client to open up a asymmetrical encryption channel to transfer a symmetrical key used for the bulk of the data transfer. The **Handshake Protocol** is the asymmetrical encryption that allow the transfer of the symmetrical key for the **Record Protocol**. The data transfer requires a symmetrical key using **Record Protocol** because the speed of the symmetrical key encryption and decryption is too computationally expensive and using a session key is much more efficient.
+
+  Generally for TLS 1.3 we are looking at and ephemeral Diffie-Hellman for the Asymmetrical **Handshake** over the RSA (1977 by Rivest, Shamir and Adelman) which is vulnerable to being not **forward-secret**. Forward secret meaning that in the event that an entire conversation is recorded using RSA it is encrypted. However, if the private key is somehow obtained at a later date the session key can be recovered and thus the message can be decrypted. 
+
+## SSL/TLS Handshake
+
+* A focus will be on TLS however the text references SSL quite a bit
+* Goals of Handshake
+  * Agree on Cipher Suite
+  * Agree on a Secret (for bulk encryption)
+  * Establish trust between Client & Server (you are who you say you are)
+
+## TLS Handshake
+
+* Client "Hello"
+* Server "Hello"
+* Server Sends Certificate
+* Server "Hello Done"
+* Client Key Exchange
+* Client Change Cipher Spec
+* Client Finished
+* Server Change Cipher Spec
+* Server Finished
+
+
+The purpose of the TLS handshake is to establish the conditions in which a secure exchange can be executed. For our purposes this exchange is initiated by the client, in the assumption we are looking at a traditional client accessing a server (note, this same process is valid for SSL VPNs or server to server communications). The handshake start with a "Client Hello" that outlines the capabilities of the client to the server, namely the cipher suit an in TLS 1.3 some preshared keys. The server will then reply with the type of encryption being used and the servers certificate which enables the client to encrypt a session key in the encryption method that was selected. The server will then send a "Hello Done" message. At this point the client can verify the certificate and assure that the server is valid and will generate a pre-master secret, encrypts the secret with the certificate. The client will send a "Key Exchange Message", encrypted with the certificate, that includes the generated **pre-master secret** which can be used by both the client and server to calculate the bulk encryption secret for the session or **Session Key**. The client will send a "Client Change Cipher Spec" message then a "Client Finished" message using the Session Key to test the Session Key. The server will then reply with a "Change Cipher Spec" followed by a "Server Finished" message using the Session Key. At this point both machines have established a secure method to communicated based on the successful delivery of the finished messages using the Session Key, the session is established and the Session Key can be used for bulk encryption. 
+
+
+## TLS Handshake Part Deux
+
+![Handshake](https://cga.sfo2.digitaloceanspaces.com/cns/images/TLS1_3.PNG)
+
+## Cipher Suite
+
+* Protocol -- TLS 1.3, TLS 1.2, TLS 1.0, SSL V3, SSL V2
+* Key Exchange -- DH, DHE, ECDH, ECDHE, RSA
+* Authentication -- RSA, ECDSA
+* Cipher -- AES, AES-GCM, AES-CBC, Camellia, DES, RC4, RC2
+* Message Authentication Code -- HMAC-MD5,HMAC-SHA1, HMAC-SHA256/384, AEAD
+
+
+As one can see the idea of a Cipher Suite Includes the Protocol Version (TLS 1.2, TLS 1.3 etc.), the Key Exchange Algorithm, Authentication Method, Block Cipher, and Message Authentication Code for data integrity. As you can imagine with older versions of items in these categories getting flaws uncovered and new replacements being produced this list grew to an invariable large number. This, and because browsers just want things to work, have provided the incentive to add lots of different combinations to all aspects of the SSL/TLS cipher suites (up until TLS 1.3). Right now there are only a few combinations that are secure in TLS 1.2. 
+
+
+## TLS <= 1.2
+
+![TLS 1.2 -- All the options](https://cga.sfo2.digitaloceanspaces.com/cns/images/tls1_2.PNG)
+
+* 37 Cipher Suites Supported
+* Adding Previous versions of TLS/SSLv3 319 Cipher Suites
+
+## Why all the options
+
+![TLS 1.2 -- So many options](https://cga.sfo2.digitaloceanspaces.com/cns/images/tls12.PNG)
+
+## Key to security is simplicity
+
+![TLS 1.3 -- Only a few options](https://cga.sfo2.digitaloceanspaces.com/cns/images/tls13.PNG)
+
+## TLS 1.3 Cipher Suite
+
+![A simple Cipher Suite](https://cga.sfo2.digitaloceanspaces.com/cns/images/cipher_suite.PNG)
+
+## TLS 1.3 Cipher Suites
+
+* TLS_AES_256_GCM_SHA384
+* TLS_CHACHA20_POLY1305_SHA256
+* TLS_AES_128_GCM_SHA256
+* TLS_AES_128_CCM_8_SHA256
+* TLS_AES_128_CCM_SHA256
+
+
+Take a look at CloudFlares analysis of [TLS 1.3](https://blog.cloudflare.com/rfc-8446-aka-tls-1-3/) With it we learn more about the details on why the move is necessary. You will notice that each there is no key exchange noted because it is assumed to be some variant of Diffie-Hellman. With a few cipher suites to support it is easy to streamline negotiation and put effort into securing those technologies employed. 
+
+
+## SLL/TLS Vulnerability
+
+* FREAK Attack Example
+
+![SSL/TLS Downgrade](https://cga.sfo2.digitaloceanspaces.com/cns/images/freak_attack.PNG)
+
+## When All else fails, look to NIST
+
+* Reference the [NIST 800-52](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-52r2.pdf)
