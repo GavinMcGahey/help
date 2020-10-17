@@ -65,3 +65,5 @@ It then configures a box for centos 7.
 It gives the IP address of 127.0.0.1 to use.
 It then configures a vm provision for ansible
 then sets ansible.playbook to "playbook.yml"*
+
+**[Quiz 1 Walkthrough](https://youtu.be/MM-OO18PwEQ)**
