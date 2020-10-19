@@ -54,7 +54,7 @@ a CPU.
 
 Consider the desktop PC motherboard with a processor socket shown below:
 
-**Insert Picture**
+![PC Motherboard](https://github.com/Spencer-Kotys/help/blob/main/Operating_Systems/PC_Pic1.PNG)
 
 This board is a fully functioning computer, once its slots are populated.
 It consists of a processor socket containing a CPU, DRAM sockets, PCIe bus
