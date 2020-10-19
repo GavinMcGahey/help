@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # script to encrypt pgp messages
-# first argument is the message, second argument is the name of the reipient's public key
+# first argument is the message, second argument is the name of the recipient's public key
 
 # prints Input
 echo Message: $1
