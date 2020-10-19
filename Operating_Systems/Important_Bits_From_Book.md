@@ -49,3 +49,15 @@ Although virtually all systems are now multicore, we use the general term
 CPU when referring to a single computational unit of a computer system and
 core as well as multicore when specifically referring to one or more cores on
 a CPU.
+
+* PC Motherboard
+
+Consider the desktop PC motherboard with a processor socket shown below:
+
+**Insert Picture**
+
+This board is a fully functioning computer, once its slots are populated.
+It consists of a processor socket containing a CPU, DRAM sockets, PCIe bus
+slots, and I/O connectors of various types. Even the lowest-cost generalpurpose CPU contains multiple cores. Some motherboards contain multiple
+processor sockets. More advanced computers allow more than one system
+board, creating NUMA systems.
