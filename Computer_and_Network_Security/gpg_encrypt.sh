@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # script to encrypt pgp messages
 # first argument is the message, second argument is the name of the recipient's public key
