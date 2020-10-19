@@ -61,3 +61,30 @@ It consists of a processor socket containing a CPU, DRAM sockets, PCIe bus
 slots, and I/O connectors of various types. Even the lowest-cost generalpurpose CPU contains multiple cores. Some motherboards contain multiple
 processor sockets. More advanced computers allow more than one system
 board, creating NUMA systems.
+
+* Hadoop
+
+Hadoop is an open-source software framework that is used for distributed
+processing of large data sets (known as big data) in a clustered system containing simple, low-cost hardware components. Hadoop is designed to scale
+from a single system to a cluster containing thousands of computing nodes.
+Tasks are assigned to a node in the cluster, and Hadoop arranges communication between nodes to manage parallel computations to process and coalesce
+results. Hadoop also detects and manages failures in nodes, providing an
+efficient and highly reliable distributed computing service.
+Hadoop is organized around the following three components:
+1. A distributed file system that manages data and files across distributed computing nodes.
+
+2. The YARN (“Yet Another Resource Negotiator”) framework, which manages
+resources within the cluster as well as scheduling tasks on nodes in the
+cluster.
+
+3. The MapReduce system, which allows parallel processing of data across
+nodes in the cluster.
+
+Hadoop is designed to run on Linux systems, and Hadoop applications
+can be written using several programming languages, including scripting
+languages such as PHP, Perl, and Python. Java is a popular choice for
+developing Hadoop applications, as Hadoop has several Java libraries that
+support MapReduce. More information on MapReduce and Hadoop can
+be found at https://hadoop.apache.org/docs/r1.2.1/mapred tutorial.html
+and https://hadoop.apache.org
+
