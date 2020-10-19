@@ -32,3 +32,20 @@ bytes. Computer manufacturers often round off these numbers and say that
 a megabyte is 1 million bytes and a gigabyte is 1 billion bytes. Networking
 measurements are an exception to this general rule; they are given in bits
 (because networks move data a bit at a time).
+
+* Definitions of Computer System Components
+
+CPU—The hardware that executes instructions.
+
+Processor—A physical chip that contains one or more CPUs.
+
+Core—The basic computation unit of the CPU.
+
+Multicore— Including multiple computing cores on the same CPU.
+
+Multiprocessor— Including multiple processors.
+
+Although virtually all systems are now multicore, we use the general term
+CPU when referring to a single computational unit of a computer system and
+core as well as multicore when specifically referring to one or more cores on
+a CPU.
