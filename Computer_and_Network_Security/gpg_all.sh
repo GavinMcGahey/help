@@ -58,11 +58,29 @@ decrypt()
         rm temp.asc
 } # end of decrypt function
 
+import()
+{
+        echo import
+
+        # create file for the public key
+        nano temp.txt
+
+        # import key
+        gpg --import temp.txt
+
+        # delete file
+        rm temp.txt
+} # end of import function
+
 help()
 {
-        echo "Help"
-        echo "Usage: ./program [-option] [message] [recipient]"
-        echo "Options: -e: encrypt, -es: encrypt and sign, -d: decrypt"
+        echo "Spencer Kotys gpg messenger 2020"
+        echo "Help Page"
+        echo "This is a bash program created by Spencer Kotys, it eliminates the need to create files when encrypting, decrypting, or importing gpg keys and messages"
+        echo "Syntax:"
+        echo " ./program [-option] [message] [recipient] for options e and es"
+        echo " ./program [-option] for options d, i, and h"
+        echo "Options: -e: encrypt, -es: encrypt and sign, -d: decrypt, -i: import key, -h: help"
         exit
 } # end of help function
 
@@ -88,8 +106,10 @@ do
                         encrypt-sign ;;
                 "-d" )
                         decrypt ;;
-
-                "-h" )  help ;;
+                "-i" )
+                        import ;;
+                "-h" )  
+                        help ;;
         esac
         shift
 done
