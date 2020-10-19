@@ -147,3 +147,5 @@ cns{flag}
 30. Password hashes are stored in the /etc/shadow file which is usually restricted from general users reading. One of the fields is a salted hashed password for every user. What is the hash for user thedini?
 
 **$6$i64cYSIcH9SsgSz4$JJ51VIGNsA4bpKJvlnUGZMfGpm0PRc5JD5Rem9o/KM0MJXXQUW2MD5pV.ovmVv9ybJpwEUMaZEDFKX1sFWgul1**
+
+[Walkthrough](https://youtu.be/RkDxS383YDM)
