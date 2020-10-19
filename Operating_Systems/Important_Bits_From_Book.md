@@ -88,3 +88,12 @@ support MapReduce. More information on MapReduce and Hadoop can
 be found at https://hadoop.apache.org/docs/r1.2.1/mapred tutorial.html
 and https://hadoop.apache.org
 
+* Linux Timers
+
+On Linux systems, the kernel configuration parameter HZ specifies the frequency of timer interrupts. An HZ value of 250 means that the timer generates
+250 interrupts per second, or one interrupt every 4 milliseconds. The value
+of HZ depends upon how the kernel is configured, as well the machine type
+and architecture on which it is running. A related kernel variable is jiffies,
+which represent the number of timer interrupts that have occurred since the
+system was booted. A programming project in Chapter 2 further explores
+timing in the Linux kernel.
