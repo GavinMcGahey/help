@@ -97,3 +97,13 @@ and architecture on which it is running. A related kernel variable is jiffies,
 which represent the number of timer interrupts that have occurred since the
 system was booted. A programming project in Chapter 2 further explores
 timing in the Linux kernel.
+
+* Linux Kernel Data Structures
+
+The data structures used in the Linux kernel are available in the kernel source
+code. The include file <linux/list.h> provides details of the linked-list
+data structure used throughout the kernel. A queue in Linux is known as a
+kfifo, and its implementation can be found in the kfifo.c file in the kernel
+directory of the source code. Linux also provides a balanced binary search tree
+implementation using red-black trees. Details can be found in the include file
+<linux/rbtree.h>.
