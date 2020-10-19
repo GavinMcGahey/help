@@ -3945,3 +3945,98 @@ Take a look at CloudFlares analysis of [TLS 1.3](https://blog.cloudflare.com/rfc
 ## When All else fails, look to NIST
 
 * Reference the [NIST 800-52](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-52r2.pdf)
+
+# Class 21 -- Network Access Control
+
+## Definitions
+
+* NAC -- Network Access Control (Network Admission Control via CISCO)
+* NAP -- Network Access Protection (Microsoft)
+* TPM -- Trusted Platform Module
+* EAP -- Extensible Authentication Protocol
+* RADIUS -- Remote Authentication Dial-in User Service
+
+## NAC Overview
+
+* A method to protect access to the network
+* Includes:
+  * NAC Central Manager
+  * NAC Policy Server
+  * Host Agent
+  * Protected Infrastructure
+
+## NAC
+
+![NAC Overview](https://cga.sfo2.digitaloceanspaces.com/cns/images/NAC.PNG)
+
+## What you need
+
+* Database of Users, and Hosts
+* ACLs (Access Control Lists): rules
+* MS Active Directory (directory service that allows you to keep track of assests and users) and security Policies
+* Firewall/IDS/IPS: network security system
+* Host agent/anti-virus/anti-malware
+* RADIUS/802.1X: authentication mechanism 
+* VLAN/Switch/Router
+* VPN: virtual private network 
+
+
+If you have not figured this out yet network access control includes just about everything working together to make keeping the network secure possible. From policies to switches all the components of the network, host and servers need to work in concert to accomplish the goals of enforcing the security policies on the network. Imagine that in order to get onto the network you need to have current critical patches applied and you need to login using a second factor? That could cover the "health" of your device and verification of identity. From there the correct policies are applied to you access so that you are only getting access to the parts of the network you are allowed. The devil in the details is that this process is little more than a gateway to everything without adequate policies and data categorization being in place to assist in allowing only specific access to what that individual needs for their work role.
+
+
+## NAC Policies
+
+* ACL -- control resource access based on user role (providing you role based access)
+* NAC Server constantly monitors "health" of user (what level of trust do we have/get, higher trust = more access)
+* Policy can quarantine systems without adequate "health"
+
+
+When looking at enforcing policies or "rules" for access to the network and the data therein we need to go back to the tools we have used in the past. The ACL is the basis for the user role which provides rules based on identity parameters and can perform both authentication and authorization. This is found and controlled at the **NAC Server**. It can provide direction on how host negotiates access to the system. Does the host get into a guest area or head to a post-admission control and monitoring. This monitoring can include checking and tracking items like:
+* Windows Registry Settings
+* Presents of security related agents
+* Anti-Virus/Anti-malware, IDS/IPS status and findings
+* Running processes
+
+Host monitoring can continue while connected to assure that the "health" does not change during the period as well as providing data for logging and auditing purposes. This is a good time to reference some of the STIG setting we looked at for monitoring  
+
+
+## NAC Agent
+
+* The host agent with insight into all aspects of host
+* Ability to report and take actions on the host
+
+## Enforcement Points
+
+* The NAC server can control access at enforcement points
+* Enforcement points include:
+  * Switch Router -- VLAN
+  * VPN Concentrator -- ACL/Firewall
+  * Wireless access -- 802.1X
+  * DHCP Server -- IP of subnet
+  * LAN Authentication -- 802.1X
+
+## 802.1X
+
+* Authentication Mechanism for LAN and WiFi
+* Can be provided for port security for LAN ports
+* EAP/RADIUS used to authenticate devices (MAC, Cert, etc)
+* Works with NAC Server to allow access based on privilege
+
+## NAC Solutions
+
+* [CISCO (Security Agent, Clean Access Agent, NAC Agent)](https://www.cisco.com/c/en/us/td/docs/security/nac/appliance/configuration_guide/49/cam/49cam-book/m_webagt.html)
+* [PAN (Next-Generation Network Security Client)](https://www.paloaltonetworks.com/cyberpedia/replacing-vpn-and-nac-with-ngfw-for-endpoints)
+* [Fortigate (FortiNAC)](https://www.fortinet.com/products/network-access-control.html?gclid=CjwKCAiA1rPyBRAREiwA1UIy8M9XsQk9JqniNHxfrGhTCRhsfkNBEgBMBDOz-kM_dLh3hajefWpMpxoCnPUQAvD_BwE)
+
+## Kerberos
+
+* [Overview of Kerberos](https://www.youtube.com/watch?v=2WqZSZ5t0qk)
+* Authentication scheme used across OSs
+* Developed by MIT, MIT still maintains it but others add on to it 
+* Heavily used in MS Active Directory
+
+## Trusted Platform Module
+
+* Security Micro-controller: takes input 
+* Only allows secure processing
+* Foundation of NAC measurement
