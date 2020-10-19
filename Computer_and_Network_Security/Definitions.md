@@ -80,3 +80,8 @@
 * AEAD -- Authenticated Encryption with Associated Data
 * RSA -- Rivest, Shamir and Adelman
 * MAC -- Message Authentication Code
+* NAC -- Network Access Control (Network Admission Control via CISCO)
+* NAP -- Network Access Protection (Microsoft)
+* TPM -- Trusted Platform Module
+* EAP -- Extensible Authentication Protocol
+* RADIUS -- Remote Authentication Dial-in User Service
