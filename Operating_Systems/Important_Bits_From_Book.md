@@ -107,3 +107,37 @@ kfifo, and its implementation can be found in the kfifo.c file in the kernel
 directory of the source code. Linux also provides a balanced binary search tree
 implementation using red-black trees. Details can be found in the include file
 <linux/rbtree.h>.
+
+* The Study of Operating Systems
+
+There has never been a more interesting time to study operating systems,
+and it has never been easier. The open-source movement has overtaken operating systems, 
+causing many of them to be made available in both source and
+binary (executable) format. The list of operating systems available in both
+formats includes Linux, BSD UNIX, Solaris, and part of macOS. The availability of source
+code allows us to study operating systems from the inside out.
+Questions that we could once answer only by looking at documentation or
+the behavior of an operating system we can now answer by examining the
+code itself.
+Operating systems that are no longer commercially viable have been
+open-sourced as well, enabling us to study how systems operated in a
+time of fewer CPU, memory, and storage resources. An extensive but
+incomplete list of open-source operating-system projects is available from
+http://dmoz.org/Computers/Software/Operating Systems/Open Source/.
+In addition, the rise of virtualization as a mainstream (and frequently free)
+computer function makes it possible to run many operating systems on top
+of one core system. For example, VMware (http://www.vmware.com) provides a free “player” for 
+Windows on which hundreds of free “virtual appliances” can run. Virtualbox (http://www.virtualbox.com) provides a free,
+open-source virtual machine manager on many operating systems. Using
+such tools, students can try out hundreds of operating systems without dedicated hardware.
+In some cases, simulators of specific hardware are also available, allowing the operating system to run on “native” hardware, all within the confines of a modern computer and modern operating system. For example,
+a DECSYSTEM-20 simulator running on macOS can boot TOPS-20, load the
+source tapes, and modify and compile a new TOPS-20 kernel. An interested
+student can search the Internet to find the original papers that describe the
+operating system, as well as the original manuals.
+The advent of open-source operating systems has also made it easier to
+make the move from student to operating-system developer. With some
+knowledge, some effort, and an Internet connection, a student can even create
+a new operating-system distribution. Not so many years ago, it was difficult
+or impossible to get access to source code. Now, such access is limited only
+by how much interest, time, and disk space a student has.
