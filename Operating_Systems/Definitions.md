@@ -14,3 +14,9 @@
 * Kernel: One program that is always running on the computer, base of the operating system.
 * System Programs: Associated with the operating system, but not part of the kernel.
 * Middleware: A set of software frameworks that provide additional services to application developers.
+* public cloud: cloud available via the internet to anyone willing to pay
+* private cloud: available for and ran by a company
+* hybrid cloud: a cloud with public and private cloud components
+* SaaS: one or more applications available via the internet
+* PaaS: a software stack ready for application use via the internet
+* IaaS: servers or storage available over the internet 
