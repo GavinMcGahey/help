@@ -23,8 +23,8 @@
 * Tertiary storage
 * Memory
 * Nonvolatile storage (NVS)
-* Mechanical storage
-* Electrical storage (NVM)
+* Mechanical storage: HDDS, optical disks, etc. (generally larger and less expensive per byte)
+* Electrical storage (NVM) 
 * **CPU: The hardware that executes instructions.**
 * **Processor: A physical chip that contains one or more CPUs.**
 * **Core: The basic computation unit of the CPU.**
@@ -38,7 +38,7 @@
 * Asymmetric clustering
 * Multiprogramming
 * Process
-* Multitasking
+* Multitasking: an extension of multiprogramming wherein CPU scheduling algorithms rapidly switch between processes
 * Response time
 * Privileged instructions
 * Protection rings
