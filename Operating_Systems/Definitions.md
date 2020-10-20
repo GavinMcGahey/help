@@ -14,14 +14,58 @@
 * Kernel: One program that is always running on the computer, base of the operating system.
 * System Programs: Associated with the operating system, but not part of the kernel.
 * Middleware: A set of software frameworks that provide additional services to application developers.
+* Interrupt vector
+* Interrupt-request line
+* Interrupt-handler routine
+* Secondary storage
+* Hard-disk drives (HDDs)
+* Non volatile memory (NVM)
+* Tertiary storage
+* Memory
+* Nonvolatile storage (NVS)
+* Mechanical storage
+* Electrical storage (NVM)
 * **CPU: The hardware that executes instructions.**
 * **Processor: A physical chip that contains one or more CPUs.**
 * **Core: The basic computation unit of the CPU.**
 * **Multicore: Including multiple computing cores on the same CPU.**
 * **Multiprocessor: Including multiple processors.**
-* public cloud: cloud available via the internet to anyone willing to pay
-* private cloud: available for and ran by a company
-* hybrid cloud: a cloud with public and private cloud components
+* Clustered system
+* Loosely coupled
+* High-availability service
+* Gracegul degradation
+* Fault tolerant
+* Asymmetric clustering
+* Multiprogramming
+* Process
+* Multitasking
+* Response time
+* Privileged instructions
+* Protection rings
+* Virtual machine manager (VMM)
+* Cache management
+* List
+* Linked list
+* Singly linked list
+* Doubly linked list
+* Circularly linked list
+* Stack
+* LIFO
+* Hash collision
+* Hash map
+* Bitmap
+* Wireless networks
+* Firewal
+* Mobile Computing
+* Computer-server system
+* File-server system
+* Discovery protocol
+* Public cloud: cloud available via the internet to anyone willing to pay
+* Private cloud: available for and ran by a company
+* Hybrid cloud: a cloud with public and private cloud components
 * SaaS: one or more applications available via the internet
 * PaaS: a software stack ready for application use via the internet
 * IaaS: servers or storage available over the internet 
+* Reverse engineering
+* BSD UNIX
+* Version control system
