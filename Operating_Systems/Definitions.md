@@ -14,6 +14,11 @@
 * Kernel: One program that is always running on the computer, base of the operating system.
 * System Programs: Associated with the operating system, but not part of the kernel.
 * Middleware: A set of software frameworks that provide additional services to application developers.
+* **CPU: The hardware that executes instructions.**
+* **Processor: A physical chip that contains one or more CPUs.**
+* **Core: The basic computation unit of the CPU.**
+* **Multicore: Including multiple computing cores on the same CPU.**
+* **Multiprocessor: Including multiple processors.**
 * public cloud: cloud available via the internet to anyone willing to pay
 * private cloud: available for and ran by a company
 * hybrid cloud: a cloud with public and private cloud components
