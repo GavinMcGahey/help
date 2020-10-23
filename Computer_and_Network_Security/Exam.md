@@ -1,7 +1,7 @@
 # Exam 1
 1. TCP/IP networks employ which of the following protocols
 
-**HTTP, SMTP, TCP, and UDP
+**HTTP, SMTP, TCP, and UDP**
 
 2. What would be the supernet for the following 4 networks:
 
