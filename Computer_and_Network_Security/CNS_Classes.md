@@ -4040,3 +4040,67 @@ Host monitoring can continue while connected to assure that the "health" does no
 * Security Micro-controller: takes input 
 * Only allows secure processing
 * Foundation of NAC measurement
+
+# Class 22 -- Network Access Control Part Deux
+
+## Definitions
+
+* AS -- Authentication Server
+* KDC -- Key distribution center
+* TGT -- Ticket-granting Ticket
+* TGS -- Ticket-Granting Service
+* SS -- Services Server
+
+## Kerberos V5
+
+* A computer authentication protocol
+* uses tickets to authenticate over insecure networks to prove identity
+* UDP Port 88 by default
+
+## Kerberos History
+
+* Developed at MIT
+* Originally listed at "Auxiliary Military Equipment" and banned from export (DES)
+* Currently at V5
+* Since Windows 2000 Kerberos has been the default windows authentication methods for Active Directory
+
+## Kerberos Video
+
+* [Overview of Kerberos](https://www.youtube.com/watch?v=2WqZSZ5t0qk)
+
+## Kerberos Parts
+
+* Authentication Server (AS)
+* Key distribution center (KDC)
+* Ticket-Granting Ticket (TGT)
+* Ticket-Granting Service (TGS)
+* Services Server (SS)
+
+## Kerberos Authentication
+
+* Client sends clear-text request to the Authentication Server with user ID
+* Authentication Server checks if users is valid in User Database
+* Authentication Server Sends two Messages
+  * Message A -- Encrypted with User Password Hash **holding** client/Ticket Granting Services Session Key
+  * Message B -- Encrypted with TGS **Secret Key** and **holding** Ticket-Granting-Ticket (Client ID, Client Network Address, Ticket Validity Period and client/TGS session key)
+* If Client can decrypt Message A (the password hash as the decryptor) It has the session key and can authenticate
+* Client can not decrypt Message B since it doesn't have the TGS Secret Key
+
+## Kerberos Services Authorization
+
+* Client Sends
+  * Message C -- TGT from message B and ID of Service
+  * Message D -- Authenticator encrypted with session key
+* Server Decrypts TGT (From Message C) and can decrypt wit its **Secret Key** giving it the client/TGS session key to decrypt Message D and compares client ID. Replies with:
+  * Message E -- Client-to-Server ticket (client ID client network address, validity period and Client/server session key) encrypted with services **Secret Key**
+  * Message F -- Client/Server Session key encrypted with the Client/TGS **Session Key**
+
+## Kerberos Client Services Request
+
+* Client Receives Message E and F From TGS, it can now authenticate itself wit the Service Server, sends Message E and G
+  * Message E -- Message E gets sent to the Service Server
+  * Message G -- Creates a new Authenticator which includes  Client ID, Timestamp and is Encrypted using **Client/Server Session Key**
+* Service Server Decrypts Message E using its **Secret Key** to obtain the Client/Service Session Key to Decrypts Message G and can compare the Client ID in E and G. If they match the Client can be authenticated
+  * Message H -- Service Server encrypts the Authenticator Time Stamp and encrypts with the Client/Server Session Key
+* Client Receives Message H and checks the timestamp if correct the client can trust the server
+* Server provides requested services to the client
