@@ -90,3 +90,4 @@
 * TGT -- Ticket-granting Ticket
 * TGS -- Ticket-Granting Service
 * SS -- Services Server
+* ZTN -- Zero Trust Networks
