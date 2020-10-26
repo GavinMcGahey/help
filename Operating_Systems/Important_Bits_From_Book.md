@@ -245,3 +245,4 @@ The following illustrates various equivalent system calls for Windows and UNIX o
 | --- | --- | --- |
 | Process control | ``CreateProcess()`` <br> ``ExitProcess()`` <br> ``WaitForSingleObject()`` | ``fork()`` <br> ``exit()`` <br> ``wait()`` |
 | File management | ``CreateFile()`` <br> ``ReadFile()`` <br> ``WriteFile()`` <br> ``CloseHandle()`` | ``open()`` <br> ``read()`` <br> ``write()`` <br> ``close()`` |
+| Device management | ``SetConsoleMode()`` <br> ``ReadConsole()`` <br> ``WriteConsole()`` | ``ioctl()`` <br> ``read()`` <br> ``write()`` |
