@@ -214,3 +214,25 @@ computing, mobile computing, client–server systems, peer-to-peer systems, clou
 Free and open-source operating systems are available in source-code format. Free software is licensed to allow no-cost use, redistribution, and
 modification. GNU/Linux, FreeBSD, and Solaris are examples of popular
 open-source systems.
+
+# Chapter 2
+* Example of Standard API
+
+As an example of a standard API, consider the ``read()`` function that is available in UNIX and Linux systems. The API for this function is obtained from the man page by invoking the command
+
+``man read``
+
+on the command line. A description of this API appears below:
+
+*Insert Image*
+
+A program that uses the ``read()`` function must include the ``unistd.h`` header
+file, as this file defines the ``ssize_t`` and ``size_t`` data types (among other
+things). The parameters passed to ``read()`` are as follows:
+
+* ``int fd`` — the file descriptor to be read
+* ``void *buf`` — a buffer into which the data will be read
+* ``size t count`` — the maximum number of bytes to be read into the buffer
+
+On a successful read, the number of bytes read is returned. A return value of
+0 indicates end of file. If an error occurs, ``read()`` returns −1.
