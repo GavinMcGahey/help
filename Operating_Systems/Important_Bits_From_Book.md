@@ -236,3 +236,12 @@ things). The parameters passed to ``read()`` are as follows:
 
 On a successful read, the number of bytes read is returned. A return value of
 0 indicates end of file. If an error occurs, ``read()`` returns −1.
+
+* Examples of Windows and Unix System Calls
+
+The following illustrates various equivalent system calls for Windows and UNIX operating systems.
+
+| System Call | Windows | Unix |
+| --- | --- | --- |
+| Process control | ``CreateProcess()`` <br> ``ExitProcess()`` <br> ``WaitForSingleObject()`` | ``fork()`` <br> ``exit()`` <br> ``wait()`` |
+| File management | ``CreateFile()`` <br> ``ReadFile()`` <br> ``WriteFile()`` <br> ``CloseHandle()`` | ``open()`` <br> ``read()`` <br> ``write()`` <br> ``close()`` |
