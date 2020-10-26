@@ -4104,3 +4104,83 @@ Host monitoring can continue while connected to assure that the "health" does no
   * Message H -- Service Server encrypts the Authenticator Time Stamp and encrypts with the Client/Server Session Key
 * Client Receives Message H and checks the timestamp if correct the client can trust the server
 * Server provides requested services to the client
+
+# Class 23 -- Zero Trust Networks
+
+## Definitions
+
+ZTN -- Zero Trust Networks
+
+## The Assumption
+
+* We assume our internal network is secure
+* We assume the bad guys are on the outside
+* We assume that the good guys are on the inside
+* We assume walls will save us
+
+## Our Assumptions
+
+Our assumptions are proving to be wrong
+
+## What about Defense in Depth
+
+* Castle: there can be more than just the wall, there could be: honeymots, mots, snares 
+* We don't truly do defense in depth
+
+## Try something new
+
+ZTN is being adopted by innovative organizations
+* Everyone is trying to adopt these concepts but only innovative companies have been successful 
+
+## Goals of ZTN
+
+* Identify each User: have to affirmatively say that this user is who they say they are
+* Identify each device: need to manage endpoint and know that it is who/what they say they are (standard)
+* Classify all data: where most organizations fail, need to know what to protect 
+* Access controlled systems: support the disestablishment of VPNs, a way to get on the network without actually going through a gate 
+* Policy-defined access
+
+Vendors provide ZTN for whatever they sell
+
+
+The model of ZTN is one based on a Google trust model. The above references give an overview of the Google model which literally no one else can accomplish. The top reference was one that I attended at Shmoocon 2020 on ZTN and the issues GitLab has run into while implementing it. You will be given time to watch that video! Before that happens lets explore what ZTNs mean and how they are different from traditional networks. A traditional network has a hard candy coated exterior and soft gooie inside. We protect that perimeter with things like firewalls. We enable remote access with things like VPNs.
+
+With ZTN the concept is based around the idea of if you took NAC to the cloud and all remote. Meaning, think of all the controls of network access controls.  In the world of Google it looks at each request and determines if that request is valid and should be fulfilled. The idea is that you can build trust based on who you are, what device you are on and eventually where you may be. They also support the idea of gaining trust, the more things you do that only you can do the more trust you gain.
+
+In reality, no one can really run a perfect ZTN as is exhibited by the video from Shmoocon and GitLab.
+
+
+## Reality -- GitLab
+
+* No perimeter
+* No VPN
+* All Remote Workers
+* All Cloud -- Multi-Cloud
+* Limited asset management
+
+## Pain Point
+
+* Data classification (very difficult) is fluid, by the time you open the file it may be classified very differently 
+* CUI (Control Unclassified Information) 
+* Provisioning/De-provisioning is difficult: all about gaining trust 
+* no asset management
+
+## Needs
+
+* User authentication with MFA (multi-factor)
+* Provisioning users to minutes (needs to be done quickly)
+* Secure Communications: all encryption algorithms have to be up to date 
+* Audit Access Control: getting live and auditable feedback of who is getting into what and when 
+* Manage Assets
+* Detection/tracking of anomalies (advanced) 
+
+## Data Classification
+
+* Data Classification is difficult
+* As information changes consideration needs to be made as to limit or provide access
+
+## How do we do it?
+
+* Start small
+* Think simple
+* Think no trust!
