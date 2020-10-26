@@ -69,3 +69,101 @@
 * Reverse engineering
 * BSD UNIX
 * Version control system
+* User interface
+* Graphical user interface (GUI)
+* Touch-screnn interface
+* Command-line interface (CLI)
+* Shared memory
+* Message passing
+* Command interpreter
+* Shells
+* Desktop
+* Icons
+* Folder
+* Gestures
+* Springboard
+* System administrators
+* Power users
+* Shell scripts
+* System calls
+* Application programming interface (API)
+* libc
+* Run=time environment (RTE)
+* System-call interface
+* Pushed
+* Stack
+* Popped
+* Process control
+* File management
+* Device management
+* Information maintenance
+* Communications
+* Protection
+* Debugger
+* Bugs
+* Lock
+* Sketch
+* Boot loader
+* Single step
+* Message-passing model
+* Host name
+* Process name
+* Daemons
+* Client
+* Server
+* Shared-memory model
+* System services aka system utilities
+* Registry
+* Application programs
+* Relocatable object file
+* Linker
+* Executable
+* Loader
+* Relocation
+* Dynamically linked libraries (DLLs)
+* Executable and Linkable Format (ELF)
+* Portable Executable (PE)
+* Mach-O
+* Applicatin binary interface (ABI)
+* User goals
+* System goals
+* Policy
+* Mechanism
+* Monolithic
+* Tightly coupled
+* Loosely coupled
+* Layerd approach
+* Mach
+* Micro-kernel
+* Loadable kernel modules (LKMs)
+* User experience layer
+* Application frameworks layer
+* Core Frameworks
+* Kernel environment
+* Darwin
+* Traps
+* Krnel abstractions
+* Kernel extensions or kexts
+* Ahead-of-time (AOT)
+* Bionic
+* WSL
+* Pico
+* System build
+* Booting
+* Bootstrap program or boot loader
+* BIOS
+* Boot block
+* UEFI
+* GRUB
+* Recovery mode
+* Single-user mode
+* Debugging
+* Performance tuning
+* Botlenecks
+* Log file
+* Core dump
+* Crash
+* Crash dump
+* BPF Compiler Collection (BCC)
+* Verifie
+
