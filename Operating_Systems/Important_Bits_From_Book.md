@@ -275,3 +275,41 @@ Windows uses a hybrid architecture that provides subsystems to emulate different
 Pico processes communicate with the kernel services LXCore and LXSS to translate Linux system calls, if possible using native Windows system calls. When the Linux application makes a system call that has no Windows equivalent, the LXSS service must provide the equivalent functionality. When there is a one-to-one relationship between the Linux and Windows system calls, LXSS forwards the Linux system call directly to the equivalent call in the Windows kernel. In some situations, Linux and Windows have system calls that are similar but not identical. When this occurs, LXSS will provide some of the functionality and will invoke the similar Windows system call to provide the remainder of the functionality. The Linux ``fork()`` provides an illustration of this: The Windows ``CreateProcess()`` system call is similar to ``fork()`` but does not provide exactly the same functionality. When ``fork()`` is invoked in WSL, the LXSS service does some of the initial work of ``fork()`` and then calls ``CreateProcess()`` to do the remainder of the work. The figure below illustrates the basic behavior of WSL.
 
 *Insert Image*
+
+* *Kernighan’s Law*
+
+“Debugging is twice as hard as writing the code in the first place. Therefore,
+if you write the code as cleverly as possible, you are, by definition, not smart
+enough to debug it.”
+
+* Summary
+
+An operating system provides an environment for the execution of programs by providing services to users and programs.
+
+The three primary approaches for interacting with an operating system are (1) command interpreters, (2) graphical user interfaces, and (3) touchscreen interfaces.
+
+System calls provide an interface to the services made available by an operating system. Programmers use a system call’s application programming interface (API) for accessing system-call services.
+
+System calls can be divided into six major categories: (1) process control, (2) file management, (3) device management, (4) information maintenance, (5) communications, and (6) protection.
+
+The standard C library provides the system-call interface for UNIX and Linux systems.
+
+Operating systems also include a collection of system programs that provide utilities to users.
+
+A linker combines several relocatable object modules into a single binary executable file. A loader loads the executable file into memory, where it becomes eligible to run on an available CPU.
+
+There are several reasons why applications are operating-system specific. These include different binary formats for program executables, different instruction sets for different CPUs, and system calls that vary from one operating system to another.
+
+An operating system is designed with specific goals in mind. These goals ultimately determine the operating system’s policies. An operating system implements these policies through specific mechanisms.
+
+A monolithic operating system has no structure; all functionality is provided in a single, static binary file that runs in a single address space. Although such systems are difficult to modify, their primary benefit is efficiency.
+
+A layered operating system is divided into a number of discrete layers, where the bottom layer is the hardware interface and the highest layer is the user interface. Although layered software systems have had some success, this approach is generally not ideal for designing operating systems due to performance problems.
+
+The microkernel approach for designing operating systems uses a minimal kernel; most services run as user-level applications. Communication takes place via message passing.
+
+A modular approach for designing operating systems provides operatingsystem services through modules that can be loaded and removed during run time. Many contemporary operating systems are constructed as hybrid systems using a combination of a monolithic kernel and modules.
+
+A boot loader loads an operating system into memory, performs initialization, and begins system execution.
+
+The performance of an operating system can be monitored using either counters or tracing. Counters are a collection of system-wide or perprocess statistics, while tracing follows the execution of a program through the operating system.
