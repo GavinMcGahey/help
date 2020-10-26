@@ -249,3 +249,21 @@ The following illustrates various equivalent system calls for Windows and UNIX o
 | Information maintenance | ``GetCurrentProcessID()`` <br> ``SetTimer()`` <br> ``Sleep()`` | ``getpid()`` <br> ``alarm()`` <br> ``sleep()`` |
 | Communications | ``CreatePipe()`` <br> ``CreateFileMapping()`` <br> ``MapViewOfFile()`` | ``pipe()`` <br> ``shm_open()`` <br> ``mmap()`` |
 | Protection | ``SetFileSecurity()`` <br> ``InitlializeSecurityDescriptor()`` <br> ``SetSecurityDescriptorGroup()`` | ``chmod()`` <br> ``umask()`` <br> ``chown()`` |
+
+* The Standard C Library
+
+The standard C library provides a portion of the system-call interface for many versions of UNIX and Linux. As an example, let’s assume a C program invokes the ``printf()`` statement. The C library intercepts this call and invokes the necessary system call (or calls) in the operating system—in this instance, the ``write()`` system call. The C library takes the value returned by ``write()`` and passes it back to the user program:
+
+*Insert Image*
+
+* ELF Format
+
+Linux provides various commands to identify and evaluate ELF files. For example, the ``file`` command determines a file type. If ``main.o`` is an object file, and ``main`` is an executable file, the command
+
+``file main.o``
+
+will report that ``main.o`` is an ELF relocatable file, while the command
+
+``file main``
+
+will report that ``main`` is an ELF executable. ELF files are divided into a number of sections and can be evaluated using the ``readelf`` command.
