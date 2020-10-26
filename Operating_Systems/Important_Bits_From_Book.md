@@ -267,3 +267,11 @@ will report that ``main.o`` is an ELF relocatable file, while the command
 ``file main``
 
 will report that ``main`` is an ELF executable. ELF files are divided into a number of sections and can be evaluated using the ``readelf`` command.
+
+* Windows Subsytem for Linux
+
+Windows uses a hybrid architecture that provides subsystems to emulate different operating-system environments. These user-mode subsystems communicate with the Windows kernel to provide actual services. Windows 10 adds a Windows subsystem for Linux (WSL), which allows native Linux applications (specified as ELF binaries) to run on Windows 10. The typical operation is for a user to start the Windows application ``bash.exe``, which presents the user with a bash shell running Linux. Internally, the WSL creates a Linux instance consisting of the ``init`` process, which in turn creates the bash shell running the native Linux application ``/bin/bash``. Each of these processes runs in a Windows Pico process. This special process loads the native Linux binary into the process’s own address space, thus providing an environment in which a Linux application can execute.
+
+Pico processes communicate with the kernel services LXCore and LXSS to translate Linux system calls, if possible using native Windows system calls. When the Linux application makes a system call that has no Windows equivalent, the LXSS service must provide the equivalent functionality. When there is a one-to-one relationship between the Linux and Windows system calls, LXSS forwards the Linux system call directly to the equivalent call in the Windows kernel. In some situations, Linux and Windows have system calls that are similar but not identical. When this occurs, LXSS will provide some of the functionality and will invoke the similar Windows system call to provide the remainder of the functionality. The Linux ``fork()`` provides an illustration of this: The Windows ``CreateProcess()`` system call is similar to ``fork()`` but does not provide exactly the same functionality. When ``fork()`` is invoked in WSL, the LXSS service does some of the initial work of ``fork()`` and then calls ``CreateProcess()`` to do the remainder of the work. The figure below illustrates the basic behavior of WSL.
+
+*Insert Image*
