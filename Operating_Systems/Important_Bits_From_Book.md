@@ -246,3 +246,6 @@ The following illustrates various equivalent system calls for Windows and UNIX o
 | Process control | ``CreateProcess()`` <br> ``ExitProcess()`` <br> ``WaitForSingleObject()`` | ``fork()`` <br> ``exit()`` <br> ``wait()`` |
 | File management | ``CreateFile()`` <br> ``ReadFile()`` <br> ``WriteFile()`` <br> ``CloseHandle()`` | ``open()`` <br> ``read()`` <br> ``write()`` <br> ``close()`` |
 | Device management | ``SetConsoleMode()`` <br> ``ReadConsole()`` <br> ``WriteConsole()`` | ``ioctl()`` <br> ``read()`` <br> ``write()`` |
+| Information maintenance | ``GetCurrentProcessID()`` <br> ``SetTimer()`` <br> ``Sleep()`` | ``getpid()`` <br> ``alarm()`` <br> ``sleep()`` |
+| Communications | ``CreatePipe()`` <br> ``CreateFileMapping()`` <br> ``MapViewOfFile()`` | ``pipe()`` <br> ``shm_open()`` <br> ``mmap()`` |
+| Protection | ``SetFileSecurity()`` <br> ``InitlializeSecurityDescriptor()`` <br> ``SetSecurityDescriptorGroup()`` | ``chmod()`` <br> ``umask()`` <br> ``chown()`` |
