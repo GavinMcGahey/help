@@ -85,3 +85,8 @@
 * TPM -- Trusted Platform Module
 * EAP -- Extensible Authentication Protocol
 * RADIUS -- Remote Authentication Dial-in User Service
+* AS -- Authentication Server
+* KDC -- Key distribution center
+* TGT -- Ticket-granting Ticket
+* TGS -- Ticket-Granting Service
+* SS -- Services Server
