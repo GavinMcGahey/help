@@ -4332,3 +4332,94 @@ Think about why the *sudo* command is important. If all users made changes using
 
 * Googles Safe Browsing Protocol -- List of known phishing sites
 * Training -- [KnowB4](https://www.knowbe4.com/phishing)
+
+# Class 26 - Cyber Threats and Defenses
+## Definitions
+
+OWASP -- The Open Web Application Security Project
+[REST] -- Representation State Transfer
+[SOAP] -- Simple Object Access Protocol
+[API] -- Application Programming Interface
+W3C -- World Wide Web Consortium
+[SAML] -- Security Assertion markup Language
+[XACML] -- Extensible Access Control Markup Language
+[UDDI] -- Universal Description, Discovery and Integration
+SIEM -- Security information and event management
+
+## Web Vulnerabilities
+
+* Every year updated list at [OWASP Top Ten Vulns]
+* #1 has traditionally been Injections in general
+
+We have talked about various different vulnerabilities on different systems. One major attack surface is that of **Web Applications**. If you think how we interact with web applications you realize we use them in every aspect of our life. Every time we do any banking or need to buy something we are using a web application of some sort. With the rise in mobile use we have shifted this paradigm a bit where we have a mobile application that uses backend requests to display data but in its essence it is still a web based application. Securing these applications has been tricky because the purpose of them is to be widely available to users to exchange data. By presenting that data to the public it exposes the application to a wide array of attacks. OWASP, The Open Web Application Security Project, makes a list of the top 10 web vulnerabilities that it updates every year. The text has a somewhat outdated list so the next slide provides the most updated list as well as a link above to where they are posted.
+
+![OWASP](https://owasp.org/www-project-internet-of-things/assets/images/OWASP-IoT-Top-10-2018-final.jpg)
+
+## 2019 Top Ten
+
+1) Injection
+2) Broken Authentication
+3) Sensitive Data Exposure
+4) XML External Entities
+5) Broken Access Control
+6) Security Misconfiguration
+7) Cross-Site Scripting
+8)Insecure Deserialization
+9) Using Components with Known Vulnerabilities
+10) Insufficient Logging & Monitoring
+
+
+## Web App Protection -- How Computer Talk
+
+* Application Programming Interface
+  * [SOAP] -- XML more structured
+  * HTTP -- HTML, XML, JSON
+* Can leverage [REST] on either protocol
+* Read more [SOAP and REST]
+
+## Web App Protection -- Securing That Chat
+
+* [NIST 800-95] -- Guide to Secure Web Services
+* W3C have outlined [SAML] and [XACML] to secure XML in transit
+* Also [UDDI] enables authentication and authorize between Publishers, Inquirers and subscribers
+
+## Web App Protection -- Logs Logs Logs
+
+* Logs provide insights into what is happening on the machines
+* Logs need to be maintained in a manner that protects integrity
+
+Question: Do you trust logs on a machine that is compromised?
+
+## Web App Protection -- More On Logs
+
+* Guidance provided by [NIST 800-92]
+* Covers log management, what to log, how long to log it
+
+## Syslog
+
+* Standard framework for log generation, storage and transfer
+* Can be implemented on any platform
+* Utilize priority from 0 -- emergency to 7 -- debug
+
+## SIEM
+
+* Unlike syslog a SIEM can combined non-standard logs and syslogs
+* Central servers for log analysis
+* Can utilize an agent
+* Can provide area off the host to store and analyze logs
+
+[OWASP Top Ten Vluns]:https://owasp.org/www-project-top-ten/
+[SOAP and REST]:https://www.upwork.com/hiring/development/soap-vs-rest-comparing-two-apis/
+[NIST 800-95]:https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-95.pdf
+[NIST 800-92]:https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-92.pdf
+[SAML]:https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
+[XACML]:https://en.wikipedia.org/wiki/XACML
+[SOAP]:https://en.wikipedia.org/wiki/SOAP
+[REST]:https://en.wikipedia.org/wiki/Representational_state_transfer
+[API]:https://en.wikipedia.org/wiki/Application_programming_interface
+[UDDI]:https://en.wikipedia.org/wiki/Web_Services_Discovery#Universal_Description_Discovery_and_Integration
+[Syslog]:https://en.wikipedia.org/wiki/Syslog
+[Kibana]:https://www.elastic.co/kibana
+[Heat Map]:https://extelligenceblog.it/2017/07/27/elasticstack-elk-suricata-and-pfsense-firewall-part-4-kibana-visualizations-and-dashboards-pretty-pictures/
+[DO Guide]:https://www.digitalocean.com/community/tutorials/how-to-use-kibana-dashboards-and-visualizations
+[Predictive Analytics Today]:https://www.predictiveanalyticstoday.com/kibana/
