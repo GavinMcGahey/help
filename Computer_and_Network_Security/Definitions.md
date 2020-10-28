@@ -94,3 +94,6 @@
 * Separation of Duties- different roles for different users
 * DevOps- Development Operations
 * Least Privilege -- Principal of only allowing user and admins to have the lowest level of access they need to do their job
+* SPF -- Sender Policy Framework
+* DKIM -- Domain Key Identified Mail
+* DMARC -- Domain-based Message Authentication, Reporting and Conformance
