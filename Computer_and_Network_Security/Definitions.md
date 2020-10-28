@@ -91,3 +91,6 @@
 * TGS -- Ticket-Granting Service
 * SS -- Services Server
 * ZTN -- Zero Trust Networks
+* Separation of Duties- different roles for different users
+* DevOps- Development Operations
+* Least Privilege -- Principal of only allowing user and admins to have the lowest level of access they need to do their job
