@@ -4184,3 +4184,69 @@ In reality, no one can really run a perfect ZTN as is exhibited by the video fro
 * Start small
 * Think simple
 * Think no trust!
+
+# Class 24 - Automation
+
+## Definitions
+* Separation of Duties- different roles for different users
+* DevOps- Development Operations
+* Least Privilege -- Principal of only allowing user and admins to have the lowest level of access they need to do their job
+
+
+## Introduction
+
+* Information systems benefit from high levels of abstraction
+* Many processes are still manual
+* Automated processes sometimes are not reliable (Selenium)
+* Many times they are not well connected or centralized
+
+
+
+Many times as information systems get larger and more complex we need abstract away from simple solutions we can build to go to a packaged commercial solution that may have increased functionality but we, as administrators, have less understanding or control of. For example, we can build a firewall with OpenBSD (an operating system). From there we can implement a packet filtering firewall which is built into the OpenBSD kernel. We can configure the software to allow the exact IPs we want and filter ports, and protocols. We can even set up some additional software to provide functionality of IDS/IPS on the same system, like Snort or Suricata. From there we can send all that data to a SIEM and set up alerts to come to some chat channel like Slack, we can make a bot that checks that chat channel so we can have a natural conversation with that chat bot to take actions on the platform when we can not. Or we could buy a Palo Alto Firewall and have their security engineers deal with IDS/IPS rules and have them update the signatures and heuristics and leverage their API to interact with the system through third party chat systems... The idea is you have to choose between build vs buy all the time. In many cases however we need to configure systems the same time every time. In the past many administrators have considered the device to be a save place to store the only copy of an active configuration. For example, you have a Firewall like a Cisco ASA, and the admin logs in when a change needs to be made, she will make the change and then test and log out. She may even do this on a test environment first before rolling out to production. Many times if she needed to figure out what the specific configuration is on the system she would log in to view it or even export the configuration to reference. You can imagine, if an attacker gained access to the system it would be difficult to confirm what a known good state is, especially if logging was not set up to indicate when changes were made, or logging was blocked or altered.
+
+For this reason we need to think about how we do configuration management. We need to think about it on many levels. Luckily the rise of DevOps (Development Operations), a workflow that connects software developers to system administrator (operators), has been hard at work making tools that abstract configuration and store it as code, something that is stored as text and describes a system state. The tools that can be used to check the state do so in an **[Idempotent](https://en.wikipedia.org/wiki/Idempotence)** manner, a math term that means it will remain unchanged when operated on by itself. We will be focusing on this topic today and the tools used to obtain this.
+
+
+## Configuration Management
+
+* NIST Guidance found in [NIST 800-128](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-128.pdf)
+* Process for Security Focused CM
+  * Planning
+  * Identify & Implement Configurations
+  * Controlling Configuration Changes
+  * Monitoring for changes
+* Set up process around CM
+
+
+At the core of configuration management is the idea that you need to start with a known good configuration, implement those configurations, control changes and monitor for unapproved changes. That, as one can imagine involves many processes and procedures. Think for a moment what would be involved to implement a firewall rule change. Someone needs to request a firewall rule change and that change need, needs to be verified and approved as a valid change. That means a configuration change control board needs to meet and approve the changes, a technical team needs to meet to make sure the change won't conflict with current configuration, an implementation team needs to meet to figure out the best way of rolling out the changes, and a team actually needs to make the change. This is not to mention the fact that the change and process needs to be documented as well as added to a new baseline. 
+
+Think about why the *sudo* command is important. If all users made changes using the root user, there would be no way to track which user made a change to network configuration. The *sudo* command allows a user to execute commands with the security permisssions of another user, thus the changes can be tracked. 
+
+
+## Continuous Integration Continuous Deployment
+
+* Defined workflows can have tests built
+* Conditions that are known to enable automatic testing
+* Once testing is complete approval workflows can be developed
+* Ultimately deployment of changes can be automatic
+
+## Platforms
+
+![DevOps Tools](https://3ovyg21t17l11k49tk1oma21-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/Automic-CD-Map.png)
+
+## More tools
+
+![Cloud Native Landscape](https://www.stackoverdrive.net/wp-content/uploads/2017/01/CloudNativeLandscape_latest.png)
+
+## Automation of Firewall
+
+* Using platforms like Ansible you can deploy router and firewall configs to standard hardware
+* Using software defined networking you can automate all aspects of networking
+  * Automatically shifting to IPS after IDS detects attack
+* Using source control that "description" of your system can be version controlled
+
+## Lets look at a Fortigate Firewall
+
+* Take a look at the fortigate.yml playbook using the [fortios_config](https://docs.ansible.com/ansible/latest/modules/fortios_config_module.html)
+* It will load up the new_configuartion.conf.j2 file
+* j2 stands for Jinja2 which is a templating engine
