@@ -97,3 +97,12 @@
 * SPF -- Sender Policy Framework
 * DKIM -- Domain Key Identified Mail
 * DMARC -- Domain-based Message Authentication, Reporting and Conformance
+* OWASP -- The Open Web Application Security Project
+* REST -- Representation State Transfer
+* SOAP -- Simple Object Access Protocol
+* API -- Application Programming Interface
+* W3C -- World Wide Web Consortium
+* SAML -- Security Assertion markup Language
+* XACML -- Extensible Access Control Markup Language
+* UDDI -- Universal Description, Discovery and Integration
+* SIEM -- Security information and event management
