@@ -4250,3 +4250,85 @@ Think about why the *sudo* command is important. If all users made changes using
 * Take a look at the fortigate.yml playbook using the [fortios_config](https://docs.ansible.com/ansible/latest/modules/fortios_config_module.html)
 * It will load up the new_configuartion.conf.j2 file
 * j2 stands for Jinja2 which is a templating engine
+
+# Class 25 - Cyber Threats and Defenses
+
+## Definitions
+
+* SPF -- Sender Policy Framework
+* DKIM -- Domain Key Identified Mail
+* DMARC -- Domain-based Message Authentication, Reporting and Conformance
+
+## DNS Caching
+
+* DNS entries can be manipulated (as seen in lab)
+* Bogus DNS entries are maintained for the TTL
+* Pharming -- Tricking users into accepting false site as real
+
+## Drive By Pharming
+
+* User gets malicious scripts from compromised site
+* Scripts probe route for default credentials
+* Resets DNS to malicious DNS
+* Capture info from malicious sites using DNS
+
+## DNS Issues
+
+* Traditional DNS has:
+  * No authentication
+  * No validation
+* If domain name is unknown DNS server will ask authoritative source
+* First response can be accepted as valid (Race Condition)
+
+## DNSSEC
+
+* Validates DNS Response
+* Utilizes **Chain of Trust**
+* Each DNS Request is signed to verify DNS
+
+
+## Router Vulnerability -- BGP
+
+* BGP vulnerable to Broadcast Injection
+* Used by Pakistan Telecom "Attack"
+  * Broadcast ownership of YouTube IP space
+  * Rerouted traffic to YouTube over censorship order
+* BGP Routers took the new route broadcast and rerouted traffic
+
+## Router Vulnerability -- DoS
+
+* Flood of traffic routers can't process
+* Can be distributed (DDoS)
+* Easy to execute -- Difficult to mitigate
+
+## Router Vulnerability -- Spoofing
+
+* Injection of false information into routing table
+* Reset Attack by sending TCP RESET messages
+  * Drops session
+  * Reset routes learned by each other
+
+## Router Vulnerability -- Flapping
+
+* Repetitive changes to BGP routing table (30-50 times per second)
+* Overload routers and compromise availability
+
+## Router Security
+
+* NIST 800-189 -- Resilient Inter-domain Traffic Exchange
+* BGP Peer Authentication
+* Router Prefix Limits, Filter Invalid Prefixes
+* Logging
+
+## Spam
+
+* Blacklist SPAM hosts
+* Sender Policy Framework (SPF) -- Define which mail servers are authorized using DNS TXT record
+* Domain Key Identified Mail (DKIM) -- Signing by domain
+* Domain-based Message Authentication, Reporting and Conformance (DMARC)
+
+
+## Phishing
+
+* Googles Safe Browsing Protocol -- List of known phishing sites
+* Training -- [KnowB4](https://www.knowbe4.com/phishing)
