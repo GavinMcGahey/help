@@ -224,7 +224,7 @@ As an example of a standard API, consider the ``read()`` function that is availa
 
 on the command line. A description of this API appears below:
 
-*Insert Image*
+![API Call](https://github.com/Spencer-Kotys/help/blob/main/Operating_Systems/Pictures/OS2.1.PNG)
 
 A program that uses the ``read()`` function must include the ``unistd.h`` header
 file, as this file defines the ``ssize_t`` and ``size_t`` data types (among other
