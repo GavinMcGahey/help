@@ -254,7 +254,7 @@ The following illustrates various equivalent system calls for Windows and UNIX o
 
 The standard C library provides a portion of the system-call interface for many versions of UNIX and Linux. As an example, let’s assume a C program invokes the ``printf()`` statement. The C library intercepts this call and invokes the necessary system call (or calls) in the operating system—in this instance, the ``write()`` system call. The C library takes the value returned by ``write()`` and passes it back to the user program:
 
-*Insert Image*
+![C Call](https://github.com/Spencer-Kotys/help/blob/main/Operating_Systems/Pictures/OS2.2.PNG)
 
 * ELF Format
 
@@ -274,7 +274,7 @@ Windows uses a hybrid architecture that provides subsystems to emulate different
 
 Pico processes communicate with the kernel services LXCore and LXSS to translate Linux system calls, if possible using native Windows system calls. When the Linux application makes a system call that has no Windows equivalent, the LXSS service must provide the equivalent functionality. When there is a one-to-one relationship between the Linux and Windows system calls, LXSS forwards the Linux system call directly to the equivalent call in the Windows kernel. In some situations, Linux and Windows have system calls that are similar but not identical. When this occurs, LXSS will provide some of the functionality and will invoke the similar Windows system call to provide the remainder of the functionality. The Linux ``fork()`` provides an illustration of this: The Windows ``CreateProcess()`` system call is similar to ``fork()`` but does not provide exactly the same functionality. When ``fork()`` is invoked in WSL, the LXSS service does some of the initial work of ``fork()`` and then calls ``CreateProcess()`` to do the remainder of the work. The figure below illustrates the basic behavior of WSL.
 
-*Insert Image*
+![WSL](https://github.com/Spencer-Kotys/help/blob/main/Operating_Systems/Pictures/OS2.3.PNG)
 
 * *Kernighan’s Law*
 
