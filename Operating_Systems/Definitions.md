@@ -1,3 +1,4 @@
+# Chapter 1
 * Operating system: Software that manages a computer's hardware.
 * Hardware: The central processing unit (CPU), the memory, and the input/ouput (I/O) devices.
 * Application programs: Such as word processors, spreadsheets, web browsers, define the ways in which these resources are used.
