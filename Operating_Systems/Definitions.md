@@ -14,17 +14,22 @@
 * Kernel: One program that is always running on the computer, base of the operating system.
 * System Programs: Associated with the operating system, but not part of the kernel.
 * Middleware: A set of software frameworks that provide additional services to application developers.
-* Interrupt vector
-* Interrupt-request line
-* Interrupt-handler routine
-* Secondary storage
-* Hard-disk drives (HDDs)
-* Non volatile memory (NVM)
-* Tertiary storage
-* Memory
-* Nonvolatile storage (NVS)
+* Interrupt: A signal sent to the CPU that my stop the system bus, usually at the completion of a program.
+* Interrupt vector: An array of addresses that hold the interrupt service routines indexed by a unique number.
+* Interrupt-request line: A wire on the CPU that is checked after executing every instruction.
+* Interrupt-handler routine: The instruction set that the CPU jumps to after reading the interrupt number.
+* Random-access memory (RAM): Rewritable memory that computers run programs off of. Also called main memory.
+* Bit: A bit is the building block of computer storage and can be either 0 or 1.
+* Byte: 8 bits, most common size of data to manipulate.
+* Word: Number of bytes dependent on computer architecture. On a 64-bit computer, a word is 64 bits or 8 bytes.
+* Secondary storage: An extention of main memory (RAM), able to hold data permanently.
+* Hard-disk drives (HDDs): Spinning discs that are encoded with information, think CDs or DVDs.
+* Nonvolatile memory (NVM): Circits that store data, generally called SSDs, think flash drives.
+* Tertiary storage: Data storage used for special purposes like backup. Could be stored on optical disk or magnetic tape.
+* Memory: In this book, volatile storage is referred to as memory. 
+* Nonvolatile storage (NVS): It retains its contents when power is lost, usually secondary storage.
 * Mechanical storage: HDDS, optical disks, etc. (generally larger and less expensive per byte)
-* Electrical storage (NVM) 
+* Electrical storage (NVM) : Flash memory, FRAM, NRAM, and SSD.
 * **CPU: The hardware that executes instructions.**
 * **Processor: A physical chip that contains one or more CPUs.**
 * **Core: The basic computation unit of the CPU.**
