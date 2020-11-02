@@ -36,13 +36,19 @@
 * **Core: The basic computation unit of the CPU.**
 * **Multicore: Including multiple computing cores on the same CPU.**
 * **Multiprocessor: Including multiple processors.**
-* Clustered system
-* Loosely coupled
-* High-availability service
-* Gracegul degradation
-* Fault tolerant
-* Asymmetric clustering
-* Multiprogramming
+* Clustered system: A system which combines multiple CPUS.
+* Loosely coupled: Clustered systems are considered loosely coupled because theay are composed of two  or more individual systems.
+* High-availability service: Service that will continue evein if one or more failures occur.
+* Graceful degradation: The ability to continue providing service proportional to the level of surviving hardware after a failure.
+* Fault tolerant: Goes beyond graceful degradation because any single component can fail without affecting operations.
+* Asymmetric clustering: One machine is in hot-standby mode where it is ready to jump in if the other machine fails.
+* Symmetric clustering: Two or more machines are running programs and monitoring each other. 
+* Parallelization: Dividing a program into sepate parts that run in parallel on different cores of the computer.
+* Distributed lock manager (DLM): Access controal and locking for parallelization.
+* Storage-area networks (SANs): Allow many systems to attach to a pool of storage.
+* System daemons: System services that are loaded at boot and run the entire time the kernel is running.
+* Trap (exception): Another form of an interrupt which is a software-generated kind caused by and error or a specific request.
+* Multiprogramming: 
 * Process
 * Multitasking: an extension of multiprogramming wherein CPU scheduling algorithms rapidly switch between processes
 * Response time
