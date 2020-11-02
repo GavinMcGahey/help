@@ -111,27 +111,35 @@
 
 # Chapter 2
 
-* User interface
-* Graphical user interface (GUI)
-* Touch-screnn interface
-* Command-line interface (CLI)
-* Shared memory
-* Message passing
-* Command interpreter
-* Shells
-* Desktop
-* Icons
-* Folder
-* Gestures
-* Springboard
-* System administrators
-* Power users
-* Shell scripts
-* System calls
-* Application programming interface (API)
-* libc
-* Run=time environment (RTE)
-* System-call interface
+* User interface: A way for the user to interact with the system.
+* Graphical user interface (GUI): A window system where a mouse is used to point at objects and the keyboard is use to enter text.
+* Touch-screnn interface: Similear to a GUI, but where a user uses their fingers to point to objects.
+* Command-line interface (CLI): A system that uses text commands from the keyboard to navigate.
+* Program execution: Load a program into memory, run it, then have it end either normally or abnormally.
+* I/O operations: Taking input and producing output, whether it be to and from a file or keyboard and mouse.
+* File-system manipulation: Being able to create and delete a file, search for a file, and list file information. Also manage permissions for files and directories.
+* Communications: Exchanging information between processes.
+* Shared memory: Two or more processes read and write to a shared section of memory.
+* Message passing: Packets of information in predefined formats are moved between processes.
+* Error detection: Detecting and handling errors that occur.
+* Resource allocation: Ability to allocate resources to multiple processes running simltaniously.
+* Logging: Recording which programs use how much and what kinds of computer resources.
+* Protection and security: Protecting data stored on the system and securing the system from attacks.
+* Command interpreter: A command-line interface that allows users to directly enter command for the operating system.
+* Shells: Another name for command line interpreters.
+* Desktop: A metaphor used in GUIs to represent a users workspace.
+* Icons: Objects that a user can point to with a mouse.
+* Folder: A directory that in a GUI uses a folder metaphor.
+* Gestures: How a user interacts with a touch-screen interface.
+* Springboard: Touch-screen interface used by iPad and iPhone.
+* System administrators: Individuals that manage computers
+* Power users: Individuals that have a deep knowledge of a system.
+* Shell scripts: A program interpreted by the command-line interface, often used to perform repetitive tasks.
+* System calls: Provide an interface to the services made available by an operating system.
+* Application programming interface (API): Specifies a set of functions that are available to an application programmer.
+* libc: A library for UNIX and Linux programs written in C.
+* Run-time environment (RTE): Full suite of software needed to execute applications written in a given programming language.
+* System-call interface: Serves as the link to system calls made available by the operating system.
 * Pushed
 * Stack
 * Popped
@@ -209,3 +217,28 @@
 * BPF Compiler Collection (BCC)
 * Verifie
 
+# Chapter 3
+
+* Jobs
+* User programs
+* Tasks
+* Processes
+* Program counter
+* Text section
+* Data section
+* Heap section
+* Stack section
+* Activation record
+* State
+* New State
+* Running State
+* Waiting State
+* Ready State
+* Process control block (PCB)
+* Process state
+* Program counter
+* CPU registers
+* CPU-scheduling information
+* Memory-management information
+* Accounting information
+* I/O status information
