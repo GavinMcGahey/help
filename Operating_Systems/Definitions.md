@@ -48,8 +48,8 @@
 * Storage-area networks (SANs): Allow many systems to attach to a pool of storage.
 * System daemons: System services that are loaded at boot and run the entire time the kernel is running.
 * Trap (exception): Another form of an interrupt which is a software-generated kind caused by and error or a specific request.
-* Multiprogramming: 
-* Process
+* Multiprogramming: Organizes programs so that the CPU is always executing one.
+* Process: A program in execution
 * Multitasking: an extension of multiprogramming wherein CPU scheduling algorithms rapidly switch between processes
 * Response time
 * Privileged instructions
