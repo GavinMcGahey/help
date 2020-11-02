@@ -1,4 +1,5 @@
 # Chapter 1
+
 * Operating system: Software that manages a computer's hardware.
 * Hardware: The central processing unit (CPU), the memory, and the input/ouput (I/O) devices.
 * Application programs: Such as word processors, spreadsheets, web browsers, define the ways in which these resources are used.
@@ -59,32 +60,57 @@
 * Virtual machine manager (VMM): Manages virtual machine, has privilge between user an kernel.
 * Timer: An interrupt that can be set for a specified period of time, used to prevent infinite loops.
 * Variable timer: A timer set to a number of clock cycles.
-* Cache management
-* List
-* Linked list
-* Singly linked list
-* Doubly linked list
-* Circularly linked list
-* Stack
-* LIFO
-* Hash collision
-* Hash map
-* Bitmap
-* Wireless networks
-* Firewal
-* Mobile Computing
-* Computer-server system
-* File-server system
-* Discovery protocol
+* Progarm counter: Specifies the next instruction to execute.
+* Caching: Copying information from a slower storage system to a the cache which is a faster storage system.
+* Cache management: The managing of information stored in the cache.
+* List: A representation of collections of data values in a sequence.
+* Linked list: A list in which items are linked to one another.
+* Singly linked list: Each item points to its successor.
+* Doubly linked list: Item can refer to either its predecessor or its successor.
+* Circularly linked list: The last element in the list refers to the first element.* Stack: A sequentially ordered data structure that used LIFO for adding and removing items.
+* Last in, first out (LIFO): The last item in is the first item removed.
+* Queue: A sequentially ordered data structure that uses FIFO.
+* First in, first out (FIFO): items are removed in the order in which they came.
+* Tree: A data structure that can represent data hierarchically. Data linked through parent-child relationships.
+* General tree: A parent may have an unlimited number of children.
+* Binary tree, a parent may have at most two children.
+* Hash function: Takes data as its input, performs an operation on the data, and returns a value.
+* Hash collision: When two different inputs result in the same hash output.
+* Hash map: Associates key and value pairs using a hash function.
+* Bitmap: A string of n binary digits that can be used to represent the status of n items.
+* Disk blocks: The individual units on a storage disk.
+* Portals: Provide web accessibility to internal servers.
+* Wireless networks: A network that does not use wires to propagate network connections.
+* Firewall: Controls information that is passed in, out, and on the network.
+* Mobile Computing: Computing on handheld smartphones and tablet computers.
+* Client-Server Computing: Where there is a designated server or servers for clients to connect to.
+* Computer-server system: Provides an interface to which a client can send a request to perform an action. The server then executes the action and sends the results to the client. 
+* File-server system: Provides a file-system interface where clients can create, update, read, and delte files.
+* Peer-to-Peer Computing: Where there is not distingtion between clients and servers.
+* Discovery protocol: A protocol that allows peers to discover services provided by other peers.
+* Cloud computing: Computing that delivers computing, storage, applications as a service across a network.
 * Public cloud: cloud available via the internet to anyone willing to pay
 * Private cloud: available for and ran by a company
 * Hybrid cloud: a cloud with public and private cloud components
 * SaaS: one or more applications available via the internet
 * PaaS: a software stack ready for application use via the internet
 * IaaS: servers or storage available over the internet 
-* Reverse engineering
-* BSD UNIX
-* Version control system
+* Application-specific integrated circuits (ASICs): Hardware created to perform specific tasks.
+* Free software: Makes source code availabe and is licensed to allow no-cost use, redistribution, and modification.
+* Open-source software: Source code is availabe but not the same licencing as free software.
+* Closed-source: Where source code is not released.
+* Proprietary software: Owned and sometimes created by a company, usually heavily restricted.
+* Reverse engineering: Taking binary code and turing it into  the source code.
+* GNU's not unix! (GNU): A Unix compatible operating system started by Richard Stallman in 1984.
+* Linux: The kernel created by Linus Torvals and others released in 1991.
+* GNU/Linux: Combination of GNU and teh Linux kernel, commonly refered to as Linux.
+* BSD UNIX: A derivated of AT&T's UNIX from Berkely. Started in 1978, became open source in 1994.
+* Version control system: Allow a user to pull entire source code and push changed back.
+* Git: A version control system, is what Github is based on.
+* Solaris: Commmercial UNIX-based operating system of Sun Microsystems.
+
+# Chapter 2
+
 * User interface
 * Graphical user interface (GUI)
 * Touch-screnn interface
