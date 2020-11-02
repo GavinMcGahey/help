@@ -50,11 +50,15 @@
 * Trap (exception): Another form of an interrupt which is a software-generated kind caused by and error or a specific request.
 * Multiprogramming: Organizes programs so that the CPU is always executing one.
 * Process: A program in execution
-* Multitasking: an extension of multiprogramming wherein CPU scheduling algorithms rapidly switch between processes
-* Response time
-* Privileged instructions
-* Protection rings
-* Virtual machine manager (VMM)
+* Multitasking: An extension of multiprogramming wherein CPU scheduling algorithms rapidly switch between processes
+* Response time: The amount of time it takes a process to respond to user input.
+* User mode: LImited in the instructions that can be executed.
+* Kernel mode (supervisor mode, system mode, etc): Can exectue any instruction.
+* Privileged instructions: Machine instruction that may cause harm so only a privileged account can execute them.
+* Protection rings: Varying levels of privilge.
+* Virtual machine manager (VMM): Manages virtual machine, has privilge between user an kernel.
+* Timer: An interrupt that can be set for a specified period of time, used to prevent infinite loops.
+* Variable timer: A timer set to a number of clock cycles.
 * Cache management
 * List
 * Linked list
