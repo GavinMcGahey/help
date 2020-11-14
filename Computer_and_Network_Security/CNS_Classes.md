@@ -4423,3 +4423,81 @@ Question: Do you trust logs on a machine that is compromised?
 [Heat Map]:https://extelligenceblog.it/2017/07/27/elasticstack-elk-suricata-and-pfsense-firewall-part-4-kibana-visualizations-and-dashboards-pretty-pictures/
 [DO Guide]:https://www.digitalocean.com/community/tutorials/how-to-use-kibana-dashboards-and-visualizations
 [Predictive Analytics Today]:https://www.predictiveanalyticstoday.com/kibana/
+
+# Class 27 - Cyber Threats and Defenses
+
+## Definitions
+
+* APT -- Advanced Persistent Threat
+
+## Threat Groups
+
+* As we gather information about threat actors we need a way to organize them
+* Not every attack is random and rarely can anyone truly hide forever
+* These organizations are categorized into Advanced Persistent Threats
+
+
+Many times victims feel like their attack was random and that the attack may have been carried out by someone eating Cheetos in their parents basement. In reality, the world of cyber crime and cyber espionage is not only more organized but also more... like every day life. The attackers are broadly categorized into Nation States, Hacktivists, and Criminal Organizations. With these flags we can then start to learn more about them. Like most people, they live normal lives, keep normal schedules and (spoiler alert) don't have any magic that they use for their every day hacks. They may be managing thousands or hundreds of thousands of compromised machines at any given time. It is like a job to them. Most attackers are using a set of tools they have been using for years, only innovating when needed. If the old tool works, use it. We can take advantage of many of these attributes of human nature to help us learn about our adversary. Meet the Advanced Persistent Threats.
+
+
+## APT Groups
+
+* APT groups operate across the globe
+* We can't always attribute exactly who attacks a target but we can put together clues
+* Each group leaves finger prints we can use to track their actions
+
+
+Advanced Persistent Threats are named that because they are not a single person but an **advanced** enterprise with intelligence-gathering, tool construction and human resources. They are not fly by night and have been established for long periods of time. They have the means to carry out **Persistent** attacks which means they may  be happy sitting on compromised machines until the time is right to exfiltrate data or trigger an attack. They are considered  a threat because they have both the capability and intent to execute. There are two main ways that we have seen threat actors be categorized at APTs, the MITRE method assigns and tracks a number for their [ATP Groups] (generally the way we are going to be using) on the other hand [CrowdStrike ATP Groups] have interesting names correlating to their country:
+
+### Nation-State-Based Adversaries
+
+* Bear = Russia
+* Buffalo = Vietnam
+* Chollima (a mythical winged horse) = North Korea
+* Crane = South Korea
+* Kitten = Iran
+* Leopard = Pakistan
+* Panda = China
+* Tiger = India
+
+### Non-Nation-State Adversaries
+
+* Jackal = Activist groups
+* Spider = Criminal groups
+
+By tracking these organizations we can start to track their methods and then, once we have an idea what we are dealing with use their TTPs against them to help defend our organization.
+
+
+## APT Overview
+
+* Take a moment to watch the [CrowdStrike] video on APT
+* Think about what APTs from the list you may see within the transportation industry
+
+## Anatomy of an attack
+
+* Most attacks fall into a matrix of actions
+* MITRE Matrix Tracks ATP and serves as a basis for measurement
+* View the [ATT&CK Matrix]
+
+Many of the topics discussed in class are covered in the [ATT&CK Matrix]. The columns represents phases of the attack. They are relatively self explanatory but you can see how they move through an attack. Starting with obtaining **Initial Access** by means of Phishing we see we move to **Execution** on the same box, many times they say attackers can hide but eventually they need to execute something on a machine. The purpose of execution is to attempt to obtain **persistence**, a mechanism that will enable them access back into that machine in the event they lose their connection. Persistence can come in many ways but keep in mind, every time something is done bread crumbs are left. From there the attacker is going to attempt to **escalate their privileges** to gain access to more machines and more data. During this time the attacker will attempt to maintain a low profile and **evade defenses* in a number of ways. The attacker will try to harvest credentials however possible form that machine or utilizing directory services in a phase known as **Credential Access**. As the attacker has learned everything on the current machine they have gained access to they will start to look around, during **discovery** the attacker will try to find out where they are in the network, what is around them and where they can go from there. This all builds up to their ability to **move laterally in an environment from one machine to another. They will do the same process on each box they move to and begin to **collect data** that may be useful or important to their ends. At this point the attacker is starting to think that they need a way to get all this great information they are gathering out. They will establish **command and control** channels to prepare to move data out of the network. The attacker finally gets what they want and they **exfiltrate** the data and all that is left is the only name that doesn't fully make sense, **impact** is a phase of cleaning up and covering tracks.
+
+Pretty simple...
+
+## APT 1
+
+* Lets review [APT 1]
+* [Unit 61398](https://cdn.hswstatic.com/gif/army-hacker-2.jpg)
+* APT 1 [Attack Matrix]
+
+
+As we look at the [Attack Matrix] for ATP 1 we see that MITRE has a great resource that highlights the TTPs used by this attacker. Sadly this is not telling us all that much (at this level we may not know that much) but it gives us hints on what we can expect and who we are dealing with. You can see that we can expect to see execution of command line and scripting as well masquerading as known legitimate executable files. To gain credentials they have been known to dump creds and then use various discovery techniques. To note, you notice that lateral movement is exhibited by Pass the Hash as well as RDP, interesting. With this we can get a fingerprint for how ATP 1 has operated in the past, it is not a guarantee but it does help us understand the process and learn how to defend against it. You can see on the [2020 Threat Report] that page 13-14 has the same matrix mapped with frequency used.
+
+* CrowdStrike [2020 Threat Report]
+
+[CrowdStrike]:https://www.youtube.com/watch?v=v8u0yz_ezqQ
+[APT Groups]:https://attack.mitre.org/groups/
+[APT 1]:https://www.fireeye.com/content/dam/fireeye-www/services/pdfs/mandiant-apt1-report.pdf
+[CrowdStrike ATP Groups]:https://www.crowdstrike.com/blog/meet-the-adversaries/
+[ATT&CK Matrix]:https://attack.mitre.org/
+[Attack Matrix]:https://mitre-attack.github.io/attack-navigator/enterprise/#layerURL=https%3A%2F%2Fattack.mitre.org%2Fgroups%2FG0006%2FG0006-enterprise-layer.json
+[2020 Threat Report]:https://go.crowdstrike.com/rs/281-OBQ-266/images/Report2020CrowdStrikeGlobalThreatReport.pdf
