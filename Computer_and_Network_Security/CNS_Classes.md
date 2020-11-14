@@ -4501,3 +4501,88 @@ As we look at the [Attack Matrix] for ATP 1 we see that MITRE has a great resour
 [ATT&CK Matrix]:https://attack.mitre.org/
 [Attack Matrix]:https://mitre-attack.github.io/attack-navigator/enterprise/#layerURL=https%3A%2F%2Fattack.mitre.org%2Fgroups%2FG0006%2FG0006-enterprise-layer.json
 [2020 Threat Report]:https://go.crowdstrike.com/rs/281-OBQ-266/images/Report2020CrowdStrikeGlobalThreatReport.pdf
+
+# Class 28 - SSL/TLS VPNs
+
+## Definitions
+
+* IKE -- Internet Key Exchange
+* AH -- Authentication Header
+* ESP -- Encapsulating Security Payload
+
+## Learning Objectives
+
+* Explain how network defense tools (firewalls, IDS etc.) are used to defend against attacks and mitigate vulnerabilities (NDF2)
+* Design a secure architecture for a given application (IAA2)
+
+## What goes over the IP network
+
+* Within an organization a preponderance of data is unencrypted
+* Two sites may need to be connected in a secure manner
+
+When considering the issues with IP Network security the topic comes down to what you are doing and what you want to protect. Not everything that you need to move from point A to point B is going to be over TLS. For example what if you want to have replication between two geographically disperse locations. Within the internet protocol we have no allocation for security, we worry about eavesdropping, modification of packets in transit, forging of source IP addresses, MitM attacks, and DoS. For that reason the network layer needs a degree of security and that security needs to be standard to facility interoperability. That is where IPsec (Internet Protocol Security) and other network layer security protocol come in. TLS is to the transport layer what IPsec is to the network layer.
+
+## Types of VPNs
+
+* Site to Site (Gateway to Gateway)
+* Remote Access (Host to Gateway)
+* Transport Mode
+
+## Site to Site
+
+![VPN Gateway to Gateway](https://cga.sfo2.digitaloceanspaces.com/cns/images/vpn_gateway.PNG)
+
+ When you are looking to connect two sites together from a router or firewall with the internal network being outside the tunnel (yea, inside the network is not in the tunnel). This mode is used to connect two sites that are geographically separated. This type of connection can occur over the internet or over a dedicated link like MPLS. It provides protection to the data in transit in the event the line has been tapped all the information will be encrypted.
+
+## Remote Access
+
+![VPN Host to Gateway](https://cga.sfo2.digitaloceanspaces.com/cns/images/vpn_host.PNG)
+
+The last mode is a method of remote access into a system. The text calls it **Host to Gateway** where you are connecting from a client into a host environment. This would be used to provide remote workers access into an environment.
+
+## Transport Mode
+
+![VPN Transport Mode](https://cga.sfo2.digitaloceanspaces.com/cns/images/vpn_transport.PNG)
+
+One can set up a VPN tunnel between two hosts given they have the ability to connect to each other (AKA not behind a NAT), this is known as **Transport Mode**.
+
+## VPN Protocol
+
+* SSL and TLS VPN
+* IPsec (Internet Protocol Security)
+* Layer 2 Tunneling Protocol (L2TP)
+* Point to Point Tunneling Protocol (PPTP)
+* OpenVPN -- Custom TLS
+* Secure Shell (SSH)
+
+There are various ways access systems over remote connection. A focus is made on IPsec but keep in mind that various protocol can be used to tunnel traffic. We briefly spoke about TLS VPNs using TLS to establish a link between two points. Similarly OpenVPN uses a custom TLS VPN. [Layer 2 Tunneling Protocol](https://en.wikipedia.org/wiki/Layer_2_Tunneling_Protocol) is a method of tunneling that relies on external encryption since it provides none as part of its specification. [Point to Point Tunneling Protocol (PPTP)](https://en.wikipedia.org/wiki/Point-to-Point_Tunneling_Protocol) is similar in that it replies on external encryption. SSH is popular for tunneling in the *nix world and does have mechanisms for maintaining a constant tunnel which other protocol can then travel.
+
+
+## IPsec
+
+* IPsec is comprised of three main parts
+  * IKE -- Internet Key Exchange
+  * AH -- Authentication Header
+  * ESP -- Encapsulating Security Payload
+* IPsec = IKE + AH + ESP + Data Compression
+
+When looking at IPsec we have a few main parts which are similar to what we learned in the TLS handshake. The IKE, internet key exchange, is where keys are exchanged and identity is verified. ESP and AH can be used independently or combined. ESP provides bulk encryption to encapsulate the traffic while AH provides authentication and limited integrity. Together they provide an authenticated encrypted channel that is resistant to some integrity issues, namely packet replay attacks.
+
+
+Keep in mind that both the ESP and AH can be applied together or individually on in conjunction.
+
+The main difference between Transport and Tunnel modes are in Tunnel mode you get an new IP header, in transport mode you expose your original IP header.
+
+
+## IPsec Transport Mode
+
+![IPsec Transport Mode](http://www.firewall.cx/images/stories/ipsec-modes-transport-tunnel-3.png)
+
+## IPsec Tunnel Mode
+
+![IPsec Tunnel Mode](http://www.firewall.cx/images/stories/ipsec-modes-transport-tunnel-1.png)
+
+## IPsec VPN
+
+* Transport vs Tunnel vs Host Gateway
+* [Watch This Video](https://www.youtube.com/watch?v=tuDVWQOG0C0)
