@@ -106,3 +106,4 @@
 * XACML -- Extensible Access Control Markup Language
 * UDDI -- Universal Description, Discovery and Integration
 * SIEM -- Security information and event management
+* APT -- Advanced Persistent Threat
