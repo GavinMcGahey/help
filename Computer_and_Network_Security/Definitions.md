@@ -107,3 +107,6 @@
 * UDDI -- Universal Description, Discovery and Integration
 * SIEM -- Security information and event management
 * APT -- Advanced Persistent Threat
+* IKE -- Internet Key Exchange
+* AH -- Authentication Header
+* ESP -- Encapsulating Security Payload
