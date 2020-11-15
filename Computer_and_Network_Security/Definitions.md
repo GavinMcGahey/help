@@ -110,3 +110,9 @@
 * IKE -- Internet Key Exchange
 * AH -- Authentication Header
 * ESP -- Encapsulating Security Payload
+* ACAS - Assured Compliance Assessment Solution 
+* DISA - Defense Information Systems Agency
+* NIST - National Institute of Standards and Technology
+* HIPPA - Health Insurance Portability and Accountability Act
+* SOX - Sarbanes-Oxley Act
+
