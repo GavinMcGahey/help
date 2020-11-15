@@ -4586,3 +4586,138 @@ The main difference between Transport and Tunnel modes are in Tunnel mode you ge
 
 * Transport vs Tunnel vs Host Gateway
 * [Watch This Video](https://www.youtube.com/watch?v=tuDVWQOG0C0)
+
+# Class 29 Logging and Vuln Management
+
+## Learning Outcomes
+
+* Apply tools and techniques for identifying vulnerabilities (VLA)
+* Create and apply a vulnerability map of a system (VLA)
+* Trace vulnerability to its root cause (VLA)
+* Develop and analyze countermeasures to mitigate vulnerabilities (VLA)
+* Identify and prepare disclosure of vulnerability (VLA)
+
+## Definitions
+
+* ACAS - Assured Compliance Assessment Solution 
+* DISA - Defense Information Systems Agency
+* NIST - National Institute of Standards and Technology
+* HIPPA - Health Insurance Portability and Accountability Act
+* SOX - Sarbanes-Oxley Act
+
+## What is Vulnerability Management
+
+* An process to discover, prioritize, assess, report remediate and verify vulnerabilities in a system
+* Provides control and visibility into environment
+* Provides a proactive way to manage security
+
+## Vuln Management Cycle
+
+![Vuln Management Process](https://cga.sfo2.digitaloceanspaces.com/cns/images/vmlc.gif)
+
+## Vuln Management Solutions
+
+* Default DoD sourced solution is ACAS (Tennable.SC)
+* Other products exist like Splunk, Rapid7, Qualys
+
+## Why is Vuln Management Important
+
+* Most vulnerabilities are exploited long after patches are released
+* Organizations lack a systemic method to repair vulnerabilities
+* Singular vulnerable systems can disrupt entire network functions
+
+## Scanning is the key
+
+* "... the countermeasure that will protect you, should a hacker scan your machines with a scanner, is to scan your own systems first. Make sure to address any problems and then a scan by a hacker will give her no edge..." *Hacking Linux Exposed, Second Edition*
+
+## Discovery
+
+* Shows assets and topology of network
+* Possible detection of rouge devices
+
+## Asset Prioritization
+
+* Develop a priority of critical assets
+* Assessment made on business impact
+* Assign ownership to assets
+
+## Assessment
+
+* Develop standards for the systems and software
+* Outline frameworks and scanning methodology
+
+## Scanning
+
+* Deploy internal, external and credentialed scans
+* Develop perspectives from external attacker, internal attacker and host based data
+* Test the effectiveness of security controls against automated scanning
+
+## Reporting
+
+* Develop reporting to convey information to technical and management personnel
+* Report on security framework compliance
+
+## Remediation
+
+* Track the patching and mitigation of vulnerabilities
+* Utilize a ticketing system for accountability
+
+## Verification
+
+* Re-scan assets to verify vulnerability is closed/mitigated
+
+## Logging
+
+* Centralized service to allow applications and the operating system to report events that take place
+
+## Why Log
+
+* Compliance -- NIST, HIPPA, SOX
+* System Health -- Thing often don't fail in silence
+* Security -- One of the best way to track attackers
+* Auditing -- Prove you are doing what you say you are doing
+* Forensics -- Reconstruct what happened
+
+## Log Process
+
+* Develop a plan for what needs to be logged
+* Determine the duration to keep logs for
+* Implement system to collect and store logs
+* Manage and backup logs for their entire lifetime
+
+## Windows Client
+
+* Event Logs introduced in Windows NT 4 in 1993
+* Provides logs from
+  * Applications -- database connection from XYZ
+  * System -- failure in print driver
+  * Security -- fire access logs, login attempts
+
+## Windows Domain
+
+* Domain Controller Logging
+  * Directory Services Logs -- Connection issues
+  * File Replication Logs -- DC updates
+  * DNS Logs -- Requests
+
+## Windows Logs
+
+* Located in `C:\Windows\System32\winevt\Logs`
+* In files ending in .evtx readable in various event log viewers
+
+## Linux Logging
+
+* Logs are stored in `/var/log`
+* `/var/log/syslog and /var/log/messages store all system logs`
+* `/var/log/auth.log or /var/secure stores all security logs`
+
+## Logging and anti-forensics
+
+* Logs on a system are susceptible to being manipulated
+* Log events in both systems can be removed or changed
+
+## Log Aggregation
+
+* Log aggregation is the process of collecting logs in one location for management and correlation
+* Various platforms enable log aggregation and correlation
+* Reduces the possibility and effect of log manipulation
