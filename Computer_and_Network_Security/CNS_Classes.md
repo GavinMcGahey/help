@@ -4721,3 +4721,128 @@ The main difference between Transport and Tunnel modes are in Tunnel mode you ge
 * Log aggregation is the process of collecting logs in one location for management and correlation
 * Various platforms enable log aggregation and correlation
 * Reduces the possibility and effect of log manipulation
+
+# Class 30 - Windows Logging: The Files are in the Computer
+
+## Resources
+
+* [Event ID Reference]
+* [MS Log Reference]
+* [Windows Account Activity Part 1]
+* [Windows Account Activity Part 2]
+* [Login Type Reference]
+
+## Old Windows
+
+* Windows NT/2000/XP/Server 2003
+  * .evt file type
+  * located in `C:\Windows\System32\config`
+  * Include file names: SecEvent.evt, AppEvent.evt, SysEvent.evt
+
+## New Windows
+
+* Windows Vista/Win7/Win8/Win10/Server 2008, 2012, 2016, 2019
+  * .evtx file type
+  * located in `C:\Windows\System32\winevt\logs`
+  * enabled remote logging
+  * Include file names: Security.evtx, Application.evtx, System.evtx etc. etc.
+
+## Log Management
+
+* When Logs get full you have three methods to use:
+  * Overwrite Events (Default)
+  * Archive Events -- Don't overwrite
+  * Do nothing and error out
+
+## Security Logs
+
+* Access Control/Security Settings
+* Events from audit policies and group policies
+* Examples: Login Attempt, File Access
+
+## System Logs
+
+* Events from Windows System and Services
+* Examples: Shutdown, Service Start/Stop
+
+## Application Logs
+
+* Events from software that isn't the Windows System
+* Example: Webserver requests, SQL Server Connections, Anti-Virus Alerts
+
+## Custom Logs
+
+* Custom Application Logs
+
+## Log Categories
+
+* Setup Logs -- Patches, hotfixes and updates
+* Forwarded Events -- Logs from other systems (think SIEM)
+* Applications and Services -- Hundreds of logs for various applications
+* [MS Log Reference]
+
+## So Many Logs, which to worry about
+
+* Security Logs -- House most audit information
+* Application Logs -- Mostly used for troubleshooting
+
+## Security Logs
+
+* Only the Local Security Authority Subsystem Service (LSASS) can trigger events to post in the security log
+* Security help identify logs, there are 9 Security Event Categories
+
+* Account Login -- Either local or domain login stored on the system that authorized the login -- **AUTHENTICATION EVENT**
+* Account Management -- Changes to accounts, escalations additions etc
+* Directory Service -- Access events of Active Directory Objects
+* Logon Event -- Instance or a logon or logoff of the system -- Taking place on the machine being logged into
+* Object Access -- Access to any object that has been set to be audited in the system Access Control List
+* Policy Change -- Any changes to audit policies, trust policies or user rights
+* Privilege Use -- Events where elevated privileges are used
+* Process Tracking -- Process events like start, stop, exit handlers, etc
+* System Events -- System startup and shutdown, action to security logs
+
+## Event IDs
+
+* Event IDs are used to identify the type of event
+* These ID number will become second nature
+* There are numerous IDs that can help troubleshoot or detect security issues
+* [Event ID Reference]
+
+## Events Digging In
+
+* 4624 -- Successful Logon
+* 4625 -- Failed Logon
+* 4634 -- Successful Logoff
+* 4647 -- User Initiated Logoff
+* 4648 -- Logon using explicit credentials like "RunAs"
+* 4672 -- Logon with Administrator rights
+* 4720 -- Account Creation
+
+## Microsoft Login Types
+
+* Logins have various different types (in handout)
+* Login types differ slightly between "Old Windows" and current
+
+| Logon Type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2          | Interactive (logon at keyboard and screen of system)                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 3          | Network (i.e. connection to shared folder on this computer from elsewhere on network)                                                                                                                                                                                                                                                                                                                                                                        |
+| 4          | Batch (i.e. scheduled task)                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 5          | Service (Service startup)                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| 7          | Unlock (i.e. unattended workstation with password protected screen saver)                                                                                                                                                                                                                                                                                                                                                                                   |
+| 8          | NetworkCleartext (Logon with credentials sent in the clear text. Most often indicates a logon to IIS with "basic authentication") See this article for more information.                                                                                                                                                                                                                                                                                     |
+| 9          | NewCredentials such as with RunAs or mapping a network drive with alternate credentials.  This logon type does not seem to show up in any events.  If you want to track users attempting to logon with alternate credentials see 4648.  MS says "A caller cloned its current token and specified new credentials for outbound connections. The new logon session has the same local identity, but uses different credentials for other network connections." |
+| 10         | RemoteInteractive (Terminal Services, Remote Desktop or Remote Assistance)                                                                                                                                                                                                                                                                                                                                                                                   |
+| 11         | CachedInteractive (logon with cached domain credentials such as when logging on to a laptop when away from the network)                                           
+
+## Videos
+
+* Please watch to following videos to view log walk-through
+  * [Windows Account Activity Part 1]
+  * [Windows Account Activity Part 2]
+
+[Event ID Reference]:https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/
+[MS Log Reference]:https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/bb726966(v=technet.10)?redirectedfrom=MSDN
+[Windows Account Activity Part 1]:https://youtu.be/EK2BxRsRN1A
+[Windows Account Activity Part 2]:https://youtu.be/0R5kLI75I8k
+[Login Type Reference]:https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=4624
