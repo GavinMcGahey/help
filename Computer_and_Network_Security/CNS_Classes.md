@@ -4846,3 +4846,58 @@ The main difference between Transport and Tunnel modes are in Tunnel mode you ge
 [Windows Account Activity Part 1]:https://youtu.be/EK2BxRsRN1A
 [Windows Account Activity Part 2]:https://youtu.be/0R5kLI75I8k
 [Login Type Reference]:https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=4624
+
+# Class 31 - Syslog
+
+## References
+
+* Wu/Irwin 19.1 - 19.7  -- IPS
+* [Syslog]
+* [What is Syslog]
+
+## Syslog
+
+* Defined in RFC 3164
+* Standardized/Finalized in RFC 5424
+* Uses UDP Port 514 by default: pre certificate based for encryption
+* Has three parts
+  * Header
+  * Structured Data (SD)
+  * Message
+
+## Syslog Format
+
+![Syslog Format]
+
+## Linux Logs
+
+* Found in /var/log
+* All sorts of different logs: .log, .log.1, some are zipped
+* log rotation
+* less syslog 
+* less dpkg.log
+* cat dpkg.log | grep "5.14.0-2"
+* less ufw.log
+
+## Other Devices
+
+* Many other devices support syslog
+* Generally you can forward logs to a collector (UDP 514)
+* Firewalls, "Appliances", Switches
+
+## Logging Live Demo
+
+* Observe the OSSIM SIEM Platform (AlienVault OSSIM)
+* Watch configuring logging on a Unified Network System
+* Watch configuring logging on network storage system
+
+## Videos
+
+* [Linux Logging Part 1]
+* [SIFT Workstation]
+
+[Syslog]:https://en.wikipedia.org/wiki/Syslog
+[What is Syslog]:https://blog.rapid7.com/2017/05/24/what-is-syslog/
+[Syslog Format]:https://blog.rapid7.com/content/images/post-images/63449/Untitled.png
+[SIFT Workstation]:https://digital-forensics.sans.org/community/downloads
+[Linux Logging Part 1]:https://youtu.be/JjZ1ZS_0wn0
