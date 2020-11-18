@@ -10,6 +10,12 @@
 
 ## MITRE ATT&CK -- Understand the TTPs and what might illustrate different Techniques
 
+[Class 6](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-06-mitre-attck)
+
+[Class 13](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-13----intro-to-cyber)
+
+[Class 27](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-27---cyber-threats-and-defenses)
+
 ## Domain Names -- Find registration info and IPs and DNS data
 
 ## SQL Injections -- Lab on SQL
