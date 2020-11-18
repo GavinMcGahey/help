@@ -4901,3 +4901,117 @@ The main difference between Transport and Tunnel modes are in Tunnel mode you ge
 [Syslog Format]:https://blog.rapid7.com/content/images/post-images/63449/Untitled.png
 [SIFT Workstation]:https://digital-forensics.sans.org/community/downloads
 [Linux Logging Part 1]:https://youtu.be/JjZ1ZS_0wn0
+
+# Class 32 - What is Normal
+
+## References
+
+* [Density Scout] Video
+* [Sigcheck Pt1] Video
+* [Sigcheck Pt2] Video
+
+## What do you see
+
+![Can you spot what is wrong?](https://cga.sfo2.digitaloceanspaces.com/cns/images/white-furred-animals-on-green-grass-field-710263.jpg)
+
+## What is right
+
+* If you saw nothing wrong you are correct
+* Everything is perfectly "normal"
+
+
+Generally if we don't understand the system we are using it gets very difficult to determine what is good and what is bad? In the photo in the prior slide it was simply a photo of a pasture. But when looking at it you thought there must be something wrong with it. Maybe there is and we can't see it, maybe we don't understand what perspective we should be taking. The point is unless we know where we are coming from and what to look for it gets very difficult to find something. If we know it is utterly illegal to have a fence in this part of the world the issue with the photo becomes obvious, without that bit of knowledge we would never think to come up with that as an issue.
+
+
+## Where to hide
+
+* Malware can be present in 3 ways
+   * Active Malware
+   * Dormant Malware
+   * Compromised without Malware
+* Remember Malware can hide but eventually needs to run
+* When it runs you can usually identify it, find it, and mitigate the situation
+
+
+When you have active malware on a system it is somewhat easier to detect. Like we spoke about most things are not new and many times, after some time, you see the same behavior over and over again. When malware is dormant it is more difficult to detect. Dormant malware may be mistaken for a legitimate program and can be present on a system awaiting a trigger to initiate. Lastly there are cases where a host is compromised but there is no malware. This is normally after the attacker has fully compromised the system an no longer needs malware for persistance. This type is the most difficult to detect.
+
+
+## Finding what is bad
+
+* Funnel
+* Start with wide net automated approaches (telling you what you know already)
+* Incident (something bad) vs Event (might be unexplained, might become an incident)
+* Narrow down your search with targeted searching
+* Evaluate individual hosts memory for a deep dive 
+
+## Know what is good
+
+* Understand what is normal
+* Look at running processes
+* Understand where they are running from
+
+
+To know what is bad we need to have an idea of what is good. In this sense take a look at your current Windows host of VM. Open up the command prompt and list all the runnign processes with
+
+```powershell
+tasklist /SVC
+tasklist /SVC | findstr svchost.exe
+taskList /SVC | findstr lsass.exe
+```
+
+WOW that is a long list. Lets try to answer a few questions here:
+
+* How many svchost.exe instances are running?
+* How many lsass.exe instance are running?
+
+At this point we need to determine if we know what we are looking at. Windows is a pretty big complex piece of software. Take some time to try to dig into learn about what is what on the host to help understand what is normal. The ultimate reference is the [Windows Internals] Part 1. Which can be obtained somewhat inexpensively, and written by the twisted minds that brought you Windows 10 and Azure!
+
+Use this list to get started:
+
+* system.exe
+* svchost.exe
+* smss.exe
+* csrss.exe
+* services.exe
+* lsaiso.exe
+* explorer.exe
+* wininit.exe
+* winlogon.exe
+* lsass.exe
+* taskhostw.exe
+* wininit.exe
+* WinLogon.exe
+* RuntimeBroker.exe
+
+
+## Signed Code
+
+* Code can be signed by the author in the same way you sign things with your private key
+* In this way anyone can sign anything, the question is trust
+* Public/Private key cryptography 
+* Shared trust mechanism 
+* It is very rare for a company to lose a code signing key... [Opera Loses Key]
+* Very low percentages of malware is signed (3.5%) according to [McAfee Threat Report]
+
+
+## Finding Anomalies -- Big net fishing
+
+* densityscout -- Looking for obfuscation and packing
+* pescan -- looking at the **Program Execution** file structure
+* sigcheck -- checks for signed code and uploads hashs to Virus Total
+
+Above is a brief description of what is discussed in the referenced videos. Eacho tool has tremendous amount of information associated with it but the video describes hunting around for some compromised files using those tools. Try using the same tools and scripts on your machine. I posted the code I used on the infected systems, with some slight modifications you should be able to run them against your system. 
+* Hint: Change to your Windows directory...
+
+Watch:
+
+* [Density Scout] Video
+* [Sigcheck Pt1] Video
+* [Sigcheck Pt2] Video
+
+[Density Scout]:https://youtu.be/GU1puxL01e8
+[Sigcheck Pt1]:https://youtu.be/u0JxLt-1lXI
+[Sigcheck Pt2]:https://youtu.be/VX0OB9oqP4Q
+[Opera Loses Key]:https://threatpost.com/opera-code-signing-certificate-stolen-malware-signed-and-distributed/101107/
+[McAfee Threat Report]:https://www.mcafee.com/enterprise/en-us/assets/reports/rp-quarterly-threats-jun-2017.pdf
+[Windows Internals]:https://www.thriftbooks.com/w/windows-internals-part-1-covering-windows-server-2008-r2-and-windows-7_mark-russinovich_david-a-solomon/1691405/#isbn=0735648735&idiq=24220747
