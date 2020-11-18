@@ -34,6 +34,8 @@
 
 [Windows Logs](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#windows-logs)
 
+[Class 30](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-30---windows-logging-the-files-are-in-the-computer)
+
 ## Sigcheck
 
 ## Log analysis -- Windows, Linux, Nginx, access logs
