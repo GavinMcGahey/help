@@ -20,6 +20,8 @@
 
 ## SQL Injections -- Lab on SQL
 
+[SQL Injection](https://github.com/macee/cns/blob/2020f/labs/lab_09_SQL_inject/lab_09.md#test-sql-injection-string)
+
 ## Vuln Mgmt -- Tools like ACAS (Nessus and SC from Tennable) 
 
 [Class 29](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-29-logging-and-vuln-management)
