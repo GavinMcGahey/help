@@ -22,6 +22,8 @@
 
 ## Vuln Mgmt -- Tools like ACAS (Nessus and SC from Tennable) 
 
+[Class 29](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-29-logging-and-vuln-management)
+
 ## DNSSEC -- What does it protect against
 
 ## Windows Executable -- Where do they live on a system
