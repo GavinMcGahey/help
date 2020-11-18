@@ -30,6 +30,10 @@
 
 ## Windows Executable -- Where do they live on a system
 
+[Windows PE](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#windows-pe-file)
+
+[Windows Logs](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#windows-logs)
+
 ## Sigcheck
 
 ## Log analysis -- Windows, Linux, Nginx, access logs
