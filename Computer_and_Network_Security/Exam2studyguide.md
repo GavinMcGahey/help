@@ -44,6 +44,10 @@ Some cyber attacks come from more sophistocated actors. These are called Advance
 
 ## Sigcheck
 
+Sigcheck is a command-line utility that shows file version number, timestamp information, and digital signature details, including certificate chains.
+
+[Sigcheck Docs](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck#:~:text=Sigcheck%20is%20a%20command%2Dline,signature%20details%2C%20including%20certificate%20chains.)
+
 ## Log analysis -- Windows, Linux, Nginx, access logs
 
 [Class 29](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-29-logging-and-vuln-management)
