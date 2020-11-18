@@ -39,3 +39,9 @@
 ## Sigcheck
 
 ## Log analysis -- Windows, Linux, Nginx, access logs
+
+[Class 29](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-29-logging-and-vuln-management)
+
+[Class 30](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-30---windows-logging-the-files-are-in-the-computer)
+
+[Class 31](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-31---syslog)
