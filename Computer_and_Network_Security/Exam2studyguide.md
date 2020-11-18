@@ -22,6 +22,8 @@ Some cyber attacks come from more sophistocated actors. These are called Advance
 
 ## Domain Names -- Find registration info and IPs and DNS data
 
+[whois](https://www.tecmint.com/whois-command-get-domain-and-ip-address-information/)
+
 ## SQL Injections -- Lab on SQL
 
 [SQL Injection](https://github.com/macee/cns/blob/2020f/labs/lab_09_SQL_inject/lab_09.md#test-sql-injection-string)
