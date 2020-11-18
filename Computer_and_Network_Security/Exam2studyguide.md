@@ -26,6 +26,8 @@
 
 ## DNSSEC -- What does it protect against
 
+[DNSSEC](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#dnssec)
+
 ## Windows Executable -- Where do they live on a system
 
 ## Sigcheck
