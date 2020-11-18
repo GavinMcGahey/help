@@ -2,6 +2,8 @@
 
 ## Threat Reports -- Specifically Crowdstrike
 
+[Crowdstrike](https://www.crowdstrike.com/about-crowdstrike/)
+
 [Class 13](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-13----intro-to-cyber)
 
 [Class 17](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-17-intrusion-detection-and-intrusion-prevention-systems)
