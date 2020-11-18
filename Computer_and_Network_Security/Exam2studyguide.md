@@ -2,6 +2,8 @@
 
 ## Threat Reports -- Specifically Crowdstrike
 
+Some cyber attacks come from more sophistocated actors. These are called Advanced Persistent Threats (APT). Threat reports are drawn up to describe there activities. Crowdstrike is one of many companies that uses knowlegde of APTs to protect against cyber attacks.
+
 [Crowdstrike](https://www.crowdstrike.com/about-crowdstrike/)
 
 [Class 13](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-13----intro-to-cyber)
