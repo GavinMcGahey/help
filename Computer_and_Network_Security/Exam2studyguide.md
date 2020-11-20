@@ -110,6 +110,28 @@ Sigcheck is a command-line utility that shows file version number, timestamp inf
 
 ## Log analysis -- Windows, Linux, Nginx, access logs
 
+### Windows Logs:
+
+Old (NT,2000,XP,Server 2003):
+
+.evt files located in `C:\Windows\System32\config`, examples are SecEvent.evt, AppEvent.evt, SysEvent.evt
+
+New (Vista onwards):
+
+.evtx files located in `C:\Windows\System32\winevt\logs` and are able to do remote logging, examples are Security.evtx, Application.evtx, System.evtx
+
+Different logon types (2,3,4,5,7,8,9,10,11)
+
+4624 = Successful Logon
+
+### Linux Logs:
+
+.log files located in `/var/log` 
+
+`var/log/syslog` and `/var/log/messages` store all system logs
+
+`var/log/auth.log` and `var/secure` store all security logs
+
 [Class 29](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-29-logging-and-vuln-management)
 
 [Class 30](https://github.com/Spencer-Kotys/help/blob/main/Computer_and_Network_Security/CNS_Classes.md#class-30---windows-logging-the-files-are-in-the-computer)
