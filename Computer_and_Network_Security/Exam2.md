@@ -114,3 +114,68 @@ Referencing log2.hacking.fans: What is the event ID for a logoff?
 
 *4634*
 
+## Question 20
+
+Referencing log2.hacking.fans: What is the machine host name?
+
+*dc1*
+
+## Question 21
+
+What is the IP address for DC2?
+
+*10.1.10.222*
+
+## Question 22
+
+Referencing log3.hacking.fans: How many log entries are in the file?
+
+*11047*
+
+## Question 23
+
+Referencing log3.hacking.fans: What is the host name?
+
+*pom-ubuntu2*
+
+## Question 24
+
+Referencing log3.hacking.fans: What is last blocked IP address
+
+*84.38.187.221*
+
+## Question 25
+
+Referencing log3.hacking.fans: What is last blocked IP address
+
+*84.38.187.221*
+
+## Question 26
+
+Referencing log3.hacking.fans: MAC Address ca:af:f6:92:eb:ea:5c:45:27:78:fb:30:08:00 has been blocked form various IP addresses. How many log entries include that MAC address?
+
+*5533*
+
+## Question 27
+
+Referencing log3.hacking.fans: From what you can tell, how many interfaces does this machine have?
+
+*1*
+
+## Question 28 
+
+Referencing log3.hacking.fans: What is the hosts public IP?
+
+*159.283.115.211*
+
+## Question 29 
+
+Referencing log3.hacking.fans: What is the hosts public IP?
+
+*159.283.115.211*
+
+## Question 30
+
+Referencing log3.hacking.fans: How many days does this log cover?
+
+*3*
