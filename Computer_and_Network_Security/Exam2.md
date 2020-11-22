@@ -179,3 +179,5 @@ Referencing log3.hacking.fans: What is the hosts public IP?
 Referencing log3.hacking.fans: How many days does this log cover?
 
 *3*
+
+[Exam 2 Walkthrough](https://www.youtube.com/watch?v=Ttd81HWVeqE&feature=youtu.be)
