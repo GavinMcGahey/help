@@ -5015,3 +5015,87 @@ Watch:
 [Opera Loses Key]:https://threatpost.com/opera-code-signing-certificate-stolen-malware-signed-and-distributed/101107/
 [McAfee Threat Report]:https://www.mcafee.com/enterprise/en-us/assets/reports/rp-quarterly-threats-jun-2017.pdf
 [Windows Internals]:https://www.thriftbooks.com/w/windows-internals-part-1-covering-windows-server-2008-r2-and-windows-7_mark-russinovich_david-a-solomon/1691405/#isbn=0735648735&idiq=24220747
+
+# Class 33 -- Penetration Testing Methodologies
+
+## Definitions
+
+* OSINT -- Open Source Intelligence
+* OSSTMM -- Open Source Security Testing Methodology Manual
+
+## Goals of Pen Test
+
+* A structured process to test:
+  * Procedural Security
+  * Operational Security
+  * Technological Security
+
+When penetration testing the tester is authorized to attempt to circumvent or violate security controls in a system under specific constraints. The test is meant to provide a method to examine the effectiveness of procedural, operational and technological controls within an organization.
+
+## What isn't
+
+* Security Audit
+* Vulnerability Assessment
+
+A **Security Audit** is simply checking if the organization is following a set of standard security policies and procedures (Do what you say)
+
+A **Vulnerability Assessment** is focused on discovering vulnerabilities in an environment but not proving their ability and consequence to being exploited. It is easy to think of this as understanding how bad it can be not understanding of when that bad could happen. An asteroid that hits earth will kill all live... Well when is that asteroid coming around.. Understanding risk
+
+## What is
+
+* Considers the Security Audit and Vulnerability Assessment but demonstrates if the vulnerabilities in an environment can be exploited to obtain breaches in Confidentiality, Integrity or Availability
+
+A pen test is not a security audit or a vulnerability assessment because it actually provides a method to test the controls that are in place. It provides an understanding of risk and a measure of the consequence of actions. Many times features provide methods for entry which can then be exploited and used to compromise the business. This links back to the concept of technology debt where we do not fully understand the value obtained (and true cost) of the increase in productivity that technology has provided.
+
+## Testing Layers
+
+* Black Box -- External attacker with no prior knowledge of the organization
+* Gray Box -- External attacker with some prior or inside knowledge of the system
+* White Box -- Internal attacker with perfect knowledge of the systems
+
+## Many Methodologies
+
+* Flaw Hypothesis
+* OSSTMM
+
+## Flaw Hypothesis Methodology
+
+* A 5 Step Method developed by [System Development Corporation] as a framework for penetration studies
+* The Steps include:
+  * Information Gathering
+  * Flaw Hypothesis
+  * Flaw Testing
+  * Flaw Generalization
+  * Flaw Elimination
+
+## Information Gathering -- Flaw Hypothesis
+
+* Gather information on organization and systems
+* Utilize OSINT (Open Source Intelligence)
+* Look for common errors, signs of "noobs"
+* Develop a list of flaws to test
+
+## Flaw Testing
+
+* Determine an order for testing flaws
+* Rank flaws in order of **Business Risk**
+* Attempt to exploit flaw
+* Continue exploit as attacker
+* Consider damage to systems
+
+## Flaw Generalization
+
+* As flaws are discovered they can be categorized
+* By combining flaws we develop a generalization as to the flaws that exist
+
+## Flaw Elimination
+
+* Tests normally offer suggestions on remediation of the flaws
+* Proper corrective action is necessary to improve security
+* Understanding **how** the flaw is exploited is paramount
+
+## OSSTMM
+
+* Additional testing methodology
+* Open Standard for Pen Testing
+* Detailed and complete
