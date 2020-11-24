@@ -115,4 +115,5 @@
 * NIST - National Institute of Standards and Technology
 * HIPPA - Health Insurance Portability and Accountability Act
 * SOX - Sarbanes-Oxley Act
-
+* OSINT -- Open Source Intelligence
+* OSSTMM -- Open Source Security Testing Methodology Manual
