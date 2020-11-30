@@ -5099,3 +5099,64 @@ A pen test is not a security audit or a vulnerability assessment because it actu
 * Additional testing methodology
 * Open Standard for Pen Testing
 * Detailed and complete
+
+# Class 33 - Pen Test Tooling
+
+## What is Kali Linux
+
+* Kali is a Debian-based distribution of Linux aimed to assist security teams in Penetration Testing and Security Assessments
+* Kali includes various tools that help make security testing easier
+* It is built and managed by Offensive Security using open tools
+
+## A brief history
+
+* Computer were born (1960s)
+* UNIX was born (1970s)
+* Linux was born (1990s)
+* BackTrack Linux was Born (2006)
+* Kali Linux released as rebranding for Backtrack 6 (2013)
+
+## Pentest Tools By Phase
+
+* Information Gathering
+* Scanning
+* Exploitation
+* Post Exploit
+
+## Information Gathering
+
+* nmap
+* Searchsploit
+* dnsenum
+* dnsmap
+* hping3
+
+## Scanning
+
+* [webshag]
+* [vega]
+* Nessus
+
+## Exploitation
+
+* [Metasploit]
+* John the Ripper
+* mimikatz
+* hashcat
+
+## Post Exploit
+
+* Tunneling & Exfil
+* OS Backdoors
+* Web Backdoors
+
+## Other Tools
+
+* 300+ Tools
+* Forensics
+
+## Getting Kali
+
+* Download the iso and install
+* Download the VM and run
+* Using Ubuntu use Katoolin in install all Kali Packages
