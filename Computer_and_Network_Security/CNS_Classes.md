@@ -5208,6 +5208,7 @@ sudo nmap -sS <IP_of_XP_BOX>
 sudo nmap -sU <IP_of_XP_BOX>
 sudo nmap -sS -p 3232 <IP_of_XP_BOX>
 sudo nmap -sV -p 3232 <IP_of_XP_BOX>
+```
 
 The SYN (Stealth) Scan `-sS` begins to establish a TCP connection and after receiving a SYN/ACK will send a RST and not complete the handshake. This enables the handshake to not be completed and thus not broken down at a later time and being much quicker. As an interesting fact because nmap is sending the SYN when the SYN/ACK comes back the OS doesn't expect it and automatically sends the RST.
 
