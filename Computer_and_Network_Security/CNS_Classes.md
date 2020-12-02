@@ -5160,3 +5160,81 @@ A pen test is not a security audit or a vulnerability assessment because it actu
 * Download the iso and install
 * Download the VM and run
 * Using Ubuntu use Katoolin in install all Kali Packages
+
+# Class 34 - Pen Test Assessments
+
+## Resources
+
+* Penetration Testing: A Hands-On Introduction to Hacking, Georgia Weidman -- (Page 25 - 123)
+* [SYN Scan]
+* [Report Template]
+* [nikto]
+* [davtest]
+
+## Netcat
+
+* netcat is a great connection tool
+* specify ports
+* lets connect to the XP SMTP Server `nc -vv <IP_of_XP_BOX>`
+
+Once connected lets try talking:
+
+Typical SMTP conversation
+When you make a connection to a mail server, a typical conversation will look like below (BOLD indicates the replies from the server):
+
+**220 mx1.example.com ESMTP Postfix**
+HELO example.com
+**250 mx1.example.com**
+MAIL FROM:<example@example.com>
+**250 2.1.0 Ok**
+RCPT TO:<example2@example.com>
+**250 2.1.5 Ok**
+DATA
+**354 End data with <CR><LF>.<CR><LF>**
+This is a test message.
+.
+**250 2.0.0 Ok: queued as 4227FE00C**
+QUIT
+**221 2.0.0 Bye**
+
+## Nmap
+
+* Nmap can be used to scan ports
+* Read more about the [SYN Scan]
+
+There are various scans we are going to do against our exploitable Windows XP host.
+```bash
+sudo nmap -sS <IP_of_XP_BOX>
+sudo nmap -sU <IP_of_XP_BOX>
+sudo nmap -sS -p 3232 <IP_of_XP_BOX>
+sudo nmap -sV -p 3232 <IP_of_XP_BOX>
+
+The SYN (Stealth) Scan `-sS` begins to establish a TCP connection and after receiving a SYN/ACK will send a RST and not complete the handshake. This enables the handshake to not be completed and thus not broken down at a later time and being much quicker. As an interesting fact because nmap is sending the SYN when the SYN/ACK comes back the OS doesn't expect it and automatically sends the RST.
+
+## Nessus
+
+* Useful method to discover vulnerabilities
+* Enables addition of credentials for credentialed scan
+
+When you start Nessus you may need to activate it which is simply signing up and getting an activation code. Once you have done this you will be able to scan different systems on your network. Today we will go over using this tool in a level of detail that should enable you to understand the basics of the scanner. Keep in mind that Nessus is the scanning engine behind ACAS much of what you learn will translate.
+
+## Nikto
+
+* A web application scanner
+* Can be used to make reports and test vulnerabilities
+
+take a look at the tool info page for [nikto] which includes example usage and the help page.
+
+## Cadaver
+
+* Method to interact with WebDAV
+* If you want to take it a step further check out [davtest]
+
+## Hashcat Demo
+
+* My primary method of cracking passwords
+* GPU accelerated
+
+[SYN Scan]:https://nmap.org/book/synscan.html
+[nikto]:https://tools.kali.org/information-gathering/nikto
+[davtest]:https://tools.kali.org/web-applications/davtest
