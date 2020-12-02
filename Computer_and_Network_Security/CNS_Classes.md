@@ -5100,7 +5100,7 @@ A pen test is not a security audit or a vulnerability assessment because it actu
 * Open Standard for Pen Testing
 * Detailed and complete
 
-# Class 33 - Pen Test Tooling
+# Class 34 - Pen Test Tooling
 
 ## What is Kali Linux
 
@@ -5161,7 +5161,7 @@ A pen test is not a security audit or a vulnerability assessment because it actu
 * Download the VM and run
 * Using Ubuntu use Katoolin in install all Kali Packages
 
-# Class 34 - Pen Test Assessments
+# Class 35 - Pen Test Assessments
 
 ## Resources
 
