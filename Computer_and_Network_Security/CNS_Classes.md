@@ -5239,3 +5239,57 @@ take a look at the tool info page for [nikto] which includes example usage and t
 [SYN Scan]:https://nmap.org/book/synscan.html
 [nikto]:https://tools.kali.org/information-gathering/nikto
 [davtest]:https://tools.kali.org/web-applications/davtest
+
+# Class 36 - Assessment Part Deux
+
+## Definitions
+
+* NSE -- Nmap Scripting Engine
+
+## Email Search
+
+* Use `theHarvester` to locate email addresses within a domain
+* Running the command without arguments will give the usage instructions
+* Try on a domain
+
+## Maltego
+
+* A platform for nodal analysis
+* Visual in nature
+
+## Nmap Scripting Engine
+
+* Extends the ability of Nmap to include identification of vulnerabilities
+* scripts located at `/usr/share/nmap/scripts`
+* You can learn more about `nse` and its usage in the [nmap documentation](https://nmap.org/book/nse-usage.html)
+
+## Vuln Scan with Metasploit
+
+* Metasploit has a zillion modules
+* Visit [METASPLOIT MODULES AND LOCATIONS] for an overview
+* The example in the text changed slightly
+  * Instead try `use auxiliary/scanner/ftp/anonymous`
+  * Set RHOST to your target `set RHOST <Linux or XP IP>`
+  * Launch exploit with `exploit`
+
+## Capturing Traffic
+
+* Use **wireshark** to capture traffic
+* Brush up on ARP and DNS cache poisoning
+
+## MitMproxy
+
+* Many of the tools in Kali have been replaced
+* Notably adding MitMproxy
+* Checkout the tutorial for [mitmproxy] to learn more
+
+## OSINT in the News
+
+* We watch as the world [Protests] the lock-down and social distancing measures
+* Look at how powerful OSINT can be
+
+The reddit post above has been a bit diluted but there was a truly amazing post of an individual that search for all domains along the lines of "repoenXYZ.com" last year in March during the lock-down this was a thing if you recall. Sites that popped up to protest lock-downs and spread disinformation about the virus. Reading now 7 months later it is sobering. What the individual did was determine through `whois` records that all the protests were being centrally organized by one group who was attempting to manipulate people to go out and protest. I can not recall who was behind it but think it was politically or economically motivated. It was a amazing display of how the tools we discussed today were used to uncover a dangerous plot to try to manipulate people and play to their fears.
+
+[METASPLOIT MODULES AND LOCATIONS]:https://www.offensive-security.com/metasploit-unleashed/modules-and-locations/
+[mitmproxy]:https://blog.heckel.io/2013/07/01/how-to-use-mitmproxy-to-read-and-modify-https-traffic-of-your-phone/
+[Protests]:https://www.reddit.com/r/maryland/comments/g3niq3/i_simply_cannot_believe_that_people_are/fnstpyl/
