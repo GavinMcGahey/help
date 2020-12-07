@@ -74,3 +74,46 @@
 * IDS -- Intrusion Detection System
 * IPS -- Intrusion Prevention System
 * TTP -- Tactics, Techniques and Procedures
+* SSL -- Secure Sockets Layer
+* TLS -- Transport Layer Security
+* IETF -- Internet Engineering Task Force
+* AEAD -- Authenticated Encryption with Associated Data
+* RSA -- Rivest, Shamir and Adelman
+* MAC -- Message Authentication Code
+* NAC -- Network Access Control (Network Admission Control via CISCO)
+* NAP -- Network Access Protection (Microsoft)
+* TPM -- Trusted Platform Module
+* EAP -- Extensible Authentication Protocol
+* RADIUS -- Remote Authentication Dial-in User Service
+* AS -- Authentication Server
+* KDC -- Key distribution center
+* TGT -- Ticket-granting Ticket
+* TGS -- Ticket-Granting Service
+* SS -- Services Server
+* ZTN -- Zero Trust Networks
+* Separation of Duties- different roles for different users
+* DevOps- Development Operations
+* Least Privilege -- Principal of only allowing user and admins to have the lowest level of access they need to do their job
+* SPF -- Sender Policy Framework
+* DKIM -- Domain Key Identified Mail
+* DMARC -- Domain-based Message Authentication, Reporting and Conformance
+* OWASP -- The Open Web Application Security Project
+* REST -- Representation State Transfer
+* SOAP -- Simple Object Access Protocol
+* API -- Application Programming Interface
+* W3C -- World Wide Web Consortium
+* SAML -- Security Assertion markup Language
+* XACML -- Extensible Access Control Markup Language
+* UDDI -- Universal Description, Discovery and Integration
+* SIEM -- Security information and event management
+* APT -- Advanced Persistent Threat
+* IKE -- Internet Key Exchange
+* AH -- Authentication Header
+* ESP -- Encapsulating Security Payload
+* ACAS - Assured Compliance Assessment Solution 
+* DISA - Defense Information Systems Agency
+* NIST - National Institute of Standards and Technology
+* HIPPA - Health Insurance Portability and Accountability Act
+* SOX - Sarbanes-Oxley Act
+* OSINT -- Open Source Intelligence
+* OSSTMM -- Open Source Security Testing Methodology Manual

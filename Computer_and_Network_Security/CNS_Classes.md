@@ -3780,3 +3780,1593 @@ There are many benefits to NIDS/NIPS at a network level. They provide the abilit
 * [snare](http://mushmush.org/) -- Site that logs http webapp vulns
 * [tanner](http://mushmush.org/)
 
+# Class 20 SSL/TLS
+
+## Definitions
+
+* SSL -- Secure Sockets Layer
+* TLS -- Transport Layer Security
+* IETF -- Internet Engineering Task Force
+* AEAD -- Authenticated Encryption with Associated Data
+* RSA -- Rivest, Shamir and Adelman
+* MAC -- Message Authentication Code
+
+## What is SSL/TLS
+
+* A mechanism to encrypt data in transit -- Confidentiality
+* Method to ensure no tampering -- Integrity
+* A way to verify you are talking to who you are talking to -- Authentication (can be done with certificates)
+* Runs on top of TCP 
+* Can be used for almost anything, however we mainly see it used for web-applications. HTTP over TLS would be HTTPS
+* Other uses include VOIP, Chat and Email
+
+We have started having the bad habit of allowing ourselves to use the terms SSL, Secure Sockets Layer, and TLS, Transport Layer Security, interchangeably. We will endeavor to explain why that is a bad idea and attempt to remedy that habit by being specific in reference to TLS and SSL. The original idea was that the internet needed a standard way to transport information across a network encrypted. 
+
+## SSL/TLS a short History
+
+* Not really needed until they noticed information starting to be tampered for the first time
+* SSL 1.0
+  * Internal Netscape design, early 1994
+  * Scrapped during technical presentation
+* SSL 2.0
+  * Published by Netscape, November 1994
+  * Several weaknesses
+* SSL 3.0 (RFC 6101)
+  * Designed by Netscape and Paul Kocher, November 1996
+  * If the internet were to be adopted by SSL, they didn't want it to be tied with Netscape
+* TLS 1.0 (RFC 2246)
+  * Internet standard based on SSL 3.0, January 1999
+  * Not inter-operable with SSL 3.0
+  * TLS uses HMAC instead of MAC
+  * Uses any port
+
+
+  You may not remember but one of the first browsers was the Netscape Navigator. In the early days of the Internet there was no good way to protect data going across the wire as web pages started to become more dynamic. The Netscape Corporation (now part of Verizon Media) needed a way to protect the confidentiality of information traveling between their customers and servers. For that they developed SSL 1.0 which was developed in early 1994 but was never released because of well known vulnerabilities in it that it is said was discovered within the first 10 minutes of presenting it in a technical demo to MIT students. SSL 2.0 was also released by Netscape as a proprietary product from Netscape, it was released in November 1994 and was withdrawn a year later. During the same time frame Microsoft released PCT (Private Communications Technology) using Secure Transport Layer Protocol (STLP), another proprietary product, it was perfect and it is what we are using today... It was actually not perfect and it did not see the success that SSL 2.0 and SSL 3.0 did. In November 1995 Netscape addressed some of the serious issues with SSL 2.0 and released SSL 3.0. SSL 3.0 is considered insecure now but still is supported by 6% websites according to [Qualys](https://www.ssllabs.com/ssl-pulse/). In 1999 what was going to be SSL 3.1 was renamed TLS 1.0 to break the relation (you guessed it by request of Microsoft) with Netscape and was developed by Internet Engineering Task Force (IETF) and gained wide adoption. Despite being based on SSL 3.0, TLS 1.0 is not actually inter-operate with SSL 3.0. For the first time we have a standard for 
+
+
+## The History Continues (Post Text Book)
+
+* TLS 1.1 (RFC 4346)
+  * Not Secure
+  * 2006 Update to address flaws related to [BEAST](https://blog.qualys.com/ssllabs/2013/09/10/is-beast-still-a-threat) cyber attack in 2011
+* TLS 1.2 (RFC 5246)
+  * 2008 Update to address flaws not seen in wild
+  * Was the standard unti the Snowden Leaks
+* 2013 Snowden Leaks -- Expose vulnerabilities in TLS 1.2
+* TLS 1.3 (RFC 8446)
+  * 2013 work begins on TLS 1.3
+  * Represents about 25% of all sites supporting 1.3: crazy since it was released in 2013
+* 2015 [POODLE Attack](https://www.us-cert.gov/ncas/alerts/TA14-290A) targets flaws in SSL 3.0
+* 2016 [DROWN Attack](https://drownattack.com/drown-attack-paper.pdf) targets flaws in SSL 2.0
+
+
+The sordid history of SSL/TLS continues in 2006 with TLS 1.1 which addresses a flaw that would later be exploited in the BEAST attack in 2011 (5 years later). Why did this attack happen 5 years after it was superseded? TLS 1.2 adds Authenticated Encryption with Associated Data (AEAD) which removes the necessity for block ciphers and vulnerability in Cipher Block Chaining CBC. After 2008 life starts getting interesting for TLS as we are deep in the heyday of the internet. A focus is made on SSL/TLS issue with the starting of [SSL Labs](https://media.blackhat.com/bh-us-10/presentations/Ristic/BlackHat-USA-2010-Ristic-Qualys-SSL-Survey-HTTP-Rating-Guide-slides.pdf) at BlackHat in 2010 still avaliable at [SSL Labs](https://www.ssllabs.com/ssltest/). At this point HTTPS is still not quite mainstream, so someone made a product called [Firesheep](https://codebutler.github.io/firesheep/) that enabled someone to recreate an entire session trivial. We are ready to enter 2011 the year of SSL. In March RFC 6176 formally deprecated HTTPS however it is still in use on over 54% of web-servers. With that we see the Comodo breach what saw seven high-profile domain names get breached, the BEAST attack and the DigiNotar compromise that forced the revocation of a root Certificate Authority. We see continued issues with insufficient on Entropy, FLAME Malware, CRIME vulnerability, Lucky 13 attack, discovery of the RC4 biases, TIME info leakage, Edward Snowden leaks, BREACH Attacks. We finally decide to develop TLS 1.3 while at the same time Chrome 29 decides to support TLS 1.2. It doesn't end there in that we see the Triple Handshake Attack and the critical flow in OpenSSL known as Heartbleed. 
+
+
+## Some SSL Labs Results
+
+![Lets Checkout pumpout.me :sad_face:](https://cga.sfo2.digitaloceanspaces.com/cns/images/pumpout_me.PNG)
+
+## Another SSL Labs Result
+
+![You can analyze any site](https://cga.sfo2.digitaloceanspaces.com/cns/images/uscga_edu.PNG)
+
+## SSL Labs Rigged
+
+![Sometimes you can get it right](https://cga.sfo2.digitaloceanspaces.com/cns/images/macris_co.PNG)
+
+## SSL/TLS Basic Concepts
+
+* Two Protocols
+  * Handshake Protocol -- utilize public-key cryptography to share a secret between a client and server, slow progress that takes a lot of overhead
+  * Record Protocol -- use the established secret to encrypt communications between two hosts (how bulk communication is established), more efficient 
+
+  At the most basic level SSL/TLS works by using Public Key Cryptography to share a secret between two machines that only need to share trust to transfer the public key and verify identity (most of the time only verifying the identity of the server side). The idea is that with Public Key Infrastructure there are a number of trusted Root Certificate Authorities (Root CA's) that are trusted by web browsers by default. These Root CA's are responsible for issuing a key pair (certificates) to verified sites that they can use to identify themselves as well as well as allow the client to open up a asymmetrical encryption channel to transfer a symmetrical key used for the bulk of the data transfer. The **Handshake Protocol** is the asymmetrical encryption that allow the transfer of the symmetrical key for the **Record Protocol**. The data transfer requires a symmetrical key using **Record Protocol** because the speed of the symmetrical key encryption and decryption is too computationally expensive and using a session key is much more efficient.
+
+  Generally for TLS 1.3 we are looking at and ephemeral Diffie-Hellman for the Asymmetrical **Handshake** over the RSA (1977 by Rivest, Shamir and Adelman) which is vulnerable to being not **forward-secret**. Forward secret meaning that in the event that an entire conversation is recorded using RSA it is encrypted. However, if the private key is somehow obtained at a later date the session key can be recovered and thus the message can be decrypted. 
+
+## SSL/TLS Handshake
+
+* A focus will be on TLS however the text references SSL quite a bit
+* Goals of Handshake
+  * Agree on Cipher Suite
+  * Agree on a Secret (for bulk encryption)
+  * Establish trust between Client & Server (you are who you say you are)
+
+## TLS Handshake
+
+* Client "Hello"
+* Server "Hello"
+* Server Sends Certificate
+* Server "Hello Done"
+* Client Key Exchange
+* Client Change Cipher Spec
+* Client Finished
+* Server Change Cipher Spec
+* Server Finished
+
+
+The purpose of the TLS handshake is to establish the conditions in which a secure exchange can be executed. For our purposes this exchange is initiated by the client, in the assumption we are looking at a traditional client accessing a server (note, this same process is valid for SSL VPNs or server to server communications). The handshake start with a "Client Hello" that outlines the capabilities of the client to the server, namely the cipher suit an in TLS 1.3 some preshared keys. The server will then reply with the type of encryption being used and the servers certificate which enables the client to encrypt a session key in the encryption method that was selected. The server will then send a "Hello Done" message. At this point the client can verify the certificate and assure that the server is valid and will generate a pre-master secret, encrypts the secret with the certificate. The client will send a "Key Exchange Message", encrypted with the certificate, that includes the generated **pre-master secret** which can be used by both the client and server to calculate the bulk encryption secret for the session or **Session Key**. The client will send a "Client Change Cipher Spec" message then a "Client Finished" message using the Session Key to test the Session Key. The server will then reply with a "Change Cipher Spec" followed by a "Server Finished" message using the Session Key. At this point both machines have established a secure method to communicated based on the successful delivery of the finished messages using the Session Key, the session is established and the Session Key can be used for bulk encryption. 
+
+
+## TLS Handshake Part Deux
+
+![Handshake](https://cga.sfo2.digitaloceanspaces.com/cns/images/TLS1_3.PNG)
+
+## Cipher Suite
+
+* Protocol -- TLS 1.3, TLS 1.2, TLS 1.0, SSL V3, SSL V2
+* Key Exchange -- DH, DHE, ECDH, ECDHE, RSA
+* Authentication -- RSA, ECDSA
+* Cipher -- AES, AES-GCM, AES-CBC, Camellia, DES, RC4, RC2
+* Message Authentication Code -- HMAC-MD5,HMAC-SHA1, HMAC-SHA256/384, AEAD
+
+
+As one can see the idea of a Cipher Suite Includes the Protocol Version (TLS 1.2, TLS 1.3 etc.), the Key Exchange Algorithm, Authentication Method, Block Cipher, and Message Authentication Code for data integrity. As you can imagine with older versions of items in these categories getting flaws uncovered and new replacements being produced this list grew to an invariable large number. This, and because browsers just want things to work, have provided the incentive to add lots of different combinations to all aspects of the SSL/TLS cipher suites (up until TLS 1.3). Right now there are only a few combinations that are secure in TLS 1.2. 
+
+
+## TLS <= 1.2
+
+![TLS 1.2 -- All the options](https://cga.sfo2.digitaloceanspaces.com/cns/images/tls1_2.PNG)
+
+* 37 Cipher Suites Supported
+* Adding Previous versions of TLS/SSLv3 319 Cipher Suites
+
+## Why all the options
+
+![TLS 1.2 -- So many options](https://cga.sfo2.digitaloceanspaces.com/cns/images/tls12.PNG)
+
+## Key to security is simplicity
+
+![TLS 1.3 -- Only a few options](https://cga.sfo2.digitaloceanspaces.com/cns/images/tls13.PNG)
+
+## TLS 1.3 Cipher Suite
+
+![A simple Cipher Suite](https://cga.sfo2.digitaloceanspaces.com/cns/images/cipher_suite.PNG)
+
+## TLS 1.3 Cipher Suites
+
+* TLS_AES_256_GCM_SHA384
+* TLS_CHACHA20_POLY1305_SHA256
+* TLS_AES_128_GCM_SHA256
+* TLS_AES_128_CCM_8_SHA256
+* TLS_AES_128_CCM_SHA256
+
+
+Take a look at CloudFlares analysis of [TLS 1.3](https://blog.cloudflare.com/rfc-8446-aka-tls-1-3/) With it we learn more about the details on why the move is necessary. You will notice that each there is no key exchange noted because it is assumed to be some variant of Diffie-Hellman. With a few cipher suites to support it is easy to streamline negotiation and put effort into securing those technologies employed. 
+
+
+## SLL/TLS Vulnerability
+
+* FREAK Attack Example
+
+![SSL/TLS Downgrade](https://cga.sfo2.digitaloceanspaces.com/cns/images/freak_attack.PNG)
+
+## When All else fails, look to NIST
+
+* Reference the [NIST 800-52](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-52r2.pdf)
+
+# Class 21 -- Network Access Control
+
+## Definitions
+
+* NAC -- Network Access Control (Network Admission Control via CISCO)
+* NAP -- Network Access Protection (Microsoft)
+* TPM -- Trusted Platform Module
+* EAP -- Extensible Authentication Protocol
+* RADIUS -- Remote Authentication Dial-in User Service
+
+## NAC Overview
+
+* A method to protect access to the network
+* Includes:
+  * NAC Central Manager
+  * NAC Policy Server
+  * Host Agent
+  * Protected Infrastructure
+
+## NAC
+
+![NAC Overview](https://cga.sfo2.digitaloceanspaces.com/cns/images/NAC.PNG)
+
+## What you need
+
+* Database of Users, and Hosts
+* ACLs (Access Control Lists): rules
+* MS Active Directory (directory service that allows you to keep track of assests and users) and security Policies
+* Firewall/IDS/IPS: network security system
+* Host agent/anti-virus/anti-malware
+* RADIUS/802.1X: authentication mechanism 
+* VLAN/Switch/Router
+* VPN: virtual private network 
+
+
+If you have not figured this out yet network access control includes just about everything working together to make keeping the network secure possible. From policies to switches all the components of the network, host and servers need to work in concert to accomplish the goals of enforcing the security policies on the network. Imagine that in order to get onto the network you need to have current critical patches applied and you need to login using a second factor? That could cover the "health" of your device and verification of identity. From there the correct policies are applied to you access so that you are only getting access to the parts of the network you are allowed. The devil in the details is that this process is little more than a gateway to everything without adequate policies and data categorization being in place to assist in allowing only specific access to what that individual needs for their work role.
+
+
+## NAC Policies
+
+* ACL -- control resource access based on user role (providing you role based access)
+* NAC Server constantly monitors "health" of user (what level of trust do we have/get, higher trust = more access)
+* Policy can quarantine systems without adequate "health"
+
+
+When looking at enforcing policies or "rules" for access to the network and the data therein we need to go back to the tools we have used in the past. The ACL is the basis for the user role which provides rules based on identity parameters and can perform both authentication and authorization. This is found and controlled at the **NAC Server**. It can provide direction on how host negotiates access to the system. Does the host get into a guest area or head to a post-admission control and monitoring. This monitoring can include checking and tracking items like:
+* Windows Registry Settings
+* Presents of security related agents
+* Anti-Virus/Anti-malware, IDS/IPS status and findings
+* Running processes
+
+Host monitoring can continue while connected to assure that the "health" does not change during the period as well as providing data for logging and auditing purposes. This is a good time to reference some of the STIG setting we looked at for monitoring  
+
+
+## NAC Agent
+
+* The host agent with insight into all aspects of host
+* Ability to report and take actions on the host
+
+## Enforcement Points
+
+* The NAC server can control access at enforcement points
+* Enforcement points include:
+  * Switch Router -- VLAN
+  * VPN Concentrator -- ACL/Firewall
+  * Wireless access -- 802.1X
+  * DHCP Server -- IP of subnet
+  * LAN Authentication -- 802.1X
+
+## 802.1X
+
+* Authentication Mechanism for LAN and WiFi
+* Can be provided for port security for LAN ports
+* EAP/RADIUS used to authenticate devices (MAC, Cert, etc)
+* Works with NAC Server to allow access based on privilege
+
+## NAC Solutions
+
+* [CISCO (Security Agent, Clean Access Agent, NAC Agent)](https://www.cisco.com/c/en/us/td/docs/security/nac/appliance/configuration_guide/49/cam/49cam-book/m_webagt.html)
+* [PAN (Next-Generation Network Security Client)](https://www.paloaltonetworks.com/cyberpedia/replacing-vpn-and-nac-with-ngfw-for-endpoints)
+* [Fortigate (FortiNAC)](https://www.fortinet.com/products/network-access-control.html?gclid=CjwKCAiA1rPyBRAREiwA1UIy8M9XsQk9JqniNHxfrGhTCRhsfkNBEgBMBDOz-kM_dLh3hajefWpMpxoCnPUQAvD_BwE)
+
+## Kerberos
+
+* [Overview of Kerberos](https://www.youtube.com/watch?v=2WqZSZ5t0qk)
+* Authentication scheme used across OSs
+* Developed by MIT, MIT still maintains it but others add on to it 
+* Heavily used in MS Active Directory
+
+## Trusted Platform Module
+
+* Security Micro-controller: takes input 
+* Only allows secure processing
+* Foundation of NAC measurement
+
+# Class 22 -- Network Access Control Part Deux
+
+## Definitions
+
+* AS -- Authentication Server
+* KDC -- Key distribution center
+* TGT -- Ticket-granting Ticket
+* TGS -- Ticket-Granting Service
+* SS -- Services Server
+
+## Kerberos V5
+
+* A computer authentication protocol
+* uses tickets to authenticate over insecure networks to prove identity
+* UDP Port 88 by default
+
+## Kerberos History
+
+* Developed at MIT
+* Originally listed at "Auxiliary Military Equipment" and banned from export (DES)
+* Currently at V5
+* Since Windows 2000 Kerberos has been the default windows authentication methods for Active Directory
+
+## Kerberos Video
+
+* [Overview of Kerberos](https://www.youtube.com/watch?v=2WqZSZ5t0qk)
+
+## Kerberos Parts
+
+* Authentication Server (AS)
+* Key distribution center (KDC)
+* Ticket-Granting Ticket (TGT)
+* Ticket-Granting Service (TGS)
+* Services Server (SS)
+
+## Kerberos Authentication
+
+* Client sends clear-text request to the Authentication Server with user ID
+* Authentication Server checks if users is valid in User Database
+* Authentication Server Sends two Messages
+  * Message A -- Encrypted with User Password Hash **holding** client/Ticket Granting Services Session Key
+  * Message B -- Encrypted with TGS **Secret Key** and **holding** Ticket-Granting-Ticket (Client ID, Client Network Address, Ticket Validity Period and client/TGS session key)
+* If Client can decrypt Message A (the password hash as the decryptor) It has the session key and can authenticate
+* Client can not decrypt Message B since it doesn't have the TGS Secret Key
+
+## Kerberos Services Authorization
+
+* Client Sends
+  * Message C -- TGT from message B and ID of Service
+  * Message D -- Authenticator encrypted with session key
+* Server Decrypts TGT (From Message C) and can decrypt wit its **Secret Key** giving it the client/TGS session key to decrypt Message D and compares client ID. Replies with:
+  * Message E -- Client-to-Server ticket (client ID client network address, validity period and Client/server session key) encrypted with services **Secret Key**
+  * Message F -- Client/Server Session key encrypted with the Client/TGS **Session Key**
+
+## Kerberos Client Services Request
+
+* Client Receives Message E and F From TGS, it can now authenticate itself wit the Service Server, sends Message E and G
+  * Message E -- Message E gets sent to the Service Server
+  * Message G -- Creates a new Authenticator which includes  Client ID, Timestamp and is Encrypted using **Client/Server Session Key**
+* Service Server Decrypts Message E using its **Secret Key** to obtain the Client/Service Session Key to Decrypts Message G and can compare the Client ID in E and G. If they match the Client can be authenticated
+  * Message H -- Service Server encrypts the Authenticator Time Stamp and encrypts with the Client/Server Session Key
+* Client Receives Message H and checks the timestamp if correct the client can trust the server
+* Server provides requested services to the client
+
+# Class 23 -- Zero Trust Networks
+
+## Definitions
+
+ZTN -- Zero Trust Networks
+
+## The Assumption
+
+* We assume our internal network is secure
+* We assume the bad guys are on the outside
+* We assume that the good guys are on the inside
+* We assume walls will save us
+
+## Our Assumptions
+
+Our assumptions are proving to be wrong
+
+## What about Defense in Depth
+
+* Castle: there can be more than just the wall, there could be: honeymots, mots, snares 
+* We don't truly do defense in depth
+
+## Try something new
+
+ZTN is being adopted by innovative organizations
+* Everyone is trying to adopt these concepts but only innovative companies have been successful 
+
+## Goals of ZTN
+
+* Identify each User: have to affirmatively say that this user is who they say they are
+* Identify each device: need to manage endpoint and know that it is who/what they say they are (standard)
+* Classify all data: where most organizations fail, need to know what to protect 
+* Access controlled systems: support the disestablishment of VPNs, a way to get on the network without actually going through a gate 
+* Policy-defined access
+
+Vendors provide ZTN for whatever they sell
+
+
+The model of ZTN is one based on a Google trust model. The above references give an overview of the Google model which literally no one else can accomplish. The top reference was one that I attended at Shmoocon 2020 on ZTN and the issues GitLab has run into while implementing it. You will be given time to watch that video! Before that happens lets explore what ZTNs mean and how they are different from traditional networks. A traditional network has a hard candy coated exterior and soft gooie inside. We protect that perimeter with things like firewalls. We enable remote access with things like VPNs.
+
+With ZTN the concept is based around the idea of if you took NAC to the cloud and all remote. Meaning, think of all the controls of network access controls.  In the world of Google it looks at each request and determines if that request is valid and should be fulfilled. The idea is that you can build trust based on who you are, what device you are on and eventually where you may be. They also support the idea of gaining trust, the more things you do that only you can do the more trust you gain.
+
+In reality, no one can really run a perfect ZTN as is exhibited by the video from Shmoocon and GitLab.
+
+
+## Reality -- GitLab
+
+* No perimeter
+* No VPN
+* All Remote Workers
+* All Cloud -- Multi-Cloud
+* Limited asset management
+
+## Pain Point
+
+* Data classification (very difficult) is fluid, by the time you open the file it may be classified very differently 
+* CUI (Control Unclassified Information) 
+* Provisioning/De-provisioning is difficult: all about gaining trust 
+* no asset management
+
+## Needs
+
+* User authentication with MFA (multi-factor)
+* Provisioning users to minutes (needs to be done quickly)
+* Secure Communications: all encryption algorithms have to be up to date 
+* Audit Access Control: getting live and auditable feedback of who is getting into what and when 
+* Manage Assets
+* Detection/tracking of anomalies (advanced) 
+
+## Data Classification
+
+* Data Classification is difficult
+* As information changes consideration needs to be made as to limit or provide access
+
+## How do we do it?
+
+* Start small
+* Think simple
+* Think no trust!
+
+# Class 24 - Automation
+
+## Definitions
+* Separation of Duties- different roles for different users
+* DevOps- Development Operations
+* Least Privilege -- Principal of only allowing user and admins to have the lowest level of access they need to do their job
+
+
+## Introduction
+
+* Information systems benefit from high levels of abstraction
+* Many processes are still manual
+* Automated processes sometimes are not reliable (Selenium)
+* Many times they are not well connected or centralized
+
+
+
+Many times as information systems get larger and more complex we need abstract away from simple solutions we can build to go to a packaged commercial solution that may have increased functionality but we, as administrators, have less understanding or control of. For example, we can build a firewall with OpenBSD (an operating system). From there we can implement a packet filtering firewall which is built into the OpenBSD kernel. We can configure the software to allow the exact IPs we want and filter ports, and protocols. We can even set up some additional software to provide functionality of IDS/IPS on the same system, like Snort or Suricata. From there we can send all that data to a SIEM and set up alerts to come to some chat channel like Slack, we can make a bot that checks that chat channel so we can have a natural conversation with that chat bot to take actions on the platform when we can not. Or we could buy a Palo Alto Firewall and have their security engineers deal with IDS/IPS rules and have them update the signatures and heuristics and leverage their API to interact with the system through third party chat systems... The idea is you have to choose between build vs buy all the time. In many cases however we need to configure systems the same time every time. In the past many administrators have considered the device to be a save place to store the only copy of an active configuration. For example, you have a Firewall like a Cisco ASA, and the admin logs in when a change needs to be made, she will make the change and then test and log out. She may even do this on a test environment first before rolling out to production. Many times if she needed to figure out what the specific configuration is on the system she would log in to view it or even export the configuration to reference. You can imagine, if an attacker gained access to the system it would be difficult to confirm what a known good state is, especially if logging was not set up to indicate when changes were made, or logging was blocked or altered.
+
+For this reason we need to think about how we do configuration management. We need to think about it on many levels. Luckily the rise of DevOps (Development Operations), a workflow that connects software developers to system administrator (operators), has been hard at work making tools that abstract configuration and store it as code, something that is stored as text and describes a system state. The tools that can be used to check the state do so in an **[Idempotent](https://en.wikipedia.org/wiki/Idempotence)** manner, a math term that means it will remain unchanged when operated on by itself. We will be focusing on this topic today and the tools used to obtain this.
+
+
+## Configuration Management
+
+* NIST Guidance found in [NIST 800-128](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-128.pdf)
+* Process for Security Focused CM
+  * Planning
+  * Identify & Implement Configurations
+  * Controlling Configuration Changes
+  * Monitoring for changes
+* Set up process around CM
+
+
+At the core of configuration management is the idea that you need to start with a known good configuration, implement those configurations, control changes and monitor for unapproved changes. That, as one can imagine involves many processes and procedures. Think for a moment what would be involved to implement a firewall rule change. Someone needs to request a firewall rule change and that change need, needs to be verified and approved as a valid change. That means a configuration change control board needs to meet and approve the changes, a technical team needs to meet to make sure the change won't conflict with current configuration, an implementation team needs to meet to figure out the best way of rolling out the changes, and a team actually needs to make the change. This is not to mention the fact that the change and process needs to be documented as well as added to a new baseline. 
+
+Think about why the *sudo* command is important. If all users made changes using the root user, there would be no way to track which user made a change to network configuration. The *sudo* command allows a user to execute commands with the security permisssions of another user, thus the changes can be tracked. 
+
+
+## Continuous Integration Continuous Deployment
+
+* Defined workflows can have tests built
+* Conditions that are known to enable automatic testing
+* Once testing is complete approval workflows can be developed
+* Ultimately deployment of changes can be automatic
+
+## Platforms
+
+![DevOps Tools](https://3ovyg21t17l11k49tk1oma21-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/Automic-CD-Map.png)
+
+## More tools
+
+![Cloud Native Landscape](https://www.stackoverdrive.net/wp-content/uploads/2017/01/CloudNativeLandscape_latest.png)
+
+## Automation of Firewall
+
+* Using platforms like Ansible you can deploy router and firewall configs to standard hardware
+* Using software defined networking you can automate all aspects of networking
+  * Automatically shifting to IPS after IDS detects attack
+* Using source control that "description" of your system can be version controlled
+
+## Lets look at a Fortigate Firewall
+
+* Take a look at the fortigate.yml playbook using the [fortios_config](https://docs.ansible.com/ansible/latest/modules/fortios_config_module.html)
+* It will load up the new_configuartion.conf.j2 file
+* j2 stands for Jinja2 which is a templating engine
+
+# Class 25 - Cyber Threats and Defenses
+
+## Definitions
+
+* SPF -- Sender Policy Framework
+* DKIM -- Domain Key Identified Mail
+* DMARC -- Domain-based Message Authentication, Reporting and Conformance
+
+## DNS Caching
+
+* DNS entries can be manipulated (as seen in lab)
+* Bogus DNS entries are maintained for the TTL
+* Pharming -- Tricking users into accepting false site as real
+
+## Drive By Pharming
+
+* User gets malicious scripts from compromised site
+* Scripts probe route for default credentials
+* Resets DNS to malicious DNS
+* Capture info from malicious sites using DNS
+
+## DNS Issues
+
+* Traditional DNS has:
+  * No authentication
+  * No validation
+* If domain name is unknown DNS server will ask authoritative source
+* First response can be accepted as valid (Race Condition)
+
+## DNSSEC
+
+* Validates DNS Response
+* Utilizes **Chain of Trust**
+* Each DNS Request is signed to verify DNS
+
+
+## Router Vulnerability -- BGP
+
+* BGP vulnerable to Broadcast Injection
+* Used by Pakistan Telecom "Attack"
+  * Broadcast ownership of YouTube IP space
+  * Rerouted traffic to YouTube over censorship order
+* BGP Routers took the new route broadcast and rerouted traffic
+
+## Router Vulnerability -- DoS
+
+* Flood of traffic routers can't process
+* Can be distributed (DDoS)
+* Easy to execute -- Difficult to mitigate
+
+## Router Vulnerability -- Spoofing
+
+* Injection of false information into routing table
+* Reset Attack by sending TCP RESET messages
+  * Drops session
+  * Reset routes learned by each other
+
+## Router Vulnerability -- Flapping
+
+* Repetitive changes to BGP routing table (30-50 times per second)
+* Overload routers and compromise availability
+
+## Router Security
+
+* NIST 800-189 -- Resilient Inter-domain Traffic Exchange
+* BGP Peer Authentication
+* Router Prefix Limits, Filter Invalid Prefixes
+* Logging
+
+## Spam
+
+* Blacklist SPAM hosts
+* Sender Policy Framework (SPF) -- Define which mail servers are authorized using DNS TXT record
+* Domain Key Identified Mail (DKIM) -- Signing by domain
+* Domain-based Message Authentication, Reporting and Conformance (DMARC)
+
+
+## Phishing
+
+* Googles Safe Browsing Protocol -- List of known phishing sites
+* Training -- [KnowB4](https://www.knowbe4.com/phishing)
+
+# Class 26 - Cyber Threats and Defenses
+## Definitions
+
+OWASP -- The Open Web Application Security Project
+[REST] -- Representation State Transfer
+[SOAP] -- Simple Object Access Protocol
+[API] -- Application Programming Interface
+W3C -- World Wide Web Consortium
+[SAML] -- Security Assertion markup Language
+[XACML] -- Extensible Access Control Markup Language
+[UDDI] -- Universal Description, Discovery and Integration
+SIEM -- Security information and event management
+
+## Web Vulnerabilities
+
+* Every year updated list at [OWASP Top Ten Vulns]
+* #1 has traditionally been Injections in general
+
+We have talked about various different vulnerabilities on different systems. One major attack surface is that of **Web Applications**. If you think how we interact with web applications you realize we use them in every aspect of our life. Every time we do any banking or need to buy something we are using a web application of some sort. With the rise in mobile use we have shifted this paradigm a bit where we have a mobile application that uses backend requests to display data but in its essence it is still a web based application. Securing these applications has been tricky because the purpose of them is to be widely available to users to exchange data. By presenting that data to the public it exposes the application to a wide array of attacks. OWASP, The Open Web Application Security Project, makes a list of the top 10 web vulnerabilities that it updates every year. The text has a somewhat outdated list so the next slide provides the most updated list as well as a link above to where they are posted.
+
+![OWASP](https://owasp.org/www-project-internet-of-things/assets/images/OWASP-IoT-Top-10-2018-final.jpg)
+
+## 2019 Top Ten
+
+1) Injection
+2) Broken Authentication
+3) Sensitive Data Exposure
+4) XML External Entities
+5) Broken Access Control
+6) Security Misconfiguration
+7) Cross-Site Scripting
+8)Insecure Deserialization
+9) Using Components with Known Vulnerabilities
+10) Insufficient Logging & Monitoring
+
+
+## Web App Protection -- How Computer Talk
+
+* Application Programming Interface
+  * [SOAP] -- XML more structured
+  * HTTP -- HTML, XML, JSON
+* Can leverage [REST] on either protocol
+* Read more [SOAP and REST]
+
+## Web App Protection -- Securing That Chat
+
+* [NIST 800-95] -- Guide to Secure Web Services
+* W3C have outlined [SAML] and [XACML] to secure XML in transit
+* Also [UDDI] enables authentication and authorize between Publishers, Inquirers and subscribers
+
+## Web App Protection -- Logs Logs Logs
+
+* Logs provide insights into what is happening on the machines
+* Logs need to be maintained in a manner that protects integrity
+
+Question: Do you trust logs on a machine that is compromised?
+
+## Web App Protection -- More On Logs
+
+* Guidance provided by [NIST 800-92]
+* Covers log management, what to log, how long to log it
+
+## Syslog
+
+* Standard framework for log generation, storage and transfer
+* Can be implemented on any platform
+* Utilize priority from 0 -- emergency to 7 -- debug
+
+## SIEM
+
+* Unlike syslog a SIEM can combined non-standard logs and syslogs
+* Central servers for log analysis
+* Can utilize an agent
+* Can provide area off the host to store and analyze logs
+
+[OWASP Top Ten Vluns]:https://owasp.org/www-project-top-ten/
+[SOAP and REST]:https://www.upwork.com/hiring/development/soap-vs-rest-comparing-two-apis/
+[NIST 800-95]:https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-95.pdf
+[NIST 800-92]:https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-92.pdf
+[SAML]:https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
+[XACML]:https://en.wikipedia.org/wiki/XACML
+[SOAP]:https://en.wikipedia.org/wiki/SOAP
+[REST]:https://en.wikipedia.org/wiki/Representational_state_transfer
+[API]:https://en.wikipedia.org/wiki/Application_programming_interface
+[UDDI]:https://en.wikipedia.org/wiki/Web_Services_Discovery#Universal_Description_Discovery_and_Integration
+[Syslog]:https://en.wikipedia.org/wiki/Syslog
+[Kibana]:https://www.elastic.co/kibana
+[Heat Map]:https://extelligenceblog.it/2017/07/27/elasticstack-elk-suricata-and-pfsense-firewall-part-4-kibana-visualizations-and-dashboards-pretty-pictures/
+[DO Guide]:https://www.digitalocean.com/community/tutorials/how-to-use-kibana-dashboards-and-visualizations
+[Predictive Analytics Today]:https://www.predictiveanalyticstoday.com/kibana/
+
+# Class 27 - Cyber Threats and Defenses
+
+## Definitions
+
+* APT -- Advanced Persistent Threat
+
+## Threat Groups
+
+* As we gather information about threat actors we need a way to organize them
+* Not every attack is random and rarely can anyone truly hide forever
+* These organizations are categorized into Advanced Persistent Threats
+
+
+Many times victims feel like their attack was random and that the attack may have been carried out by someone eating Cheetos in their parents basement. In reality, the world of cyber crime and cyber espionage is not only more organized but also more... like every day life. The attackers are broadly categorized into Nation States, Hacktivists, and Criminal Organizations. With these flags we can then start to learn more about them. Like most people, they live normal lives, keep normal schedules and (spoiler alert) don't have any magic that they use for their every day hacks. They may be managing thousands or hundreds of thousands of compromised machines at any given time. It is like a job to them. Most attackers are using a set of tools they have been using for years, only innovating when needed. If the old tool works, use it. We can take advantage of many of these attributes of human nature to help us learn about our adversary. Meet the Advanced Persistent Threats.
+
+
+## APT Groups
+
+* APT groups operate across the globe
+* We can't always attribute exactly who attacks a target but we can put together clues
+* Each group leaves finger prints we can use to track their actions
+
+
+Advanced Persistent Threats are named that because they are not a single person but an **advanced** enterprise with intelligence-gathering, tool construction and human resources. They are not fly by night and have been established for long periods of time. They have the means to carry out **Persistent** attacks which means they may  be happy sitting on compromised machines until the time is right to exfiltrate data or trigger an attack. They are considered  a threat because they have both the capability and intent to execute. There are two main ways that we have seen threat actors be categorized at APTs, the MITRE method assigns and tracks a number for their [ATP Groups] (generally the way we are going to be using) on the other hand [CrowdStrike ATP Groups] have interesting names correlating to their country:
+
+### Nation-State-Based Adversaries
+
+* Bear = Russia
+* Buffalo = Vietnam
+* Chollima (a mythical winged horse) = North Korea
+* Crane = South Korea
+* Kitten = Iran
+* Leopard = Pakistan
+* Panda = China
+* Tiger = India
+
+### Non-Nation-State Adversaries
+
+* Jackal = Activist groups
+* Spider = Criminal groups
+
+By tracking these organizations we can start to track their methods and then, once we have an idea what we are dealing with use their TTPs against them to help defend our organization.
+
+
+## APT Overview
+
+* Take a moment to watch the [CrowdStrike] video on APT
+* Think about what APTs from the list you may see within the transportation industry
+
+## Anatomy of an attack
+
+* Most attacks fall into a matrix of actions
+* MITRE Matrix Tracks ATP and serves as a basis for measurement
+* View the [ATT&CK Matrix]
+
+Many of the topics discussed in class are covered in the [ATT&CK Matrix]. The columns represents phases of the attack. They are relatively self explanatory but you can see how they move through an attack. Starting with obtaining **Initial Access** by means of Phishing we see we move to **Execution** on the same box, many times they say attackers can hide but eventually they need to execute something on a machine. The purpose of execution is to attempt to obtain **persistence**, a mechanism that will enable them access back into that machine in the event they lose their connection. Persistence can come in many ways but keep in mind, every time something is done bread crumbs are left. From there the attacker is going to attempt to **escalate their privileges** to gain access to more machines and more data. During this time the attacker will attempt to maintain a low profile and **evade defenses* in a number of ways. The attacker will try to harvest credentials however possible form that machine or utilizing directory services in a phase known as **Credential Access**. As the attacker has learned everything on the current machine they have gained access to they will start to look around, during **discovery** the attacker will try to find out where they are in the network, what is around them and where they can go from there. This all builds up to their ability to **move laterally in an environment from one machine to another. They will do the same process on each box they move to and begin to **collect data** that may be useful or important to their ends. At this point the attacker is starting to think that they need a way to get all this great information they are gathering out. They will establish **command and control** channels to prepare to move data out of the network. The attacker finally gets what they want and they **exfiltrate** the data and all that is left is the only name that doesn't fully make sense, **impact** is a phase of cleaning up and covering tracks.
+
+Pretty simple...
+
+## APT 1
+
+* Lets review [APT 1]
+* [Unit 61398](https://cdn.hswstatic.com/gif/army-hacker-2.jpg)
+* APT 1 [Attack Matrix]
+
+
+As we look at the [Attack Matrix] for ATP 1 we see that MITRE has a great resource that highlights the TTPs used by this attacker. Sadly this is not telling us all that much (at this level we may not know that much) but it gives us hints on what we can expect and who we are dealing with. You can see that we can expect to see execution of command line and scripting as well masquerading as known legitimate executable files. To gain credentials they have been known to dump creds and then use various discovery techniques. To note, you notice that lateral movement is exhibited by Pass the Hash as well as RDP, interesting. With this we can get a fingerprint for how ATP 1 has operated in the past, it is not a guarantee but it does help us understand the process and learn how to defend against it. You can see on the [2020 Threat Report] that page 13-14 has the same matrix mapped with frequency used.
+
+* CrowdStrike [2020 Threat Report]
+
+[CrowdStrike]:https://www.youtube.com/watch?v=v8u0yz_ezqQ
+[APT Groups]:https://attack.mitre.org/groups/
+[APT 1]:https://www.fireeye.com/content/dam/fireeye-www/services/pdfs/mandiant-apt1-report.pdf
+[CrowdStrike ATP Groups]:https://www.crowdstrike.com/blog/meet-the-adversaries/
+[ATT&CK Matrix]:https://attack.mitre.org/
+[Attack Matrix]:https://mitre-attack.github.io/attack-navigator/enterprise/#layerURL=https%3A%2F%2Fattack.mitre.org%2Fgroups%2FG0006%2FG0006-enterprise-layer.json
+[2020 Threat Report]:https://go.crowdstrike.com/rs/281-OBQ-266/images/Report2020CrowdStrikeGlobalThreatReport.pdf
+
+# Class 28 - SSL/TLS VPNs
+
+## Definitions
+
+* IKE -- Internet Key Exchange
+* AH -- Authentication Header
+* ESP -- Encapsulating Security Payload
+
+## Learning Objectives
+
+* Explain how network defense tools (firewalls, IDS etc.) are used to defend against attacks and mitigate vulnerabilities (NDF2)
+* Design a secure architecture for a given application (IAA2)
+
+## What goes over the IP network
+
+* Within an organization a preponderance of data is unencrypted
+* Two sites may need to be connected in a secure manner
+
+When considering the issues with IP Network security the topic comes down to what you are doing and what you want to protect. Not everything that you need to move from point A to point B is going to be over TLS. For example what if you want to have replication between two geographically disperse locations. Within the internet protocol we have no allocation for security, we worry about eavesdropping, modification of packets in transit, forging of source IP addresses, MitM attacks, and DoS. For that reason the network layer needs a degree of security and that security needs to be standard to facility interoperability. That is where IPsec (Internet Protocol Security) and other network layer security protocol come in. TLS is to the transport layer what IPsec is to the network layer.
+
+## Types of VPNs
+
+* Site to Site (Gateway to Gateway)
+* Remote Access (Host to Gateway)
+* Transport Mode
+
+## Site to Site
+
+![VPN Gateway to Gateway](https://cga.sfo2.digitaloceanspaces.com/cns/images/vpn_gateway.PNG)
+
+ When you are looking to connect two sites together from a router or firewall with the internal network being outside the tunnel (yea, inside the network is not in the tunnel). This mode is used to connect two sites that are geographically separated. This type of connection can occur over the internet or over a dedicated link like MPLS. It provides protection to the data in transit in the event the line has been tapped all the information will be encrypted.
+
+## Remote Access
+
+![VPN Host to Gateway](https://cga.sfo2.digitaloceanspaces.com/cns/images/vpn_host.PNG)
+
+The last mode is a method of remote access into a system. The text calls it **Host to Gateway** where you are connecting from a client into a host environment. This would be used to provide remote workers access into an environment.
+
+## Transport Mode
+
+![VPN Transport Mode](https://cga.sfo2.digitaloceanspaces.com/cns/images/vpn_transport.PNG)
+
+One can set up a VPN tunnel between two hosts given they have the ability to connect to each other (AKA not behind a NAT), this is known as **Transport Mode**.
+
+## VPN Protocol
+
+* SSL and TLS VPN
+* IPsec (Internet Protocol Security)
+* Layer 2 Tunneling Protocol (L2TP)
+* Point to Point Tunneling Protocol (PPTP)
+* OpenVPN -- Custom TLS
+* Secure Shell (SSH)
+
+There are various ways access systems over remote connection. A focus is made on IPsec but keep in mind that various protocol can be used to tunnel traffic. We briefly spoke about TLS VPNs using TLS to establish a link between two points. Similarly OpenVPN uses a custom TLS VPN. [Layer 2 Tunneling Protocol](https://en.wikipedia.org/wiki/Layer_2_Tunneling_Protocol) is a method of tunneling that relies on external encryption since it provides none as part of its specification. [Point to Point Tunneling Protocol (PPTP)](https://en.wikipedia.org/wiki/Point-to-Point_Tunneling_Protocol) is similar in that it replies on external encryption. SSH is popular for tunneling in the *nix world and does have mechanisms for maintaining a constant tunnel which other protocol can then travel.
+
+
+## IPsec
+
+* IPsec is comprised of three main parts
+  * IKE -- Internet Key Exchange
+  * AH -- Authentication Header
+  * ESP -- Encapsulating Security Payload
+* IPsec = IKE + AH + ESP + Data Compression
+
+When looking at IPsec we have a few main parts which are similar to what we learned in the TLS handshake. The IKE, internet key exchange, is where keys are exchanged and identity is verified. ESP and AH can be used independently or combined. ESP provides bulk encryption to encapsulate the traffic while AH provides authentication and limited integrity. Together they provide an authenticated encrypted channel that is resistant to some integrity issues, namely packet replay attacks.
+
+
+Keep in mind that both the ESP and AH can be applied together or individually on in conjunction.
+
+The main difference between Transport and Tunnel modes are in Tunnel mode you get an new IP header, in transport mode you expose your original IP header.
+
+
+## IPsec Transport Mode
+
+![IPsec Transport Mode](http://www.firewall.cx/images/stories/ipsec-modes-transport-tunnel-3.png)
+
+## IPsec Tunnel Mode
+
+![IPsec Tunnel Mode](http://www.firewall.cx/images/stories/ipsec-modes-transport-tunnel-1.png)
+
+## IPsec VPN
+
+* Transport vs Tunnel vs Host Gateway
+* [Watch This Video](https://www.youtube.com/watch?v=tuDVWQOG0C0)
+
+# Class 29 Logging and Vuln Management
+
+## Learning Outcomes
+
+* Apply tools and techniques for identifying vulnerabilities (VLA)
+* Create and apply a vulnerability map of a system (VLA)
+* Trace vulnerability to its root cause (VLA)
+* Develop and analyze countermeasures to mitigate vulnerabilities (VLA)
+* Identify and prepare disclosure of vulnerability (VLA)
+
+## Definitions
+
+* ACAS - Assured Compliance Assessment Solution 
+* DISA - Defense Information Systems Agency
+* NIST - National Institute of Standards and Technology
+* HIPPA - Health Insurance Portability and Accountability Act
+* SOX - Sarbanes-Oxley Act
+
+## What is Vulnerability Management
+
+* An process to discover, prioritize, assess, report remediate and verify vulnerabilities in a system
+* Provides control and visibility into environment
+* Provides a proactive way to manage security
+
+## Vuln Management Cycle
+
+![Vuln Management Process](https://cga.sfo2.digitaloceanspaces.com/cns/images/vmlc.gif)
+
+## Vuln Management Solutions
+
+* Default DoD sourced solution is ACAS (Tennable.SC)
+* Other products exist like Splunk, Rapid7, Qualys
+
+## Why is Vuln Management Important
+
+* Most vulnerabilities are exploited long after patches are released
+* Organizations lack a systemic method to repair vulnerabilities
+* Singular vulnerable systems can disrupt entire network functions
+
+## Scanning is the key
+
+* "... the countermeasure that will protect you, should a hacker scan your machines with a scanner, is to scan your own systems first. Make sure to address any problems and then a scan by a hacker will give her no edge..." *Hacking Linux Exposed, Second Edition*
+
+## Discovery
+
+* Shows assets and topology of network
+* Possible detection of rouge devices
+
+## Asset Prioritization
+
+* Develop a priority of critical assets
+* Assessment made on business impact
+* Assign ownership to assets
+
+## Assessment
+
+* Develop standards for the systems and software
+* Outline frameworks and scanning methodology
+
+## Scanning
+
+* Deploy internal, external and credentialed scans
+* Develop perspectives from external attacker, internal attacker and host based data
+* Test the effectiveness of security controls against automated scanning
+
+## Reporting
+
+* Develop reporting to convey information to technical and management personnel
+* Report on security framework compliance
+
+## Remediation
+
+* Track the patching and mitigation of vulnerabilities
+* Utilize a ticketing system for accountability
+
+## Verification
+
+* Re-scan assets to verify vulnerability is closed/mitigated
+
+## Logging
+
+* Centralized service to allow applications and the operating system to report events that take place
+
+## Why Log
+
+* Compliance -- NIST, HIPPA, SOX
+* System Health -- Thing often don't fail in silence
+* Security -- One of the best way to track attackers
+* Auditing -- Prove you are doing what you say you are doing
+* Forensics -- Reconstruct what happened
+
+## Log Process
+
+* Develop a plan for what needs to be logged
+* Determine the duration to keep logs for
+* Implement system to collect and store logs
+* Manage and backup logs for their entire lifetime
+
+## Windows Client
+
+* Event Logs introduced in Windows NT 4 in 1993
+* Provides logs from
+  * Applications -- database connection from XYZ
+  * System -- failure in print driver
+  * Security -- fire access logs, login attempts
+
+## Windows Domain
+
+* Domain Controller Logging
+  * Directory Services Logs -- Connection issues
+  * File Replication Logs -- DC updates
+  * DNS Logs -- Requests
+
+## Windows Logs
+
+* Located in `C:\Windows\System32\winevt\Logs`
+* In files ending in .evtx readable in various event log viewers
+
+## Linux Logging
+
+* Logs are stored in `/var/log`
+* `/var/log/syslog and /var/log/messages store all system logs`
+* `/var/log/auth.log or /var/secure stores all security logs`
+
+## Logging and anti-forensics
+
+* Logs on a system are susceptible to being manipulated
+* Log events in both systems can be removed or changed
+
+## Log Aggregation
+
+* Log aggregation is the process of collecting logs in one location for management and correlation
+* Various platforms enable log aggregation and correlation
+* Reduces the possibility and effect of log manipulation
+
+# Class 30 - Windows Logging: The Files are in the Computer
+
+## Resources
+
+* [Event ID Reference]
+* [MS Log Reference]
+* [Windows Account Activity Part 1]
+* [Windows Account Activity Part 2]
+* [Login Type Reference]
+
+## Old Windows
+
+* Windows NT/2000/XP/Server 2003
+  * .evt file type
+  * located in `C:\Windows\System32\config`
+  * Include file names: SecEvent.evt, AppEvent.evt, SysEvent.evt
+
+## New Windows
+
+* Windows Vista/Win7/Win8/Win10/Server 2008, 2012, 2016, 2019
+  * .evtx file type
+  * located in `C:\Windows\System32\winevt\logs`
+  * enabled remote logging
+  * Include file names: Security.evtx, Application.evtx, System.evtx etc. etc.
+
+## Log Management
+
+* When Logs get full you have three methods to use:
+  * Overwrite Events (Default)
+  * Archive Events -- Don't overwrite
+  * Do nothing and error out
+
+## Security Logs
+
+* Access Control/Security Settings
+* Events from audit policies and group policies
+* Examples: Login Attempt, File Access
+
+## System Logs
+
+* Events from Windows System and Services
+* Examples: Shutdown, Service Start/Stop
+
+## Application Logs
+
+* Events from software that isn't the Windows System
+* Example: Webserver requests, SQL Server Connections, Anti-Virus Alerts
+
+## Custom Logs
+
+* Custom Application Logs
+
+## Log Categories
+
+* Setup Logs -- Patches, hotfixes and updates
+* Forwarded Events -- Logs from other systems (think SIEM)
+* Applications and Services -- Hundreds of logs for various applications
+* [MS Log Reference]
+
+## So Many Logs, which to worry about
+
+* Security Logs -- House most audit information
+* Application Logs -- Mostly used for troubleshooting
+
+## Security Logs
+
+* Only the Local Security Authority Subsystem Service (LSASS) can trigger events to post in the security log
+* Security help identify logs, there are 9 Security Event Categories
+
+* Account Login -- Either local or domain login stored on the system that authorized the login -- **AUTHENTICATION EVENT**
+* Account Management -- Changes to accounts, escalations additions etc
+* Directory Service -- Access events of Active Directory Objects
+* Logon Event -- Instance or a logon or logoff of the system -- Taking place on the machine being logged into
+* Object Access -- Access to any object that has been set to be audited in the system Access Control List
+* Policy Change -- Any changes to audit policies, trust policies or user rights
+* Privilege Use -- Events where elevated privileges are used
+* Process Tracking -- Process events like start, stop, exit handlers, etc
+* System Events -- System startup and shutdown, action to security logs
+
+## Event IDs
+
+* Event IDs are used to identify the type of event
+* These ID number will become second nature
+* There are numerous IDs that can help troubleshoot or detect security issues
+* [Event ID Reference]
+
+## Events Digging In
+
+* 4624 -- Successful Logon
+* 4625 -- Failed Logon
+* 4634 -- Successful Logoff
+* 4647 -- User Initiated Logoff
+* 4648 -- Logon using explicit credentials like "RunAs"
+* 4672 -- Logon with Administrator rights
+* 4720 -- Account Creation
+
+## Microsoft Login Types
+
+* Logins have various different types (in handout)
+* Login types differ slightly between "Old Windows" and current
+
+| Logon Type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2          | Interactive (logon at keyboard and screen of system)                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 3          | Network (i.e. connection to shared folder on this computer from elsewhere on network)                                                                                                                                                                                                                                                                                                                                                                        |
+| 4          | Batch (i.e. scheduled task)                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 5          | Service (Service startup)                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| 7          | Unlock (i.e. unattended workstation with password protected screen saver)                                                                                                                                                                                                                                                                                                                                                                                   |
+| 8          | NetworkCleartext (Logon with credentials sent in the clear text. Most often indicates a logon to IIS with "basic authentication") See this article for more information.                                                                                                                                                                                                                                                                                     |
+| 9          | NewCredentials such as with RunAs or mapping a network drive with alternate credentials.  This logon type does not seem to show up in any events.  If you want to track users attempting to logon with alternate credentials see 4648.  MS says "A caller cloned its current token and specified new credentials for outbound connections. The new logon session has the same local identity, but uses different credentials for other network connections." |
+| 10         | RemoteInteractive (Terminal Services, Remote Desktop or Remote Assistance)                                                                                                                                                                                                                                                                                                                                                                                   |
+| 11         | CachedInteractive (logon with cached domain credentials such as when logging on to a laptop when away from the network)                                           
+
+## Videos
+
+* Please watch to following videos to view log walk-through
+  * [Windows Account Activity Part 1]
+  * [Windows Account Activity Part 2]
+
+[Event ID Reference]:https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/
+[MS Log Reference]:https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/bb726966(v=technet.10)?redirectedfrom=MSDN
+[Windows Account Activity Part 1]:https://youtu.be/EK2BxRsRN1A
+[Windows Account Activity Part 2]:https://youtu.be/0R5kLI75I8k
+[Login Type Reference]:https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=4624
+
+# Class 31 - Syslog
+
+## References
+
+* Wu/Irwin 19.1 - 19.7  -- IPS
+* [Syslog]
+* [What is Syslog]
+
+## Syslog
+
+* Defined in RFC 3164
+* Standardized/Finalized in RFC 5424
+* Uses UDP Port 514 by default: pre certificate based for encryption
+* Has three parts
+  * Header
+  * Structured Data (SD)
+  * Message
+
+## Syslog Format
+
+![Syslog Format]
+
+## Linux Logs
+
+* Found in /var/log
+* All sorts of different logs: .log, .log.1, some are zipped
+* log rotation
+* less syslog 
+* less dpkg.log
+* cat dpkg.log | grep "5.14.0-2"
+* less ufw.log
+
+## Other Devices
+
+* Many other devices support syslog
+* Generally you can forward logs to a collector (UDP 514)
+* Firewalls, "Appliances", Switches
+
+## Logging Live Demo
+
+* Observe the OSSIM SIEM Platform (AlienVault OSSIM)
+* Watch configuring logging on a Unified Network System
+* Watch configuring logging on network storage system
+
+## Videos
+
+* [Linux Logging Part 1]
+* [SIFT Workstation]
+
+[Syslog]:https://en.wikipedia.org/wiki/Syslog
+[What is Syslog]:https://blog.rapid7.com/2017/05/24/what-is-syslog/
+[Syslog Format]:https://blog.rapid7.com/content/images/post-images/63449/Untitled.png
+[SIFT Workstation]:https://digital-forensics.sans.org/community/downloads
+[Linux Logging Part 1]:https://youtu.be/JjZ1ZS_0wn0
+
+# Class 32 - What is Normal
+
+## References
+
+* [Density Scout] Video
+* [Sigcheck Pt1] Video
+* [Sigcheck Pt2] Video
+
+## What do you see
+
+![Can you spot what is wrong?](https://cga.sfo2.digitaloceanspaces.com/cns/images/white-furred-animals-on-green-grass-field-710263.jpg)
+
+## What is right
+
+* If you saw nothing wrong you are correct
+* Everything is perfectly "normal"
+
+
+Generally if we don't understand the system we are using it gets very difficult to determine what is good and what is bad? In the photo in the prior slide it was simply a photo of a pasture. But when looking at it you thought there must be something wrong with it. Maybe there is and we can't see it, maybe we don't understand what perspective we should be taking. The point is unless we know where we are coming from and what to look for it gets very difficult to find something. If we know it is utterly illegal to have a fence in this part of the world the issue with the photo becomes obvious, without that bit of knowledge we would never think to come up with that as an issue.
+
+
+## Where to hide
+
+* Malware can be present in 3 ways
+   * Active Malware
+   * Dormant Malware
+   * Compromised without Malware
+* Remember Malware can hide but eventually needs to run
+* When it runs you can usually identify it, find it, and mitigate the situation
+
+
+When you have active malware on a system it is somewhat easier to detect. Like we spoke about most things are not new and many times, after some time, you see the same behavior over and over again. When malware is dormant it is more difficult to detect. Dormant malware may be mistaken for a legitimate program and can be present on a system awaiting a trigger to initiate. Lastly there are cases where a host is compromised but there is no malware. This is normally after the attacker has fully compromised the system an no longer needs malware for persistance. This type is the most difficult to detect.
+
+
+## Finding what is bad
+
+* Funnel
+* Start with wide net automated approaches (telling you what you know already)
+* Incident (something bad) vs Event (might be unexplained, might become an incident)
+* Narrow down your search with targeted searching
+* Evaluate individual hosts memory for a deep dive 
+
+## Know what is good
+
+* Understand what is normal
+* Look at running processes
+* Understand where they are running from
+
+
+To know what is bad we need to have an idea of what is good. In this sense take a look at your current Windows host of VM. Open up the command prompt and list all the runnign processes with
+
+```powershell
+tasklist /SVC
+tasklist /SVC | findstr svchost.exe
+taskList /SVC | findstr lsass.exe
+```
+
+WOW that is a long list. Lets try to answer a few questions here:
+
+* How many svchost.exe instances are running?
+* How many lsass.exe instance are running?
+
+At this point we need to determine if we know what we are looking at. Windows is a pretty big complex piece of software. Take some time to try to dig into learn about what is what on the host to help understand what is normal. The ultimate reference is the [Windows Internals] Part 1. Which can be obtained somewhat inexpensively, and written by the twisted minds that brought you Windows 10 and Azure!
+
+Use this list to get started:
+
+* system.exe
+* svchost.exe
+* smss.exe
+* csrss.exe
+* services.exe
+* lsaiso.exe
+* explorer.exe
+* wininit.exe
+* winlogon.exe
+* lsass.exe
+* taskhostw.exe
+* wininit.exe
+* WinLogon.exe
+* RuntimeBroker.exe
+
+
+## Signed Code
+
+* Code can be signed by the author in the same way you sign things with your private key
+* In this way anyone can sign anything, the question is trust
+* Public/Private key cryptography 
+* Shared trust mechanism 
+* It is very rare for a company to lose a code signing key... [Opera Loses Key]
+* Very low percentages of malware is signed (3.5%) according to [McAfee Threat Report]
+
+
+## Finding Anomalies -- Big net fishing
+
+* densityscout -- Looking for obfuscation and packing
+* pescan -- looking at the **Program Execution** file structure
+* sigcheck -- checks for signed code and uploads hashs to Virus Total
+
+Above is a brief description of what is discussed in the referenced videos. Eacho tool has tremendous amount of information associated with it but the video describes hunting around for some compromised files using those tools. Try using the same tools and scripts on your machine. I posted the code I used on the infected systems, with some slight modifications you should be able to run them against your system. 
+* Hint: Change to your Windows directory...
+
+Watch:
+
+* [Density Scout] Video
+* [Sigcheck Pt1] Video
+* [Sigcheck Pt2] Video
+
+[Density Scout]:https://youtu.be/GU1puxL01e8
+[Sigcheck Pt1]:https://youtu.be/u0JxLt-1lXI
+[Sigcheck Pt2]:https://youtu.be/VX0OB9oqP4Q
+[Opera Loses Key]:https://threatpost.com/opera-code-signing-certificate-stolen-malware-signed-and-distributed/101107/
+[McAfee Threat Report]:https://www.mcafee.com/enterprise/en-us/assets/reports/rp-quarterly-threats-jun-2017.pdf
+[Windows Internals]:https://www.thriftbooks.com/w/windows-internals-part-1-covering-windows-server-2008-r2-and-windows-7_mark-russinovich_david-a-solomon/1691405/#isbn=0735648735&idiq=24220747
+
+# Class 33 -- Penetration Testing Methodologies
+
+## Definitions
+
+* OSINT -- Open Source Intelligence
+* OSSTMM -- Open Source Security Testing Methodology Manual
+
+## Goals of Pen Test
+
+* A structured process to test:
+  * Procedural Security
+  * Operational Security
+  * Technological Security
+
+When penetration testing the tester is authorized to attempt to circumvent or violate security controls in a system under specific constraints. The test is meant to provide a method to examine the effectiveness of procedural, operational and technological controls within an organization.
+
+## What isn't
+
+* Security Audit
+* Vulnerability Assessment
+
+A **Security Audit** is simply checking if the organization is following a set of standard security policies and procedures (Do what you say)
+
+A **Vulnerability Assessment** is focused on discovering vulnerabilities in an environment but not proving their ability and consequence to being exploited. It is easy to think of this as understanding how bad it can be not understanding of when that bad could happen. An asteroid that hits earth will kill all live... Well when is that asteroid coming around.. Understanding risk
+
+## What is
+
+* Considers the Security Audit and Vulnerability Assessment but demonstrates if the vulnerabilities in an environment can be exploited to obtain breaches in Confidentiality, Integrity or Availability
+
+A pen test is not a security audit or a vulnerability assessment because it actually provides a method to test the controls that are in place. It provides an understanding of risk and a measure of the consequence of actions. Many times features provide methods for entry which can then be exploited and used to compromise the business. This links back to the concept of technology debt where we do not fully understand the value obtained (and true cost) of the increase in productivity that technology has provided.
+
+## Testing Layers
+
+* Black Box -- External attacker with no prior knowledge of the organization
+* Gray Box -- External attacker with some prior or inside knowledge of the system
+* White Box -- Internal attacker with perfect knowledge of the systems
+
+## Many Methodologies
+
+* Flaw Hypothesis
+* OSSTMM
+
+## Flaw Hypothesis Methodology
+
+* A 5 Step Method developed by [System Development Corporation] as a framework for penetration studies
+* The Steps include:
+  * Information Gathering
+  * Flaw Hypothesis
+  * Flaw Testing
+  * Flaw Generalization
+  * Flaw Elimination
+
+## Information Gathering -- Flaw Hypothesis
+
+* Gather information on organization and systems
+* Utilize OSINT (Open Source Intelligence)
+* Look for common errors, signs of "noobs"
+* Develop a list of flaws to test
+
+## Flaw Testing
+
+* Determine an order for testing flaws
+* Rank flaws in order of **Business Risk**
+* Attempt to exploit flaw
+* Continue exploit as attacker
+* Consider damage to systems
+
+## Flaw Generalization
+
+* As flaws are discovered they can be categorized
+* By combining flaws we develop a generalization as to the flaws that exist
+
+## Flaw Elimination
+
+* Tests normally offer suggestions on remediation of the flaws
+* Proper corrective action is necessary to improve security
+* Understanding **how** the flaw is exploited is paramount
+
+## OSSTMM
+
+* Additional testing methodology
+* Open Standard for Pen Testing
+* Detailed and complete
+
+# Class 34 - Pen Test Tooling
+
+## What is Kali Linux
+
+* Kali is a Debian-based distribution of Linux aimed to assist security teams in Penetration Testing and Security Assessments
+* Kali includes various tools that help make security testing easier
+* It is built and managed by Offensive Security using open tools
+
+## A brief history
+
+* Computer were born (1960s)
+* UNIX was born (1970s)
+* Linux was born (1990s)
+* BackTrack Linux was Born (2006)
+* Kali Linux released as rebranding for Backtrack 6 (2013)
+
+## Pentest Tools By Phase
+
+* Information Gathering
+* Scanning
+* Exploitation
+* Post Exploit
+
+## Information Gathering
+
+* nmap
+* Searchsploit
+* dnsenum
+* dnsmap
+* hping3
+
+## Scanning
+
+* [webshag]
+* [vega]
+* Nessus
+
+## Exploitation
+
+* [Metasploit]
+* John the Ripper
+* mimikatz
+* hashcat
+
+## Post Exploit
+
+* Tunneling & Exfil
+* OS Backdoors
+* Web Backdoors
+
+## Other Tools
+
+* 300+ Tools
+* Forensics
+
+## Getting Kali
+
+* Download the iso and install
+* Download the VM and run
+* Using Ubuntu use Katoolin in install all Kali Packages
+
+# Class 35 - Pen Test Assessments
+
+## Resources
+
+* Penetration Testing: A Hands-On Introduction to Hacking, Georgia Weidman -- (Page 25 - 123)
+* [SYN Scan]
+* [Report Template]
+* [nikto]
+* [davtest]
+
+## Netcat
+
+* netcat is a great connection tool
+* specify ports
+* lets connect to the XP SMTP Server `nc -vv <IP_of_XP_BOX>`
+
+Once connected lets try talking:
+
+Typical SMTP conversation
+When you make a connection to a mail server, a typical conversation will look like below (BOLD indicates the replies from the server):
+
+**220 mx1.example.com ESMTP Postfix**
+HELO example.com
+**250 mx1.example.com**
+MAIL FROM:<example@example.com>
+**250 2.1.0 Ok**
+RCPT TO:<example2@example.com>
+**250 2.1.5 Ok**
+DATA
+**354 End data with <CR><LF>.<CR><LF>**
+This is a test message.
+.
+**250 2.0.0 Ok: queued as 4227FE00C**
+QUIT
+**221 2.0.0 Bye**
+
+## Nmap
+
+* Nmap can be used to scan ports
+* Read more about the [SYN Scan]
+
+There are various scans we are going to do against our exploitable Windows XP host.
+```bash
+sudo nmap -sS <IP_of_XP_BOX>
+sudo nmap -sU <IP_of_XP_BOX>
+sudo nmap -sS -p 3232 <IP_of_XP_BOX>
+sudo nmap -sV -p 3232 <IP_of_XP_BOX>
+```
+
+The SYN (Stealth) Scan `-sS` begins to establish a TCP connection and after receiving a SYN/ACK will send a RST and not complete the handshake. This enables the handshake to not be completed and thus not broken down at a later time and being much quicker. As an interesting fact because nmap is sending the SYN when the SYN/ACK comes back the OS doesn't expect it and automatically sends the RST.
+
+## Nessus
+
+* Useful method to discover vulnerabilities
+* Enables addition of credentials for credentialed scan
+
+When you start Nessus you may need to activate it which is simply signing up and getting an activation code. Once you have done this you will be able to scan different systems on your network. Today we will go over using this tool in a level of detail that should enable you to understand the basics of the scanner. Keep in mind that Nessus is the scanning engine behind ACAS much of what you learn will translate.
+
+## Nikto
+
+* A web application scanner
+* Can be used to make reports and test vulnerabilities
+
+take a look at the tool info page for [nikto] which includes example usage and the help page.
+
+## Cadaver
+
+* Method to interact with WebDAV
+* If you want to take it a step further check out [davtest]
+
+## Hashcat Demo
+
+* My primary method of cracking passwords
+* GPU accelerated
+
+[SYN Scan]:https://nmap.org/book/synscan.html
+[nikto]:https://tools.kali.org/information-gathering/nikto
+[davtest]:https://tools.kali.org/web-applications/davtest
+
+# Class 36 - Assessment Part Deux
+
+## Definitions
+
+* NSE -- Nmap Scripting Engine
+
+## Email Search
+
+* Use `theHarvester` to locate email addresses within a domain
+* Running the command without arguments will give the usage instructions
+* Try on a domain
+
+## Maltego
+
+* A platform for nodal analysis
+* Visual in nature
+
+## Nmap Scripting Engine
+
+* Extends the ability of Nmap to include identification of vulnerabilities
+* scripts located at `/usr/share/nmap/scripts`
+* You can learn more about `nse` and its usage in the [nmap documentation](https://nmap.org/book/nse-usage.html)
+
+## Vuln Scan with Metasploit
+
+* Metasploit has a zillion modules
+* Visit [METASPLOIT MODULES AND LOCATIONS] for an overview
+* The example in the text changed slightly
+  * Instead try `use auxiliary/scanner/ftp/anonymous`
+  * Set RHOST to your target `set RHOST <Linux or XP IP>`
+  * Launch exploit with `exploit`
+
+## Capturing Traffic
+
+* Use **wireshark** to capture traffic
+* Brush up on ARP and DNS cache poisoning
+
+## MitMproxy
+
+* Many of the tools in Kali have been replaced
+* Notably adding MitMproxy
+* Checkout the tutorial for [mitmproxy] to learn more
+
+## OSINT in the News
+
+* We watch as the world [Protests] the lock-down and social distancing measures
+* Look at how powerful OSINT can be
+
+The reddit post above has been a bit diluted but there was a truly amazing post of an individual that search for all domains along the lines of "repoenXYZ.com" last year in March during the lock-down this was a thing if you recall. Sites that popped up to protest lock-downs and spread disinformation about the virus. Reading now 7 months later it is sobering. What the individual did was determine through `whois` records that all the protests were being centrally organized by one group who was attempting to manipulate people to go out and protest. I can not recall who was behind it but think it was politically or economically motivated. It was a amazing display of how the tools we discussed today were used to uncover a dangerous plot to try to manipulate people and play to their fears.
+
+[METASPLOIT MODULES AND LOCATIONS]:https://www.offensive-security.com/metasploit-unleashed/modules-and-locations/
+[mitmproxy]:https://blog.heckel.io/2013/07/01/how-to-use-mitmproxy-to-read-and-modify-https-traffic-of-your-phone/
+[Protests]:https://www.reddit.com/r/maryland/comments/g3niq3/i_simply_cannot_believe_that_people_are/fnstpyl/
+
+# Class 37 -- Pen Testing Attacks
+
+## Metasploit
+
+* Many exploits enable a payload that can accomplish the goal of the attacker -- for example reverse shell
+* Many payloads exist for doing things from adding users to ejecting the CD Drive
+* View all available payloads in Metasploit with `show payloads` in the msfconsole
+
+## Staged Payloads vs Inline Payloads
+
+* Staged payload will send enough info to enable connection back
+  * Takes up less space
+  * Enables more complex larger payloads
+* Inline payloads will contain all instructions necessary to complete the exploit
+  * Takes up more space
+  * Increased stability
+* Staged payloads will be grouped under *meterpreter* while inline payloads will be not
+  * Staged -- */windows/meterpreter/bind_tcp*
+  * Inline -- */windows/shell/reverse_tcp*
+
+## Stagers vs Stage
+
+* Stager -- Establish communications between attacker and target to Load the stage
+* Stage -- The ultimate action the attack is focused on executing
+
+I can imagine this can be confusing. A **stager** deals with networking communications in order to set up for the **stage**. A stager include the bind_tcp and reverse_tcp. Where the ultimate goal will be to get a full GUI control with a **stage** using VNC or deployment of Meterpreter.
+
+![stager]
+
+## Meterpreter
+
+* A custom attacker-friendly shell environment that can be loaded on an exploited target
+* Versions available for all your favorites:
+  * Windows
+  * Linux
+  * macOS
+  * Android
+  * Apple iOS
+  * Java
+  * PHP
+* Uses process known as [Reflective DLL Injection]
+
+At its core it is a library that injects itself into a vulnerable process on the target through exploitation. Once loaded additional libraries can be loaded to extend the functionality of Meterpreter.
+
+## Meterpreter SHHHHHH
+
+* No trace on disk
+* Encrypts communications -- yep TLS (NIDS/NIPS)
+* No additional process created
+* No *dll* loaded with process
+
+## Web Exploitation
+
+* SQL Injection
+* Back end file/script execution
+  * Scripts available using `msfvenom`
+  * View with `msfvenom -l payloads`
+* Specific Web Application Exploits
+  * WordPress
+  * TikiWiki
+
+## Using Credentials -- Online
+
+* Try defaults -- admin:admin admin:password
+* Pass the hash
+* Automate -- Guess with tools like `hydra`
+
+## Using Credentials -- Offline
+
+* Getting a `hashdump` with meterpreter will provide users and hashes
+* We can crack the passwords with **wordlists** and **rules**
+* We can run the hashes against **Rainbow Tables**
+* We can farm it out to Online Cracking Services
+
+[stager]:https://cga.sfo2.digitaloceanspaces.com/cns/images/stager.png
+[Reflective DLL Injection]:https://blog.f-secure.com/memory-injection-like-a-boss/

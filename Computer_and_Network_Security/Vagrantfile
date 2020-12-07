@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "attacker" do |subconfig|
+    subconfig.vm.box = "geerlingguy/ubuntu2004"
+    subconfig.vm.hostname = "attacker"
+    subconfig.vm.network :private_network, ip: "10.0.0.10"
+  end
+
+  config.vm.define "server" do |subconfig|
+    subconfig.vm.box = "geerlingguy/ubuntu2004"
+    subconfig.vm.hostname = "server"
+    subconfig.vm.network :private_network, ip: "10.0.0.11"
+  end
+  
+  config.vm.provision "shell",
+    inline: "sudo apt update && sudo apt upgrade -y && sudo apt install telnet telnetd gcc git -y && sudo apt autoremove -y"
+  
+end
