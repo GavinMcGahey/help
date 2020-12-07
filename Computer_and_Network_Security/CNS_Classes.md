@@ -5293,3 +5293,80 @@ The reddit post above has been a bit diluted but there was a truly amazing post 
 [METASPLOIT MODULES AND LOCATIONS]:https://www.offensive-security.com/metasploit-unleashed/modules-and-locations/
 [mitmproxy]:https://blog.heckel.io/2013/07/01/how-to-use-mitmproxy-to-read-and-modify-https-traffic-of-your-phone/
 [Protests]:https://www.reddit.com/r/maryland/comments/g3niq3/i_simply_cannot_believe_that_people_are/fnstpyl/
+
+# Class 37 -- Pen Testing Attacks
+
+## Metasploit
+
+* Many exploits enable a payload that can accomplish the goal of the attacker -- for example reverse shell
+* Many payloads exist for doing things from adding users to ejecting the CD Drive
+* View all available payloads in Metasploit with `show payloads` in the msfconsole
+
+## Staged Payloads vs Inline Payloads
+
+* Staged payload will send enough info to enable connection back
+  * Takes up less space
+  * Enables more complex larger payloads
+* Inline payloads will contain all instructions necessary to complete the exploit
+  * Takes up more space
+  * Increased stability
+* Staged payloads will be grouped under *meterpreter* while inline payloads will be not
+  * Staged -- */windows/meterpreter/bind_tcp*
+  * Inline -- */windows/shell/reverse_tcp*
+
+## Stagers vs Stage
+
+* Stager -- Establish communications between attacker and target to Load the stage
+* Stage -- The ultimate action the attack is focused on executing
+
+I can imagine this can be confusing. A **stager** deals with networking communications in order to set up for the **stage**. A stager include the bind_tcp and reverse_tcp. Where the ultimate goal will be to get a full GUI control with a **stage** using VNC or deployment of Meterpreter.
+
+![stager]
+
+## Meterpreter
+
+* A custom attacker-friendly shell environment that can be loaded on an exploited target
+* Versions available for all your favorites:
+  * Windows
+  * Linux
+  * macOS
+  * Android
+  * Apple iOS
+  * Java
+  * PHP
+* Uses process known as [Reflective DLL Injection]
+
+At its core it is a library that injects itself into a vulnerable process on the target through exploitation. Once loaded additional libraries can be loaded to extend the functionality of Meterpreter.
+
+## Meterpreter SHHHHHH
+
+* No trace on disk
+* Encrypts communications -- yep TLS (NIDS/NIPS)
+* No additional process created
+* No *dll* loaded with process
+
+## Web Exploitation
+
+* SQL Injection
+* Back end file/script execution
+  * Scripts available using `msfvenom`
+  * View with `msfvenom -l payloads`
+* Specific Web Application Exploits
+  * WordPress
+  * TikiWiki
+
+## Using Credentials -- Online
+
+* Try defaults -- admin:admin admin:password
+* Pass the hash
+* Automate -- Guess with tools like `hydra`
+
+## Using Credentials -- Offline
+
+* Getting a `hashdump` with meterpreter will provide users and hashes
+* We can crack the passwords with **wordlists** and **rules**
+* We can run the hashes against **Rainbow Tables**
+* We can farm it out to Online Cracking Services
+
+[stager]:https://cga.sfo2.digitaloceanspaces.com/cns/images/stager.png
+[Reflective DLL Injection]:https://blog.f-secure.com/memory-injection-like-a-boss/
