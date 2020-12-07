@@ -136,3 +136,81 @@ config.vm.provision "shell",
 15. A firewall is typically located at only one position in an organization?
 
 **False**
+
+
+# Quiz 3
+1. Which is not a principal of a functional firewall, as viewed by Bellovin and Cheswick?
+
+**all traffic must pass through the firewall**
+
+2. You would expect your home router/firewall device to have no rules related to
+
+**egress**
+
+3. What type of firewall has the most on system resources
+
+**Application-Level**
+
+4. What does this diagram represent?
+
+**netfilter**
+
+5. In what country is Mrs. Pots? mrspots.hacking.fans
+
+**Singapore**
+
+6.  What attack showcased flaws in SSL 3.0
+
+**POODLE**
+
+7. What enables a user to gain access to a requested service with Kerberos, like an Application1?
+
+**Service Ticket**
+
+8.  Kerberose uses this type of encryption
+
+**Symmetric**
+
+9.  Zero Trust Networks are more important during the COVID-19 pandemic than ever before.
+
+**True**
+
+10. Which is not a goal of Zero Trust Networks
+
+**Secure the LAN perimeter**
+
+11. This snippit of code is an example of what
+
+- name: create shared files
+  file:
+    path: /usr/share/priv_esc/
+    state: directory
+    group: student
+    owner: uscga_cyber_admin
+    mode: 0744
+    
+**Ansible**
+
+12. Using the code below develop the permissions like you would see them by typing `ls` for the priv_esc directory:  example format `-rwxrwxrwx`
+
+- name: create shared files
+  file:
+    path: /usr/share/priv_esc/
+    state: directory
+    group: student
+    owner: uscga_cyber_admin
+    mode: 0744
+    
+**drwxr--r--**
+
+13. user thedini is not part of the student group. What would thedini be able to do with the file /usr/share/priv_esc/file.txt
+
+- name: create shared files
+  file:
+    path: /usr/share/priv_esc/
+    state: directory
+    group: student
+    owner: uscga_cyber_admin
+    mode: 0744
+    
+**read**
